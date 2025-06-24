@@ -2,7 +2,7 @@
     <div class="login">
         <div class="carta">
             <img class="logo" src="logo.png" alt="">
-        <form class="form form-fade-in" *ngIf="!showForgotPassword">
+        <form (ngSubmit)="login()" class="form form-fade-in" *ngIf="!showForgotPassword">
             <h1>Inicia sesión</h1>
             <div class="flex-column">
               <label>Email </label>
@@ -53,7 +53,7 @@
                 </div>
             </div>
           
-            <button class="button-submit">Iniciar sesion</button>
+            <button (click)="login()" class="button-submit">Iniciar sesion</button>
           </form>
 
           <form class="form form-fade-in" *ngIf="showForgotPassword">
