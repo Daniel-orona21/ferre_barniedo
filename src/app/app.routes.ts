@@ -8,5 +8,6 @@ export const routes: Routes = [
     { path: 'app', component: LayoutComponent, children: [
         { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: 'home', component: HomeComponent }
-    ]}
+    ]},
+    { path: '**', redirectTo: '' }
 ];
