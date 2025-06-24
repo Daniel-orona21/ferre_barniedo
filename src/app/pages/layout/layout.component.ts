@@ -44,4 +44,9 @@ export class LayoutComponent {
       this.showUserMenu = false;
     }
   }
+
+  // getCurrentPageTitle() {
+  //   const currentRoute = this.router.url;
+  //   return currentRoute.split('/').pop()?.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
+  // }
 }
