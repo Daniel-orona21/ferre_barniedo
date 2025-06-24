@@ -1,1 +1,55 @@
-<p>layout works!</p>
+<div class="contenido">
+    <nav [class.collapsed]="isNavCollapsed">
+        <img src="images/logo2.png" alt="Logo">
+        <ul>
+                <li [routerLink]="['home']" routerLinkActive="activo"><span class="material-symbols-outlined">home</span><h3>Home</h3></li>
+                <li [routerLink]="['usuarios']" routerLinkActive="activo"><span class="material-symbols-outlined">contacts_product</span><h3>Usuarios</h3></li>
+                <li [routerLink]="['roles']" routerLinkActive="activo"><span class="material-symbols-outlined">assignment_ind</span><h3>Roles y permisos</h3></li>
+                <li [routerLink]="['clientes']" routerLinkActive="activo"><span class="material-symbols-outlined">contacts_product</span><h3>Clientes</h3></li>
+                <li [routerLink]="['tipos-de-clientes']" routerLinkActive="activo"><span class="material-symbols-outlined">patient_list</span><h3>Tipos de clientes</h3></li>
+                <li [routerLink]="['aseguradoras']" routerLinkActive="activo"><span class="material-symbols-outlined">person_shield</span><h3>Aseguradoras</h3></li>
+                <li [routerLink]="['refacciones']" routerLinkActive="activo"><span class="material-symbols-outlined">construction</span><h3>Refacciones</h3></li>
+                <li [routerLink]="['almacenes']" routerLinkActive="activo"><span class="material-symbols-outlined">warehouse</span><h3>Almacenes</h3></li>
+                <li [routerLink]="['almacen-en-proceso']" routerLinkActive="activo"><span class="material-symbols-outlined">two_pager_store</span><h3>Almacen en proceso</h3></li>
+                <li [routerLink]="['anaquel']" routerLinkActive="activo"><span class="material-symbols-outlined">shelves</span><h3>Anaquel</h3></li>
+                <li [routerLink]="['proveedores']" routerLinkActive="activo"><span class="material-symbols-outlined">identity_platform</span><h3>Proveedores</h3></li>
+                <li [routerLink]="['almacenes']" routerLinkActive="activo"><span class="material-symbols-outlined">deployed_code</span><h3>Almacenes</h3></li>
+                <li [routerLink]="['inventario']" routerLinkActive="activo"><span class="material-symbols-outlined">barcode_reader</span><h3>Inventario</h3></li>
+                <li [routerLink]="['ordenes']" routerLinkActive="activo"><span class="material-symbols-outlined">local_mall</span><h3>Ordenes de compra</h3></li>
+                <li [routerLink]="['ventas']" routerLinkActive="activo"><span class="material-symbols-outlined">attach_money</span><h3>Ventas</h3></li>
+                <li [routerLink]="['credito']" routerLinkActive="activo"><span class="material-symbols-outlined">account_balance_wallet</span><h3>Credito</h3></li>
+                <li [routerLink]="['reportes']" routerLinkActive="activo"><span class="material-symbols-outlined">breaking_news</span><h3>Reportes</h3></li>
+                
+        </ul>
+    </nav>
+    <div class="cuerpo">
+        <header>
+            <span class="material-symbols-outlined" (click)="toggleNav()">menu</span>
+            <div class="headerRight">
+                <div class="notification-icon">
+                  <span class="material-symbols-outlined">notifications</span>
+                  <span class="notification-badge" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
+                </div>
+                <img src='images/senior.png' alt="">
+                <span class="material-symbols-outlined arrow-user-menu" (click)="toggleUserMenu()" [class.rotated]="showUserMenu">keyboard_arrow_down</span>
+                <div class="user-menu" *ngIf="showUserMenu">
+                    <div class="user-menu-header">
+                        <img src="images/senior.png" alt="">
+                        <div>
+                            <div class="user-name">Mathew Lucas</div>
+                            <div class="user-role">Administrador</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <ul>
+                        <li><span class="material-symbols-outlined">person</span> Perfil</li>
+                        <li (click)="logout()"><span class="material-symbols-outlined">chip_extraction</span> Cerrar sesión</li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="pagina">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
