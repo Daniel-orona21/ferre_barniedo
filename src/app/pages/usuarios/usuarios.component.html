@@ -15,7 +15,7 @@
                 <input type="text" class="buscador" placeholder="Buscar...">
                 <span class="material-symbols-outlined">search</span>
             </div>
-            <button class="btn-primary">
+            <button class="btn-primary" (click)="openNewUserModal()">
               <span class="material-symbols-outlined">add</span>
               Nuevo
             </button>
@@ -35,176 +35,24 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Jane Cooper</td>
-              <td>Suc1</td>
-              <td>Finanzas</td>
-              <td>Administrador</td>
-              <td><span class="badge bg-success">Activo</span></td>
+            <tr *ngFor="let user of users">
+              <td>{{ user.id }}</td>
+              <td>{{ user.nombre }}</td>
+              <td>{{ user.sucursal }}</td>
+              <td>{{ user.area }}</td>
+              <td>{{ user.rol }}</td>
+              <td><span class="badge bg-success">{{ user.estatus }}</span></td>
               <td class="actions">
-                <button class="btn-icon ">
+                <button class="btn-icon" (click)="openModal(user, 'view')">
                   <span class="material-symbols-outlined icon-view">visibility</span>
                 </button>
-                <button class="btn-icon ">
+                <button class="btn-icon" (click)="openModal(user, 'edit')">
                   <span class="material-symbols-outlined icon-edit">edit</span>
                 </button>
-                <button class="btn-icon ">
+                <button class="btn-icon" (click)="openModal(user, 'delete')">
                   <span class="material-symbols-outlined icon-delete">delete</span>
                 </button>
               </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Wade Warren</td>
-                <td>Suc2</td>
-                <td>Finanzas</td>
-                <td>Administrador</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                  <button class="btn-icon ">
-                    <span class="material-symbols-outlined icon-view">visibility</span>
-                  </button>
-                  <button class="btn-icon ">
-                    <span class="material-symbols-outlined icon-edit">edit</span>
-                  </button>
-                  <button class="btn-icon ">
-                    <span class="material-symbols-outlined icon-delete">delete</span>
-                  </button>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Esther Howard</td>
-                <td>Suc3</td>
-                <td>Finanzas</td>
-                <td>Administrador</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Cameron Williamson</td>
-                <td>Suc2</td>
-                <td>Administración</td>
-                <td>Supervisor</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Leslie Alexander</td>
-                <td>Suc1</td>
-                <td>Administración</td>
-                <td>Supervisor</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>Guy Hawkins</td>
-                <td>Suc4</td>
-                <td>Finanzas</td>
-                <td>Administrador</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>Jacob Jones</td>
-                <td>Suc2</td>
-                <td>Almacen</td>
-                <td>Almacen</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>Darlene Robertson</td>
-                <td>Suc4</td>
-                <td>Administración</td>
-                <td>Supervisor</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>Devon Lane</td>
-                <td>Suc1</td>
-                <td>Administración</td>
-                <td>Supervisor</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
             </tr>
           </tbody>
         </table>
@@ -231,4 +79,54 @@
         </div>
       </div>
     </div>
+</div>
+
+<div class="modal-overlay" *ngIf="isModalVisible">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 *ngIf="modalAction === 'view'">Ver Usuario</h2>
+      <h2 *ngIf="modalAction === 'edit'">Editar Usuario</h2>
+      <h2 *ngIf="modalAction === 'new'">Nuevo Usuario</h2>
+      <h2 *ngIf="modalAction === 'delete'">Eliminar Usuario</h2>
+      <button class="btn-icon" (click)="closeModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="modal-body" *ngIf="selectedUser">
+      <div *ngIf="modalAction === 'view'">
+        <p><strong>ID:</strong> {{ selectedUser.id }}</p>
+        <p><strong>Nombre:</strong> {{ selectedUser.nombre }}</p>
+        <p><strong>Sucursal:</strong> {{ selectedUser.sucursal }}</p>
+        <p><strong>Área de trabajo:</strong> {{ selectedUser.area }}</p>
+        <p><strong>Rol:</strong> {{ selectedUser.rol }}</p>
+        <p><strong>Estatus:</strong> <span class="badge bg-success">{{ selectedUser.estatus }}</span></p>
+      </div>
+      <div *ngIf="modalAction === 'edit' || modalAction === 'new'">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" class="form-control" [(ngModel)]="selectedUser.nombre">
+        </div>
+        <div class="form-group">
+          <label for="sucursal">Sucursal</label>
+          <input type="text" id="sucursal" class="form-control" [(ngModel)]="selectedUser.sucursal">
+        </div>
+        <div class="form-group">
+          <label for="area">Área de trabajo</label>
+          <input type="text" id="area" class="form-control" [(ngModel)]="selectedUser.area">
+        </div>
+        <div class="form-group">
+          <label for="rol">Rol</label>
+          <input type="text" id="rol" class="form-control" [(ngModel)]="selectedUser.rol">
+        </div>
+      </div>
+      <div *ngIf="modalAction === 'delete'">
+        <p>¿Estás seguro de que deseas eliminar al usuario <strong>{{ selectedUser.nombre }}</strong>?</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
+      <button class="btn-primary" *ngIf="modalAction === 'edit' || modalAction === 'new'" (click)="saveUser()">Guardar Cambios</button>
+      <button class="btn-danger" *ngIf="modalAction === 'delete'" (click)="deleteUser()">Eliminar</button>
+    </div>
+  </div>
 </div>

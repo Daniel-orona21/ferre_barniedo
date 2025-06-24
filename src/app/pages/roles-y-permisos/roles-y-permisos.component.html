@@ -28,149 +28,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Administrador</td>
-              <td><span class="badge bg-success">Activo</span></td>
+            <tr *ngFor="let role of roles">
+              <td>{{ role.id }}</td>
+              <td>{{ role.rol }}</td>
+              <td><span class="badge bg-success">{{ role.estatus }}</span></td>
               <td class="actions">
-                <button class="btn-icon ">
+                <button class="btn-icon" (click)="openModal(role, 'view')">
                   <span class="material-symbols-outlined icon-view">visibility</span>
                 </button>
-                <button class="btn-icon ">
+                <button class="btn-icon" (click)="openModal(role, 'edit')">
                   <span class="material-symbols-outlined icon-edit">edit</span>
                 </button>
-                <button class="btn-icon ">
+                <button class="btn-icon" (click)="openModal(role, 'delete')">
                   <span class="material-symbols-outlined icon-delete">delete</span>
                 </button>
               </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Almacenista</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                  <button class="btn-icon ">
-                    <span class="material-symbols-outlined icon-view">visibility</span>
-                  </button>
-                  <button class="btn-icon ">
-                    <span class="material-symbols-outlined icon-edit">edit</span>
-                  </button>
-                  <button class="btn-icon ">
-                    <span class="material-symbols-outlined icon-delete">delete</span>
-                  </button>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Aseguradora</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Comprador</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Contador</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>Gestor de devoluciones y cancelaciones</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>Usuario especial</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>Validador de almacen</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>Vendedor</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
             </tr>
           </tbody>
         </table>
@@ -197,4 +69,38 @@
         </div>
       </div>
     </div>
+</div>
+
+<div class="modal-overlay" *ngIf="isModalVisible">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 *ngIf="modalAction === 'view'">Ver Rol</h2>
+      <h2 *ngIf="modalAction === 'edit'">Editar Rol</h2>
+      <h2 *ngIf="modalAction === 'delete'">Eliminar Rol</h2>
+      <button class="btn-icon" (click)="closeModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="modal-body" *ngIf="selectedRole">
+      <div *ngIf="modalAction === 'view'">
+        <p><strong>ID:</strong> {{ selectedRole.id }}</p>
+        <p><strong>Rol:</strong> {{ selectedRole.rol }}</p>
+        <p><strong>Estatus:</strong> <span class="badge bg-success">{{ selectedRole.estatus }}</span></p>
+      </div>
+      <div *ngIf="modalAction === 'edit'">
+        <div class="form-group">
+          <label for="rol">Rol</label>
+          <input type="text" id="rol" class="form-control" [(ngModel)]="selectedRole.rol">
+        </div>
+      </div>
+      <div *ngIf="modalAction === 'delete'">
+        <p>¿Estás seguro de que deseas eliminar el rol <strong>{{ selectedRole.rol }}</strong>?</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
+      <button class="btn-primary" *ngIf="modalAction === 'edit'" (click)="saveRole()">Guardar Cambios</button>
+      <button class="btn-danger" *ngIf="modalAction === 'delete'" (click)="deleteRole()">Eliminar</button>
+    </div>
+  </div>
 </div>

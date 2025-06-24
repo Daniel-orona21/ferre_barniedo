@@ -23,7 +23,7 @@
                 <input type="text" class="buscador" placeholder="Buscar...">
                 <span class="material-symbols-outlined">search</span>
             </div>
-            <button class="btn-primary">
+            <button class="btn-primary" (click)="openNewRefaccionModal()">
               <span class="material-symbols-outlined">add</span>
               Nuevo
             </button>
@@ -45,176 +45,30 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Jane Cooper</td>
-              <td>example&#64;example.com</td>
-              <td>000-000-0000</td>
-              <td>Suc1</td>
-              <td><span class="badge bg-success">Activo</span></td>
+            <tr *ngFor="let refaccion of refacciones">
+              <td>{{ refaccion.id }}</td>
+              <td>{{ refaccion.producto }}</td>
+              <td>{{ refaccion.sku }}</td>
+              <td>{{ refaccion.familia }}</td>
+              <td>{{ refaccion.modelo }}</td>
+              <td>{{ refaccion.anios }}</td>
+              <td>{{ refaccion.costo }}</td>
+              <td>
+                <span class="badge" [class.bg-success]="refaccion.estatus === 'Activo'" [class.bg-danger]="refaccion.estatus !== 'Activo'">
+                  {{ refaccion.estatus }}
+                </span>
+              </td>
               <td class="actions">
-                <button class="btn-icon ">
+                <button class="btn-icon" (click)="openModal(refaccion, 'view')">
                   <span class="material-symbols-outlined icon-view">visibility</span>
                 </button>
-                <button class="btn-icon ">
+                <button class="btn-icon" (click)="openModal(refaccion, 'edit')">
                   <span class="material-symbols-outlined icon-edit">edit</span>
                 </button>
-                <button class="btn-icon ">
+                <button class="btn-icon" (click)="openModal(refaccion, 'delete')">
                   <span class="material-symbols-outlined icon-delete">delete</span>
                 </button>
               </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Wade Warren</td>
-                <td>example&#64;example.com</td>
-                <td>000-000-0000</td>
-                <td>Suc2</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                  <button class="btn-icon ">
-                    <span class="material-symbols-outlined icon-view">visibility</span>
-                  </button>
-                  <button class="btn-icon ">
-                    <span class="material-symbols-outlined icon-edit">edit</span>
-                  </button>
-                  <button class="btn-icon ">
-                    <span class="material-symbols-outlined icon-delete">delete</span>
-                  </button>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Esther Howard</td>
-                <td>example&#64;example.com</td>
-                <td>000-000-0000</td>
-                <td>Suc3</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Cameron Williamson</td>
-                <td>example&#64;example.com</td>
-                <td>000-000-0000</td>
-                <td>Suc2</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Leslie Alexander</td>
-                <td>example&#64;example.com</td>
-                <td>000-000-0000</td>
-                <td>Suc1</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>Guy Hawkins</td>
-                <td>example&#64;example.com</td>
-                <td>000-000-0000</td>
-                <td>Suc4</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>Jacob Jones</td>
-                <td>example&#64;example.com</td>
-                <td>000-000-0000</td>
-                <td>Suc2</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>Darlene Robertson</td>
-                <td>example&#64;example.com</td>
-                <td>000-000-0000</td>
-                <td>Suc4</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>Devon Lane</td>
-                <td>example&#64;example.com</td>
-                <td>000-000-0000</td>
-                <td>Suc1</td>
-                <td><span class="badge bg-success">Activo</span></td>
-                <td class="actions">
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-view">visibility</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-edit">edit</span>
-                    </button>
-                    <button class="btn-icon ">
-                      <span class="material-symbols-outlined icon-delete">delete</span>
-                    </button>
-                </td>
             </tr>
           </tbody>
         </table>
@@ -241,4 +95,68 @@
         </div>
       </div>
     </div>
+</div>
+
+<div class="modal-overlay" *ngIf="isModalVisible">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 *ngIf="modalAction === 'view'">Ver Refacción</h2>
+      <h2 *ngIf="modalAction === 'edit'">Editar Refacción</h2>
+      <h2 *ngIf="modalAction === 'new'">Nueva Refacción</h2>
+      <h2 *ngIf="modalAction === 'delete'">Eliminar Refacción</h2>
+      <button class="btn-icon" (click)="closeModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="modal-body" *ngIf="selectedRefaccion">
+      <div *ngIf="modalAction === 'view'">
+        <p><strong>ID:</strong> {{ selectedRefaccion.id }}</p>
+        <p><strong>Producto:</strong> {{ selectedRefaccion.producto }}</p>
+        <p><strong>SKU:</strong> {{ selectedRefaccion.sku }}</p>
+        <p><strong>Familia:</strong> {{ selectedRefaccion.familia }}</p>
+        <p><strong>Modelo:</strong> {{ selectedRefaccion.modelo }}</p>
+        <p><strong>Años:</strong> {{ selectedRefaccion.anios }}</p>
+        <p><strong>Costo:</strong> {{ selectedRefaccion.costo }}</p>
+        <p><strong>Estatus:</strong> 
+          <span class="badge" [class.bg-success]="selectedRefaccion.estatus === 'Activo'" [class.bg-danger]="selectedRefaccion.estatus !== 'Activo'">
+            {{ selectedRefaccion.estatus }}
+          </span>
+        </p>
+      </div>
+      <div *ngIf="modalAction === 'edit' || modalAction === 'new'">
+        <div class="form-group">
+          <label for="producto">Producto</label>
+          <input type="text" id="producto" class="form-control" [(ngModel)]="selectedRefaccion.producto">
+        </div>
+        <div class="form-group">
+          <label for="sku">SKU</label>
+          <input type="text" id="sku" class="form-control" [(ngModel)]="selectedRefaccion.sku">
+        </div>
+        <div class="form-group">
+          <label for="familia">Familia</label>
+          <input type="text" id="familia" class="form-control" [(ngModel)]="selectedRefaccion.familia">
+        </div>
+        <div class="form-group">
+          <label for="modelo">Modelo</label>
+          <input type="text" id="modelo" class="form-control" [(ngModel)]="selectedRefaccion.modelo">
+        </div>
+        <div class="form-group">
+          <label for="anios">Años</label>
+          <input type="text" id="anios" class="form-control" [(ngModel)]="selectedRefaccion.anios">
+        </div>
+        <div class="form-group">
+          <label for="costo">Costo</label>
+          <input type="text" id="costo" class="form-control" [(ngModel)]="selectedRefaccion.costo">
+        </div>
+      </div>
+      <div *ngIf="modalAction === 'delete'">
+        <p>¿Estás seguro de que deseas eliminar la refacción <strong>{{ selectedRefaccion.producto }}</strong>?</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
+      <button class="btn-primary" *ngIf="modalAction === 'edit' || modalAction === 'new'" (click)="saveRefaccion()">Guardar Cambios</button>
+      <button class="btn-danger" *ngIf="modalAction === 'delete'" (click)="deleteRefaccion()">Eliminar</button>
+    </div>
+  </div>
 </div>
