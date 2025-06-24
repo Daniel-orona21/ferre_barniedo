@@ -41,6 +41,7 @@
     position: relative;
     display: flex;
     width: 50%;
+    min-width: 800px;
     display: flex;
     overflow: hidden;
     position: relative;
@@ -78,7 +79,6 @@
       }
 
         .texto {
-
           position: relative;
           height: 50%;
           display: flex !important;
@@ -90,6 +90,7 @@
           // z-index: 9999999999999999999999;
           .logo {
                 width: 20%;
+                max-width: 140px;
                 height: min-content;
                 object-fit: contain;
                 margin: 0;
@@ -302,3 +303,65 @@
   text-align: center;
 }
   
+
+@media (min-width: 2040px) {
+  .texto {
+
+
+    h1 {
+
+    }
+  }
+}
+
+@media (max-width: 1624px) {
+  .texto {
+
+
+    h1 {
+      font-size: 6rem !important;
+    }
+  }
+}
+
+@media (max-width: 1380px) {
+  .login {
+    position: absolute !important;
+    z-index: 10 !important;
+    padding-right: 0 !important;
+    top: 55% !important;
+    left: 50% !important;
+    min-width: 600px;
+    transform: translate(-50%, -50%) !important;
+
+    .carta {
+      background-color: white;
+      width: 100% !important;
+      border-radius: 20px;
+
+      align-items: center !important;
+      justify-content: center !important;
+
+      .logo {
+        display: none !important;
+      }
+    }
+  }
+
+  .contenedorImagenes {
+    width: 100% !important;
+    margin: 0 !important;
+
+    .recorte {
+      z-index: 1 !important;
+
+      .sujeto {
+        display: none !important;
+      }
+    }
+
+    .cuadro {
+      display: none !important;
+    }
+  }
+}
