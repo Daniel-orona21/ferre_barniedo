@@ -2,6 +2,10 @@
 
 // login
 
+img {
+  pointer-events: none;
+}
+
 .loginCuerpo {
     width: 100dvw;
     height: 100dvh;
@@ -27,6 +31,10 @@
             font-size: 2.5rem;
             margin-bottom: 1rem;
         }
+
+        .semeolvidotitulo {
+          font-size: 2rem;
+        }
     
         .logo {
             width: 20%;
@@ -46,6 +54,7 @@
     overflow: hidden;
     position: relative;
     margin: 30px;
+    
 
     .cuadro {
         width: 150px;
@@ -79,6 +88,8 @@
       }
 
         .texto {
+          opacity: 0;
+          animation: scaleIn 2s 0s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
           position: relative;
           height: 50%;
           display: flex !important;
@@ -276,6 +287,38 @@
     border: 1px solid #2d79f3;
   }
   
+  @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  }
+
+  .form.ng-enter,
+  .form.ng-leave {
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .form.ng-enter {
+    opacity: 0;
+  }
+
+  .form.ng-enter-active {
+    opacity: 1;
+  }
+
+  .form.ng-leave {
+    opacity: 1;
+  }
+
+  .form.ng-leave-active {
+    opacity: 0;
+  }
+
 .blur-text-container {
   position: relative;
   display: inline-block;
@@ -309,6 +352,7 @@
 
 
     h1 {
+
 
     }
   }
@@ -365,3 +409,33 @@
     }
   }
 }
+
+.form {
+    transition: opacity 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }

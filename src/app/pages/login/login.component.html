@@ -2,7 +2,7 @@
     <div class="login">
         <div class="carta">
             <img class="logo" src="logo.png" alt="">
-        <form class="form">
+        <form class="form form-fade-in" *ngIf="!showForgotPassword">
             <h1>Inicia sesión</h1>
             <div class="flex-column">
               <label>Email </label>
@@ -49,11 +49,25 @@
                     <label for="recuerdame">Recuérdame</label>
                 </div>
                 <div class="olvidaste">
-                    <p href="#">¿Olvidaste tu contraseña?</p>
+                    <p style="cursor: pointer;" (click)="showForgotPassword = true">¿Olvidaste tu contraseña?</p>
                 </div>
             </div>
           
             <button class="button-submit">Iniciar sesion</button>
+          </form>
+
+          <form class="form form-fade-in" *ngIf="showForgotPassword">
+            <h1 class="semeolvidotitulo">Recuperar contraseña</h1>
+            <p style="font-weight: 500; font-size: 1.2rem;">Ingrese su correo electrónico y le enviaremos instrucciones para restablecer su contraseña</p>
+            <div class="flex-column" style="margin-top: 1rem;">
+              <label>Correo electronico</label>
+            </div>
+            <div class="inputForm">
+              <input type="text" class="input" placeholder="example@mail.com" />
+            </div>
+          
+            <button  class="button-submit">Enviar</button>
+            <p style="text-align: center; margin-top: 1rem; cursor: pointer;" (click)="showForgotPassword = false">Volver a iniciar sesión</p>
           </form>
         </div>
     </div>
