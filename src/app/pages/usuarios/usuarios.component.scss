@@ -84,7 +84,7 @@
     cursor: pointer;
   
     &:hover {
-      background-color: $boton-fondo-hover;
+      background-color: $color-principal-hover;
     }
   }
   
@@ -239,6 +239,8 @@
   .bg-success {
       color: #2e5327;
       background-color: #65e24f86;
+      padding: 0.5rem 1rem !important;
+      border-radius: 12px !important;
   }
   
   .container-fluid {

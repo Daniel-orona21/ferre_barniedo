@@ -25,6 +25,7 @@ export const routes: Routes = [
         { path: 'home', component: HomeComponent },
         { path: 'usuarios', component: UsuariosComponent },
         { path: 'roles-y-permisos', component: RolesYPermisosComponent },
+        { path: 'roles-y-permisos/crear', loadComponent: () => import('./pages/roles-y-permisos/crear-rol/crear-rol.component').then(m => m.CrearRolComponent) },
         { path: 'clientes', component: ClientesComponent },
         { path: 'tipos-de-clientes', component: TiposDeClientesComponent },
         { path: 'aseguradoras', component: AseguradorasComponent },
