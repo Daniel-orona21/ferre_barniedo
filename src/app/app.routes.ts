@@ -17,6 +17,12 @@ import { OrdenesDeCompraComponent } from './pages/ordenes-de-compra/ordenes-de-c
 import { VentasComponent } from './pages/ventas/ventas.component';
 import { CreditoComponent } from './pages/credito/credito.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
+import { GeneralComponent } from './pages/inventarios/general/general.component';
+import { EntradasComponent } from './pages/inventarios/entradas/entradas.component';
+import { TraspasosComponent } from './pages/inventarios/traspasos/traspasos.component';
+import { DecolucionesComponent } from './pages/inventarios/decoluciones/decoluciones.component';
+import { SalidasComponent } from './pages/inventarios/salidas/salidas.component';
+import { RevisionInventarioComponent } from './pages/inventarios/revision-inventario/revision-inventario.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent, pathMatch: 'full' },
@@ -34,6 +40,17 @@ export const routes: Routes = [
         { path: 'almacen-en-proceso', component: AlmacenenEnProcesoComponent },
         { path: 'anaquel', component: AnaquelComponent },
         { path: 'proveedores', component: ProveedoresComponent },
+        { path: 'inventario', component: InventariosComponent, 
+            children: [
+                { path: '', redirectTo: 'general', pathMatch: 'full' },
+                { path: 'general', component: GeneralComponent },
+                { path: 'entradas', component: EntradasComponent },
+                { path: 'traspasos', component: TraspasosComponent },
+                { path: 'devoluciones', component: DecolucionesComponent },
+                { path: 'salidas', component: SalidasComponent },
+                { path: 'revision-inventario', component: RevisionInventarioComponent }
+            ] 
+         },
         { path: 'ordenes', component: OrdenesDeCompraComponent },
         { path: 'ventas', component: VentasComponent },
         { path: 'credito', component: CreditoComponent },

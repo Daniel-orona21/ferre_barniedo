@@ -1,1 +1,24 @@
-<p>inventarios works!</p>
+<div class="container-fluid">
+    <div class="tabs-container">
+      <button routerLink="general" routerLinkActive="active" class="tab-button">
+        <span class="material-symbols-outlined">analytics</span> General
+      </button>
+      <button routerLink="entradas" routerLinkActive="active" class="tab-button">
+        <span class="material-symbols-outlined">box_add</span> Entradas
+      </button>
+      <button routerLink="salidas-traspasos" routerLinkActive="active" class="tab-button">
+        <span class="material-symbols-outlined">compare_arrows</span> Traspasos
+      </button>
+      <button class="tab-button">
+        <span class="material-symbols-outlined">assignment_return</span> Devoluciones
+      </button>
+      <button class="tab-button">
+        <span class="material-symbols-outlined">hand_package</span>Salidas
+      </button>
+      <button class="tab-button">
+        <span class="material-symbols-outlined">hand_package</span> Revisión de inventario
+      </button>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+  
