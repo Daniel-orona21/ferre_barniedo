@@ -53,6 +53,9 @@ export class LayoutComponent {
       if (currentRoute.includes('ordenes')) {
         return 'Ordenes de compra';
       }
+      if (currentRoute.includes('ventas')) {
+        return 'Ventas';
+      }
       return '';
     }
 }

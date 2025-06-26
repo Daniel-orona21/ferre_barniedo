@@ -24,6 +24,9 @@ import { DecolucionesComponent } from './pages/inventarios/decoluciones/decoluci
 import { SalidasComponent } from './pages/inventarios/salidas/salidas.component';
 import { RevisionInventarioComponent } from './pages/inventarios/revision-inventario/revision-inventario.component';
 import { RegistrarOrdenComponent } from './pages/ordenes-de-compra/registrar-orden/registrar-orden.component';
+import { MenudeoComponent } from './pages/ventas/menudeo/menudeo.component';
+import { CotizacionComponent } from './pages/ventas/menudeo/cotizacion/cotizacion.component';
+import { PedidoEspecialComponent } from './pages/ventas/menudeo/pedido-especial/pedido-especial.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent, pathMatch: 'full' },
@@ -55,6 +58,13 @@ export const routes: Routes = [
         { path: 'ordenes', component: OrdenesDeCompraComponent },
         { path: 'ordenes/registrar', component: RegistrarOrdenComponent },
         { path: 'ventas', component: VentasComponent },
+        { path: 'ventas/menudeo', component: MenudeoComponent,
+            children: [
+                { path: '', redirectTo: 'cotizacion', pathMatch: 'full' },
+                { path: 'cotizacion', component: CotizacionComponent },
+                { path: 'pedido-especial', component: PedidoEspecialComponent },
+            ]
+        },
         { path: 'credito', component: CreditoComponent },
         { path: 'reportes', component: ReportesComponent },
     ]},
