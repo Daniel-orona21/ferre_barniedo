@@ -45,11 +45,14 @@ export class LayoutComponent {
     }
   }
 
-  getCurrentPageTitle() {
-    const currentRoute = this.router.url;
-    if (currentRoute.includes('inventario')) {
-      return 'Inventarios';
+    getCurrentPageTitle() {
+      const currentRoute = this.router.url;
+      if (currentRoute.includes('inventario')) {
+        return 'Inventarios';
+      }
+      if (currentRoute.includes('ordenes')) {
+        return 'Ordenes de compra';
+      }
+      return '';
     }
-    return '';
-  }
 }
