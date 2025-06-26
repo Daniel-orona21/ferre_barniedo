@@ -46,54 +46,56 @@
         </div>
       </div>
       <div class="card-body">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>OC</th>
-              <th>Proveedor</th>
-              <th>Procedencia</th>
-              <th class="min-width-col">Cantidad a recibir</th>
-              <th>Precio total</th>
-              <th>Ubicación</th>
-              <th>Solicitante</th>
-              <th>Estatus</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let orden of ordenesCompra">
-              <td>{{ orden.fecha }}</td>
-              <td>{{ orden.oc }}</td>
-              <td>{{ orden.proveedor }}</td>
-              <td>{{ orden.procedencia }}</td>
-              <td class="min-width-col">{{ orden.cantidadRecibir }}</td>
-              <td>{{ orden.precioTotal }}</td>
-              <td>{{ orden.ubicacion }}</td>
-              <td>{{ orden.solicitante }}</td>
-              <td>
-                <span class="badge" 
-                      [class.bg-pendiente]="orden.estatus === 'Pendiente'"
-                      [class.bg-ordenada]="orden.estatus === 'Ordenada'"
-                      [class.bg-cancelada]="orden.estatus === 'Cancelada'"
-                      [class.bg-surtida]="orden.estatus === 'Surtida'">
-                  {{ orden.estatus }}
-                </span>
-              </td>
-              <td class="actions">
-                <button class="btn-icon" (click)="openModal(orden, 'view')">
-                  <span class="material-symbols-outlined icon-view">visibility</span>
-                </button>
-                <button class="btn-icon" (click)="openModal(orden, 'edit')">
-                  <span class="material-symbols-outlined icon-edit">edit</span>
-                </button>
-                <button class="btn-icon" (click)="openModal(orden, 'delete')">
-                  <span class="material-symbols-outlined icon-delete">delete</span>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>OC</th>
+                <th>Proveedor</th>
+                <th>Procedencia</th>
+                <th class="min-width-col">Cantidad a recibir</th>
+                <th>Precio total</th>
+                <th>Ubicación</th>
+                <th>Solicitante</th>
+                <th>Estatus</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let orden of ordenesCompra">
+                <td>{{ orden.fecha }}</td>
+                <td>{{ orden.oc }}</td>
+                <td>{{ orden.proveedor }}</td>
+                <td>{{ orden.procedencia }}</td>
+                <td class="min-width-col">{{ orden.cantidadRecibir }}</td>
+                <td>{{ orden.precioTotal }}</td>
+                <td>{{ orden.ubicacion }}</td>
+                <td>{{ orden.solicitante }}</td>
+                <td>
+                  <span class="badge" 
+                        [class.bg-pendiente]="orden.estatus === 'Pendiente'"
+                        [class.bg-ordenada]="orden.estatus === 'Ordenada'"
+                        [class.bg-cancelada]="orden.estatus === 'Cancelada'"
+                        [class.bg-surtida]="orden.estatus === 'Surtida'">
+                    {{ orden.estatus }}
+                  </span>
+                </td>
+                <td class="actions">
+                  <button class="btn-icon" (click)="openModal(orden, 'view')">
+                    <span class="material-symbols-outlined icon-view">visibility</span>
+                  </button>
+                  <button class="btn-icon" (click)="openModal(orden, 'edit')">
+                    <span class="material-symbols-outlined icon-edit">edit</span>
+                  </button>
+                  <button class="btn-icon" (click)="openModal(orden, 'delete')">
+                    <span class="material-symbols-outlined icon-delete">delete</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="card-footer">
         <div class="pagination-controls">

@@ -36,57 +36,59 @@
       </div>
     </div>
     <div class="card-body">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Producto</th>
-            <th>SKU</th>
-            <th>Familia</th>
-            <th>Modelo</th>
-            <th>Años</th>
-            <th>Costo</th>
-            <th>Cant</th>
-            <th>UM</th>
-            <th>Min</th>
-            <th>Max</th>
-            <th>Estatus</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of inventarios">
-            <td>{{ item.producto }}</td>
-            <td>{{ item.sku }}</td>
-            <td>{{ item.familia }}</td>
-            <td>{{ item.modelo }}</td>
-            <td>{{ item.anios }}</td>
-            <td>{{ item.costo }}</td>
-            <td>{{ item.cant }}</td>
-            <td>{{ item.um }}</td>
-            <td>{{ item.min }}</td>
-            <td>{{ item.max }}</td>
-            <td>
-              <span class="status"
-                [class.disponible]="item.estatus === 'Disponible'"
-                [class.bajo-stock]="item.estatus === 'Bajo Stock'"
-                [class.agotado]="item.estatus === 'Agotado'"
-                [class.sobrestock]="item.estatus === 'Sobrestock'">
-                {{ item.estatus }}
-              </span>
-            </td>
-            <td>
-              <div class="acciones">
-                <button class="btn-icon" (click)="openModal(item, 'view')">
-                  <span class="material-symbols-outlined icon-view">visibility</span>
-                </button>
-                <button class="btn-icon" (click)="openModal(item, 'edit')">
-                  <span class="material-symbols-outlined icon-edit">edit</span>
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>SKU</th>
+              <th>Familia</th>
+              <th>Modelo</th>
+              <th>Años</th>
+              <th>Costo</th>
+              <th>Cant</th>
+              <th>UM</th>
+              <th>Min</th>
+              <th>Max</th>
+              <th>Estatus</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of inventarios">
+              <td>{{ item.producto }}</td>
+              <td>{{ item.sku }}</td>
+              <td>{{ item.familia }}</td>
+              <td>{{ item.modelo }}</td>
+              <td>{{ item.anios }}</td>
+              <td>{{ item.costo }}</td>
+              <td>{{ item.cant }}</td>
+              <td>{{ item.um }}</td>
+              <td>{{ item.min }}</td>
+              <td>{{ item.max }}</td>
+              <td>
+                <span class="status"
+                  [class.disponible]="item.estatus === 'Disponible'"
+                  [class.bajo-stock]="item.estatus === 'Bajo Stock'"
+                  [class.agotado]="item.estatus === 'Agotado'"
+                  [class.sobrestock]="item.estatus === 'Sobrestock'">
+                  {{ item.estatus }}
+                </span>
+              </td>
+              <td>
+                <div class="acciones">
+                  <button class="btn-icon" (click)="openModal(item, 'view')">
+                    <span class="material-symbols-outlined icon-view">visibility</span>
+                  </button>
+                  <button class="btn-icon" (click)="openModal(item, 'edit')">
+                    <span class="material-symbols-outlined icon-edit">edit</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="card-footer">
       <div class="pagination-controls">

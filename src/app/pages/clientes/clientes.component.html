@@ -22,40 +22,42 @@
         </div>
       </div>
       <div class="card-body">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Teléfono</th>
-              <th>Correo electrónico</th>
-              <th>Sucursal</th>
-              <th>Estatus</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let cliente of clientes">
-              <td>{{ cliente.id }}</td>
-              <td>{{ cliente.nombre }}</td>
-              <td>{{ cliente.telefono }}</td>
-              <td>{{ cliente.email }}</td>
-              <td>{{ cliente.sucursal }}</td>
-              <td><span class="badge bg-success">{{ cliente.estatus }}</span></td>
-              <td class="actions">
-                <button class="btn-icon" (click)="openModal(cliente, 'view')">
-                  <span class="material-symbols-outlined icon-view">visibility</span>
-                </button>
-                <button class="btn-icon" (click)="openModal(cliente, 'edit')">
-                  <span class="material-symbols-outlined icon-edit">edit</span>
-                </button>
-                <button class="btn-icon" (click)="openModal(cliente, 'delete')">
-                  <span class="material-symbols-outlined icon-delete">delete</span>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Correo electrónico</th>
+                <th>Sucursal</th>
+                <th>Estatus</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cliente of clientes">
+                <td>{{ cliente.id }}</td>
+                <td>{{ cliente.nombre }}</td>
+                <td>{{ cliente.telefono }}</td>
+                <td>{{ cliente.email }}</td>
+                <td>{{ cliente.sucursal }}</td>
+                <td><span class="badge bg-success">{{ cliente.estatus }}</span></td>
+                <td class="actions">
+                  <button class="btn-icon" (click)="openModal(cliente, 'view')">
+                    <span class="material-symbols-outlined icon-view">visibility</span>
+                  </button>
+                  <button class="btn-icon" (click)="openModal(cliente, 'edit')">
+                    <span class="material-symbols-outlined icon-edit">edit</span>
+                  </button>
+                  <button class="btn-icon" (click)="openModal(cliente, 'delete')">
+                    <span class="material-symbols-outlined icon-delete">delete</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="card-footer">
         <div class="pagination-controls">

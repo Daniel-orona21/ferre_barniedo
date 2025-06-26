@@ -30,48 +30,50 @@
         </div>
       </div>
       <div class="card-body">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Producto</th>
-              <th>SKU</th>
-              <th>Familia</th>
-              <th>Modelo</th>
-              <th>Años</th>
-              <th>Costos</th>
-              <th>Estatus</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let refaccion of refacciones">
-              <td>{{ refaccion.id }}</td>
-              <td>{{ refaccion.producto }}</td>
-              <td>{{ refaccion.sku }}</td>
-              <td>{{ refaccion.familia }}</td>
-              <td>{{ refaccion.modelo }}</td>
-              <td>{{ refaccion.anios }}</td>
-              <td>{{ refaccion.costo }}</td>
-              <td>
-                <span class="badge" [class.bg-success]="refaccion.estatus === 'Activo'" [class.bg-danger]="refaccion.estatus !== 'Activo'">
-                  {{ refaccion.estatus }}
-                </span>
-              </td>
-              <td class="actions">
-                <button class="btn-icon" (click)="openModal(refaccion, 'view')">
-                  <span class="material-symbols-outlined icon-view">visibility</span>
-                </button>
-                <button class="btn-icon" (click)="openModal(refaccion, 'edit')">
-                  <span class="material-symbols-outlined icon-edit">edit</span>
-                </button>
-                <button class="btn-icon" (click)="openModal(refaccion, 'delete')">
-                  <span class="material-symbols-outlined icon-delete">delete</span>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>SKU</th>
+                <th>Familia</th>
+                <th>Modelo</th>
+                <th>Años</th>
+                <th>Costos</th>
+                <th>Estatus</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let refaccion of refacciones">
+                <td>{{ refaccion.id }}</td>
+                <td>{{ refaccion.producto }}</td>
+                <td>{{ refaccion.sku }}</td>
+                <td>{{ refaccion.familia }}</td>
+                <td>{{ refaccion.modelo }}</td>
+                <td>{{ refaccion.anios }}</td>
+                <td>{{ refaccion.costo }}</td>
+                <td>
+                  <span class="badge" [class.bg-success]="refaccion.estatus === 'Activo'" [class.bg-danger]="refaccion.estatus !== 'Activo'">
+                    {{ refaccion.estatus }}
+                  </span>
+                </td>
+                <td class="actions">
+                  <button class="btn-icon" (click)="openModal(refaccion, 'view')">
+                    <span class="material-symbols-outlined icon-view">visibility</span>
+                  </button>
+                  <button class="btn-icon" (click)="openModal(refaccion, 'edit')">
+                    <span class="material-symbols-outlined icon-edit">edit</span>
+                  </button>
+                  <button class="btn-icon" (click)="openModal(refaccion, 'delete')">
+                    <span class="material-symbols-outlined icon-delete">delete</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="card-footer">
         <div class="pagination-controls">

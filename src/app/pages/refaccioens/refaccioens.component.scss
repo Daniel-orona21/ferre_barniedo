@@ -22,11 +22,14 @@
     align-items: center;
     padding: 24px;
     border-bottom: 1px solid #e5e7eb;
+    flex-wrap: wrap;
+    gap: 16px;
 
     .contenedor-filtros {
         display: flex;
         align-items: center;
         gap: 20px;
+        flex-wrap: wrap;
     }
 
     .contenedor-buscador {
@@ -91,6 +94,11 @@
   
   .card-body {
     padding: 0;
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   
   .table {
