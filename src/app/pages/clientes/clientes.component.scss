@@ -1,4 +1,5 @@
 @use '../../../colores.scss' as *;
+@use 'sass:color';
 
 :host {
     display: block;
@@ -408,7 +409,7 @@
     color: white;
 
     &:hover {
-      background-color: darken($color-secundario, 8%);
+      background-color: color.adjust($color-secundario, $lightness: -8%);
     }
   }
 
@@ -416,7 +417,7 @@
     background-color: $color-terciario;
     color: white;
     &:hover {
-      background-color: darken($color-terciario, 8%);
+      background-color: color.adjust($color-terciario, $lightness: -8%);
     }
   }
 }
