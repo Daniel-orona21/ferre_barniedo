@@ -43,6 +43,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    width: 100%;
 
     .contenedor-buscador {
         display: flex;
@@ -74,8 +75,9 @@
     
     .filtros {
         display: flex;
-        align-items: center;
-        gap: 20px;
+        align-items: center;  
+        justify-content: space-around;
+        flex: 1;
     }
 
     .categoria {

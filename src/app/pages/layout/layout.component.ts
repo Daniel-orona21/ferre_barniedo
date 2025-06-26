@@ -45,8 +45,11 @@ export class LayoutComponent {
     }
   }
 
-  // getCurrentPageTitle() {
-  //   const currentRoute = this.router.url;
-  //   return currentRoute.split('/').pop()?.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
-  // }
+  getCurrentPageTitle() {
+    const currentRoute = this.router.url;
+    if (currentRoute.includes('inventario')) {
+      return 'Inventarios';
+    }
+    return '';
+  }
 }

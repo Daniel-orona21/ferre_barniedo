@@ -1,1 +1,212 @@
-<p>entradas works!</p>
+<div class="card">
+  <div class="card-header">
+    <div class="encabezado">
+      <div class="filtros">
+          <div class="categoria">
+              <h3>Proveedor</h3>
+              <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
+          </div>
+          <div class="categoria">
+              <h3>Ubicación</h3>
+              <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
+          </div>
+          <div class="categoria">
+              <h3>Solicitante</h3>
+              <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
+          </div>
+          <div class="categoria">
+              <h3>Estatus</h3>
+              <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
+          </div>
+          <div class="categoria">
+              <h3>Orden</h3>
+              <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
+          </div>
+      </div>
+      <div class="contenedor-buscador">
+        <input type="text" class="buscador" placeholder="Buscar...">
+        <span class="material-symbols-outlined">search</span>
+      </div>
+      <div class="botonera">
+        <button class="btn-primary" (click)="openNewInventarioModal()">
+          <span class="material-symbols-outlined">add</span>
+          Añadir
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>OC</th>
+          <th>Proveedor</th>
+          <th>Fecha de llegada</th>
+          <th>Cantidad a recibir</th>
+          <th>Cantidad recibida</th>
+          <th>Precio total</th>
+          <th>Ubicación</th>
+          <th>Solicitante</th>
+          <th>Estado mercancía</th>
+          <th>Estatus</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of inventarios">
+          <td>{{ item.fecha }}</td>
+          <td>{{ item.oc }}</td>
+          <td>{{ item.proveedor }}</td>
+          <td>{{ item.fechaLlegada }}</td>
+          <td>{{ item.cantidadRecibir }}</td>
+          <td>{{ item.cantidadRecibida }}</td>
+          <td>{{ item.precioTotal }}</td>
+          <td>{{ item.ubicacion }}</td>
+          <td>{{ item.solicitante }}</td>
+          <td>
+            <span class="status" [ngClass]="{
+              'disponible': item.estadoMercancia === 'Recibido',
+              'bajo-stock': item.estadoMercancia === 'Faltante',
+              'agotado': item.estadoMercancia === 'Devuelto',
+              'sobrestock': item.estadoMercancia === 'Pendiente'
+            }">
+              {{ item.estadoMercancia }}
+            </span>
+          </td>
+          <td>
+            <span class="status" [ngClass]="{
+              'disponible': item.estatus === 'Validado',
+              'bajo-stock': item.estatus === 'Pendiente',
+              'agotado': item.estatus === 'Devuelto',
+              'sobrestock': item.estatus === 'Recibido'
+            }">
+              {{ item.estatus }}
+            </span>
+          </td>
+          <td>
+            <div class="acciones">
+              <button class="btn-icon" (click)="openModal(item, 'view')">
+                <span class="material-symbols-outlined icon-view">visibility</span>
+              </button>
+              <button class="btn-icon" (click)="openModal(item, 'edit')">
+                <span class="material-symbols-outlined icon-edit">edit</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <div class="pagination-controls">
+      <span>Resultados por pagina:</span>
+      <select class="form-select">
+        <option selected>10</option>
+        <option>20</option>
+        <option>50</option>
+      </select>
+    </div>
+    <div class="pagination-info">
+      <span>1-10 de 300</span>
+      <div class="btn-group">
+        <button class="btn-light">
+          <span class="material-symbols-outlined">chevron_left</span>
+        </button>
+        <button class="btn-light">
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<div class="modal-overlay" *ngIf="isModalVisible">
+<div class="modal-content">
+  <div class="modal-header">
+    <h2 *ngIf="modalAction === 'view'">Ver Inventario</h2>
+    <h2 *ngIf="modalAction === 'edit'">Editar Inventario</h2>
+    <h2 *ngIf="modalAction === 'new'">Nuevo Inventario</h2>
+    <button class="btn-icon" (click)="closeModal()">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+  <div class="modal-body" *ngIf="selectedInventario">
+    <div *ngIf="modalAction === 'view'">
+      <div class="view-grid">
+        <p><strong>Fecha:</strong> {{ selectedInventario.fecha }}</p>
+        <p><strong>OC:</strong> {{ selectedInventario.oc }}</p>
+        <p><strong>Proveedor:</strong> {{ selectedInventario.proveedor }}</p>
+        <p><strong>Fecha de llegada:</strong> {{ selectedInventario.fechaLlegada }}</p>
+        <p><strong>Cantidad a recibir:</strong> {{ selectedInventario.cantidadRecibir }}</p>
+        <p><strong>Cantidad recibida:</strong> {{ selectedInventario.cantidadRecibida }}</p>
+        <p><strong>Precio total:</strong> {{ selectedInventario.precioTotal }}</p>
+        <p><strong>Ubicación:</strong> {{ selectedInventario.ubicacion }}</p>
+        <p><strong>Solicitante:</strong> {{ selectedInventario.solicitante }}</p>
+        <p><strong>Estado mercancía:</strong> {{ selectedInventario.estadoMercancia }}</p>
+        <p><strong>Estatus:</strong> {{ selectedInventario.estatus }}</p>
+      </div>
+    </div>
+    <div *ngIf="modalAction === 'edit' || modalAction === 'new'">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="fecha">Fecha</label>
+          <input type="date" id="fecha" class="form-control" [(ngModel)]="selectedInventario.fecha">
+        </div>
+        <div class="form-group">
+          <label for="oc">OC</label>
+          <input type="text" id="oc" class="form-control" [(ngModel)]="selectedInventario.oc">
+        </div>
+        <div class="form-group">
+          <label for="proveedor">Proveedor</label>
+          <input type="text" id="proveedor" class="form-control" [(ngModel)]="selectedInventario.proveedor">
+        </div>
+        <div class="form-group">
+          <label for="fechaLlegada">Fecha de llegada</label>
+          <input type="date" id="fechaLlegada" class="form-control" [(ngModel)]="selectedInventario.fechaLlegada">
+        </div>
+        <div class="form-group">
+          <label for="cantidadRecibir">Cantidad a recibir</label>
+          <input type="number" id="cantidadRecibir" class="form-control" [(ngModel)]="selectedInventario.cantidadRecibir">
+        </div>
+        <div class="form-group">
+          <label for="cantidadRecibida">Cantidad recibida</label>
+          <input type="number" id="cantidadRecibida" class="form-control" [(ngModel)]="selectedInventario.cantidadRecibida">
+        </div>
+        <div class="form-group">
+          <label for="precioTotal">Precio total</label>
+          <input type="text" id="precioTotal" class="form-control" [(ngModel)]="selectedInventario.precioTotal">
+        </div>
+        <div class="form-group">
+          <label for="ubicacion">Ubicación</label>
+          <input type="text" id="ubicacion" class="form-control" [(ngModel)]="selectedInventario.ubicacion">
+        </div>
+        <div class="form-group">
+          <label for="solicitante">Solicitante</label>
+          <input type="text" id="solicitante" class="form-control" [(ngModel)]="selectedInventario.solicitante">
+        </div>
+        <div class="form-group">
+          <label for="estadoMercancia">Estado mercancía</label>
+          <select id="estadoMercancia" class="form-control" [(ngModel)]="selectedInventario.estadoMercancia">
+            <option>Pendiente</option>
+            <option>Devuelto</option>
+            <option>Faltante</option>
+            <option>Recibido</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="estatus">Estatus</label>
+          <select id="estatus" class="form-control" [(ngModel)]="selectedInventario.estatus">
+            <option>Pendiente</option>
+            <option>Validado</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
+    <button class="btn-primary" *ngIf="modalAction === 'edit' || modalAction === 'new'" (click)="saveInventario()">Guardar Cambios</button>
+  </div>
+</div>
+</div> 
