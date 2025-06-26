@@ -31,7 +31,7 @@ import { PedidoEspecialComponent } from './pages/ventas/menudeo/pedido-especial/
 export const routes: Routes = [
     { path: '', component: LoginComponent, pathMatch: 'full' },
     { path: 'app', component: LayoutComponent, children: [
-        { path: '', redirectTo: 'home', pathMatch: 'full' },
+        { path: '', redirectTo: 'usuarios', pathMatch: 'full' },
         { path: 'home', component: HomeComponent },
         { path: 'usuarios', component: UsuariosComponent },
         { path: 'roles-y-permisos', component: RolesYPermisosComponent },
