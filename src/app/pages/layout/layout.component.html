@@ -22,7 +22,7 @@
         </ul>
     </nav>
     <div class="cuerpo">
-        <header>
+        <header [class.user-menu-active]="showUserMenu">
             <span class="material-symbols-outlined" (click)="toggleNav()">menu</span>
             <h1>{{ getCurrentPageTitle() }}</h1>
             <div class="headerRight">

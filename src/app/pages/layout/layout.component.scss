@@ -8,7 +8,6 @@
     user-select: none;
     height: 100vh;
     max-height: 100vh;
-    background-color: red;
     display: flex;
     overflow: hidden;
 
@@ -119,8 +118,11 @@
         justify-content: space-between;
         position: sticky;
         top: 0;
-        // z-index: 1;
         box-shadow: 0 4px 24px 0 rgba(0,0,0,0.10);
+        
+        &.user-menu-active {
+            z-index: 1000;
+        }
         
         span {
             color: $color-principal;
@@ -168,11 +170,11 @@
     top: 70px;
     right: 0;
     width: 270px;
-    background: #fff;
+    background: white;
     border-radius: 20px;
     box-shadow: 0 4px 24px 0 rgba(0,0,0,0.10);
     padding: 1.2rem 1.2rem 0.5rem 1.2rem;
-    z-index: 100;
+    z-index: 999;
     display: flex;
     flex-direction: column;
     align-items: stretch;
