@@ -1,0 +1,182 @@
+<div class="container-fluid">
+  <div class="card">
+      <div class="card-header">
+          <h1 class="card-title">Crear orden</h1>
+          <div class="id-badge">
+              <span>No. orden: 00013</span>
+          </div>
+      </div>
+      <div class="card-body">
+          <form class="form-container">
+              <div class="form-grid">
+                <div class="form-field-button">
+                  <button type="button" class="btn-add-product cargar">
+                      <span class="material-symbols-outlined">upload</span>
+                      Cargar OC
+                  </button>
+              </div>
+              
+                  <div class="form-field">
+                      <label for="fecha-solicitud">Fecha de registro</label>
+                      <input type="text" id="fecha-solicitud" value="23/05/2025">
+                  </div>
+                  <div class="form-field">
+                    <label for="fecha-solicitud">Fecha de llegada</label>
+                    <input type="text" id="fecha-solicitud" value="23/05/2025">
+                </div>
+                <div class="form-field">
+                    <label for="proveedor">Proveedor</label>
+                    <div class="contenedorSelect">
+                        <select id="proveedor">
+                            <option></option>
+                        </select>
+                        <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                    </div>
+                </div>
+                <div class="form-field">
+                  <label for="proveedor">Procedencia</label>
+                  <div class="contenedorSelect">
+                      <select id="proveedor">
+                          <option></option>
+                      </select>
+                      <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                  </div>
+              </div>
+              <div class="form-field-button">
+                <button type="button" class="btn-add-product">
+                    <span class="material-symbols-outlined">check</span>
+                    Validar
+                </button>
+            </div>
+                <div class="form-field">
+                  <label for="proveedor">Ubicación de destino</label>
+                  <div class="contenedorSelect">
+                      <select id="proveedor">
+                          <option></option>
+                      </select>
+                      <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                  </div>
+              </div>
+              <div class="form-field">
+                <label for="proveedor">Tipo de pago</label>
+                <div class="contenedorSelect">
+                    <select id="proveedor">
+                        <option></option>
+                    </select>
+                    <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                </div>
+            </div>
+            <div class="form-field">
+              <label for="proveedor">Responsable de compra</label>
+              <div class="contenedorSelect">
+                  <select id="proveedor">
+                      <option></option>
+                  </select>
+                  <span class="material-symbols-outlined">keyboard_arrow_down</span>
+              </div>
+          </div>
+          <div class="form-field">
+            <label for="proveedor">Estatus</label>
+            <div class="contenedorSelect">
+                <select id="proveedor">
+                    <option></option>
+                </select>
+                <span class="material-symbols-outlined">keyboard_arrow_down</span>
+            </div>
+        </div>
+
+                 
+              </div>
+          </form>
+          <div class="table-container">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Producto</th>
+                          <th>SKU</th>
+                          <th>Familia</th>
+                          <th>Modelo</th>
+                          <th>Año - grupo de años</th>
+                          <th>Cantidad ordenada</th>
+                          <th>UM</th>
+                          <th>Precio unitario</th>
+                          <th>Subtotal</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>Filtro de aire</td>
+                          <td>40161</td>
+                          <td>Filtros</td>
+                          <td>Fiat mobi</td>
+                          <td>2020-2024</td>
+                          <td>10</td>
+                          <td>PZ</td>
+                          <td>$150.00</td>
+                          <td>$1,500.00</td>
+                      </tr>
+                      <tr>
+                          <td>Pastillas de freno</td>
+                          <td>20254</td>
+                          <td>Frenos</td>
+                          <td>Fiat mobi</td>
+                          <td>2015-2019</td>
+                          <td>8</td>
+                          <td>PZ</td>
+                          <td>$580.00</td>
+                          <td>$6,800.00</td>
+                      </tr>
+                      <tr>
+                          <td>Alternador</td>
+                          <td>27642</td>
+                          <td>Eléctrico</td>
+                          <td>Fiat Argo</td>
+                          <td>2018-2023</td>
+                          <td>5</td>
+                          <td>PZ</td>
+                          <td>$2,200.00</td>
+                          <td>$11,000.00</td>
+                      </tr>
+                      <tr>
+                          <td>Disco de freno</td>
+                          <td>411119</td>
+                          <td>Frenos</td>
+                          <td>Fiat Argo</td>
+                          <td>2018-2023</td>
+                          <td>10</td>
+                          <td>PZ</td>
+                          <td>$860.00</td>
+                          <td>$8,600.00</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div class="summary">
+              <div class="summary-item">
+                  <span>Subtotal</span>
+                  <span>$27,900.00</span>
+              </div>
+              <div class="summary-item">
+                  <span>Impuestos</span>
+                  <span>$4,464.00</span>
+              </div>
+              <div class="summary-item total">
+                  <span>Total</span>
+                  <span>$32,364.00</span>
+              </div>
+          </div>
+      </div>
+      <div class="card-footer">
+          <div class="footer-actions">
+              <button class="btn-cancel" (click)="goBack()">
+                  <span class="material-symbols-outlined">arrow_back</span>
+                  Cancelar
+              </button>
+              <button class="btn-save">
+                  <span class="material-symbols-outlined">save</span>
+                  Guardar
+              </button>
+          </div>
+      </div>
+  </div>
+</div> 

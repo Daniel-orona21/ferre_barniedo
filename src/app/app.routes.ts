@@ -23,6 +23,7 @@ import { TraspasosComponent } from './pages/inventarios/traspasos/traspasos.comp
 import { DecolucionesComponent } from './pages/inventarios/decoluciones/decoluciones.component';
 import { SalidasComponent } from './pages/inventarios/salidas/salidas.component';
 import { RevisionInventarioComponent } from './pages/inventarios/revision-inventario/revision-inventario.component';
+import { RegistrarOrdenComponent } from './pages/ordenes-de-compra/registrar-orden/registrar-orden.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent, pathMatch: 'full' },
@@ -52,6 +53,7 @@ export const routes: Routes = [
             ] 
          },
         { path: 'ordenes', component: OrdenesDeCompraComponent },
+        { path: 'ordenes/registrar', component: RegistrarOrdenComponent },
         { path: 'ventas', component: VentasComponent },
         { path: 'credito', component: CreditoComponent },
         { path: 'reportes', component: ReportesComponent },

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { BsDatepickerModule, BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { esLocale } from 'ngx-bootstrap/locale';
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -8,7 +9,7 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 @Component({
   selector: 'app-ordenes-de-compra',
   standalone: true,
-  imports: [CommonModule, FormsModule, BsDatepickerModule],
+  imports: [CommonModule, FormsModule, RouterModule, BsDatepickerModule],
   templateUrl: './ordenes-de-compra.component.html',
   styleUrl: './ordenes-de-compra.component.scss'
 })
