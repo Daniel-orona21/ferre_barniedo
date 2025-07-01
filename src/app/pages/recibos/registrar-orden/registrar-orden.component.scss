@@ -1,0 +1,254 @@
+@use "sass:color";
+@use '../../../../colores.scss' as *;
+
+:host {
+    display: block;
+    z-index: 9;
+}
+
+.container-fluid {
+
+}
+
+.card {
+    // background-color: $boton-fondo;
+    border-radius: 8px;
+    // box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: white;
+    border-radius: 8px 8px 0 0;
+
+
+    .card-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .id-badge {
+        border: 1px solid $color-principal;
+        color: $color-principal;
+        padding: 8px 16px;
+        border-radius: 12px;
+        font-weight: 500;
+    }
+}
+
+.card-body {
+    // padding-top: 24px;
+}
+
+.form-container {
+    background-color: white;
+    padding: 24px;
+    // border-radius: 8px;
+    // margin-bottom: 24px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    label {
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #374151;
+    }
+    
+    input, select {
+        padding: 10px;
+        border: 1px solid #a1a1a1;
+        border-radius: 10px;
+        font-size: 1rem;
+        display: flex;
+        position: relative;
+        
+        &:focus {
+            border: 1px solid $color-principal;
+            outline: none;
+        }
+    }
+    
+    .contenedorSelect {
+        display: flex;
+
+        select {
+            display: flex;
+            width: 100%;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: transparent;
+            outline: none;
+            font: inherit;
+    
+        }
+        span {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            color: #a1a1a1;
+            pointer-events: none;
+            z-index: 99;
+        }
+    }
+}
+
+.form-field-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.btn-add-product {
+    background-color: #2AB9AF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    width: 100%;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: color.adjust(#2AB9AF, $lightness: -8%);
+    }
+}
+
+.cargar {
+  background-color: $aprobar;
+
+  &:hover {
+    background-color: color.adjust($aprobar, $lightness: -8%);
+  }
+}
+
+.table-container {
+    background-color: white;
+    padding: 24px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    th, td {
+        padding: 16px;
+        text-align: left;
+    }
+
+    thead {
+        background-color: $color-terciario;
+        th {
+            font-weight: 600;
+            color: white !important;
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid #e5e7eb;
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+}
+
+.summary {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: white;
+    padding: 24px;
+
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        width: 300px;
+        margin-bottom: 12px;
+        font-size: 1rem;
+
+        span:first-child {
+            color: #6B7280;
+        }
+
+        span:last-child {
+            font-weight: 600;
+        }
+    }
+    
+    .total {
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 24px;
+    background-color: white;
+    border-top: 1px solid #e5e7eb;
+    border-radius: 0 0 8px 8px;
+
+    .footer-actions {
+        display: flex;
+        gap: 16px;
+    }
+
+    .btn-cancel, .btn-save {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .btn-cancel {
+        background-color: $color-secundario;
+        border: none;
+        color: white;
+
+        &:hover {
+            background-color: color.adjust($color-secundario, $lightness: -10%);
+        }
+    }
+
+    .btn-save {
+        background-color: $color-terciario;
+        border: none;
+        color: white;
+
+        &:hover {
+            background-color: color.adjust($color-terciario, $lightness: -10%);
+        }
+    }
+} 

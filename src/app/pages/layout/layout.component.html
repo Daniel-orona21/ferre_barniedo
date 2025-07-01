@@ -2,22 +2,11 @@
     <nav [class.collapsed]="isNavCollapsed">
         <img src="images/logo2.png" alt="Logo">
         <ul>
-                <li class="disabled" [routerLink]="['home']" routerLinkActive="activo"><span class="material-symbols-outlined">home</span><h3>Home</h3></li>
+                <li [routerLink]="['dashboard']" routerLinkActive="activo"><span class="material-symbols-outlined"> dashboard</span><h3>Dashboard</h3></li>
                 <li [routerLink]="['usuarios']" routerLinkActive="activo"><span class="material-symbols-outlined">contacts_product</span><h3>Usuarios</h3></li>
-                <li [routerLink]="['roles-y-permisos']" routerLinkActive="activo"><span class="material-symbols-outlined">assignment_ind</span><h3>Roles y permisos</h3></li>
-                <li [routerLink]="['clientes']" routerLinkActive="activo"><span class="material-symbols-outlined">contacts_product</span><h3>Clientes</h3></li>
-                <li class="disabled" [routerLink]="['tipos-de-clientes']" routerLinkActive="activo"><span class="material-symbols-outlined">patient_list</span><h3>Tipos de clientes</h3></li>
-                <li class="disabled" [routerLink]="['aseguradoras']" routerLinkActive="activo"><span class="material-symbols-outlined">person_shield</span><h3>Aseguradoras</h3></li>
-                <li [routerLink]="['refacciones']" routerLinkActive="activo"><span class="material-symbols-outlined">construction</span><h3>Refacciones</h3></li>
-                <li class="disabled" [routerLink]="['almacenes']" routerLinkActive="activo"><span class="material-symbols-outlined">warehouse</span><h3>Almacenes</h3></li>
-                <li class="disabled" [routerLink]="['almacen-en-proceso']" routerLinkActive="activo"><span class="material-symbols-outlined">two_pager_store</span><h3>Almacen en proceso</h3></li>
-                <li class="disabled" [routerLink]="['anaquel']" routerLinkActive="activo"><span class="material-symbols-outlined">shelves</span><h3>Anaquel</h3></li>
-                <li class="disabled" [routerLink]="['proveedores']" routerLinkActive="activo"><span class="material-symbols-outlined">identity_platform</span><h3>Proveedores</h3></li>
-                <li [routerLink]="['inventario']" routerLinkActive="activo"><span class="material-symbols-outlined">barcode_reader</span><h3>Inventario</h3></li>
-                <li [routerLink]="['ordenes']" routerLinkActive="activo"><span class="material-symbols-outlined">local_mall</span><h3>Ordenes de compra</h3></li>
-                <li [routerLink]="['ventas']" routerLinkActive="activo"><span class="material-symbols-outlined">attach_money</span><h3>Ventas</h3></li>
-                <li class="disabled" [routerLink]="['credito']" routerLinkActive="activo"><span class="material-symbols-outlined">account_balance_wallet</span><h3>Credito</h3></li>
-                <li class="disabled" [routerLink]="['reportes']" routerLinkActive="activo"><span class="material-symbols-outlined">breaking_news</span><h3>Reportes</h3></li>
+                <li [routerLink]="['recibos']" routerLinkActive="activo"><span class="material-symbols-outlined">receipt_long</span><h3>Recibos</h3></li>
+                <li [routerLink]="['reporte']" routerLinkActive="activo"><span class="material-symbols-outlined">breaking_news</span><h3>Reportes</h3></li>
+                <li [routerLink]="['perfil']" routerLinkActive="activo"><span class="material-symbols-outlined">person</span><h3>Perfil</h3></li>
                 
         </ul>
     </nav>

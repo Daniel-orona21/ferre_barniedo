@@ -1,0 +1,199 @@
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <!-- <h1 class="card-title">Ordenes de compra</h1> -->
+        <div class="contenedor-filtros">
+            <div class="categoria">
+                <h3>Proveedor</h3>
+                <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
+            </div>
+            <div class="categoria">
+                <h3>Ubicación</h3>
+                <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
+            </div>
+            <div class="categoria">
+                <h3>Estatus</h3>
+                <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
+            </div>
+            <div class="date-picker-wrapper">
+                <label>Desde</label>
+                <input type="text"
+                       placeholder="Seleccionar fecha"
+                       class="form-control"
+                       bsDatepicker
+                       [(ngModel)]="fechaDesde"
+                       (ngModelChange)="filtrarPorFecha()"
+                       [bsConfig]="bsConfig">
+              </div>
+              <div class="date-picker-wrapper">
+                <label>Hasta</label>
+                <input type="text"
+                       placeholder="Seleccionar fecha"
+                       class="form-control"
+                       bsDatepicker
+                       [(ngModel)]="fechaHasta"
+                       (ngModelChange)="filtrarPorFecha()"
+                       [bsConfig]="bsConfig">
+              </div>
+            <div class="contenedor-buscador">
+                <input type="text" class="buscador" placeholder="Buscar...">
+                <span class="material-symbols-outlined">search</span>
+            </div>
+            <button class="btn-primary" routerLink="/app/ordenes/registrar">
+              <span class="material-symbols-outlined">add</span>
+              Nuevo
+            </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>OC</th>
+                <th>Proveedor</th>
+                <th>Procedencia</th>
+                <th class="min-width-col">Cantidad a recibir</th>
+                <th>Precio total</th>
+                <th>Ubicación</th>
+                <th>Solicitante</th>
+                <th>Estatus</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let orden of ordenesCompra">
+                <td>{{ orden.fecha }}</td>
+                <td>{{ orden.oc }}</td>
+                <td>{{ orden.proveedor }}</td>
+                <td>{{ orden.procedencia }}</td>
+                <td class="min-width-col">{{ orden.cantidadRecibir }}</td>
+                <td>{{ orden.precioTotal }}</td>
+                <td>{{ orden.ubicacion }}</td>
+                <td>{{ orden.solicitante }}</td>
+                <td>
+                  <span class="badge" 
+                        [class.bg-pendiente]="orden.estatus === 'Pendiente'"
+                        [class.bg-ordenada]="orden.estatus === 'Ordenada'"
+                        [class.bg-cancelada]="orden.estatus === 'Cancelada'"
+                        [class.bg-surtida]="orden.estatus === 'Surtida'">
+                    {{ orden.estatus }}
+                  </span>
+                </td>
+                <td class="actions">
+                  <button class="btn-icon" (click)="openModal(orden, 'view')">
+                    <span class="material-symbols-outlined icon-view">visibility</span>
+                  </button>
+                  <button class="btn-icon" (click)="openModal(orden, 'edit')">
+                    <span class="material-symbols-outlined icon-edit">edit</span>
+                  </button>
+                  <button class="btn-icon" (click)="openModal(orden, 'delete')">
+                    <span class="material-symbols-outlined icon-delete">delete</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="pagination-controls">
+            <span>Resultados por pagina:</span>
+            <select class="form-select">
+                <option selected>10</option>
+                <option>20</option>
+                <option>50</option>
+            </select>
+        </div>
+        <div class="pagination-info">
+            <span>1-10 de 30</span>
+            <div class="btn-group">
+                <button class="btn-light">
+                  <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <button class="btn-light">
+                  <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal-overlay" *ngIf="isModalVisible">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 *ngIf="modalAction === 'view'">Ver orden de compra</h2>
+      <h2 *ngIf="modalAction === 'edit'">Editar orden de compra</h2>
+      <h2 *ngIf="modalAction === 'new'">Nueva orden de compra</h2>
+      <h2 *ngIf="modalAction === 'delete'">Eliminar orden de compra</h2>
+      <button class="btn-icon" (click)="closeModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="modal-body" *ngIf="selectedOrdenCompra">
+      <div *ngIf="modalAction === 'view'">
+        <p><strong>Fecha:</strong> {{ selectedOrdenCompra.fecha }}</p>
+        <p><strong>OC:</strong> {{ selectedOrdenCompra.oc }}</p>
+        <p><strong>Proveedor:</strong> {{ selectedOrdenCompra.proveedor }}</p>
+        <p><strong>Procedencia:</strong> {{ selectedOrdenCompra.procedencia }}</p>
+        <p><strong>Cantidad a recibir:</strong> {{ selectedOrdenCompra.cantidadRecibir }}</p>
+        <p><strong>Precio total:</strong> {{ selectedOrdenCompra.precioTotal }}</p>
+        <p><strong>Ubicación:</strong> {{ selectedOrdenCompra.ubicacion }}</p>
+        <p><strong>Solicitante:</strong> {{ selectedOrdenCompra.solicitante }}</p>
+        <p><strong>Estatus:</strong> 
+          <span class="badge" 
+                [class.bg-pendiente]="selectedOrdenCompra.estatus === 'Pendiente'"
+                [class.bg-ordenada]="selectedOrdenCompra.estatus === 'Ordenada'"
+                [class.bg-cancelada]="selectedOrdenCompra.estatus === 'Cancelada'"
+                [class.bg-surtida]="selectedOrdenCompra.estatus === 'Surtida'">
+            {{ selectedOrdenCompra.estatus }}
+          </span>
+        </p>
+      </div>
+      <div *ngIf="modalAction === 'edit' || modalAction === 'new'">
+        <div class="form-group">
+          <label for="fecha">Fecha</label>
+          <input type="text" id="fecha" class="form-control" [(ngModel)]="selectedOrdenCompra.fecha">
+        </div>
+        <div class="form-group">
+          <label for="oc">OC</label>
+          <input type="text" id="oc" class="form-control" [(ngModel)]="selectedOrdenCompra.oc">
+        </div>
+        <div class="form-group">
+          <label for="proveedor">Proveedor</label>
+          <input type="text" id="proveedor" class="form-control" [(ngModel)]="selectedOrdenCompra.proveedor">
+        </div>
+        <div class="form-group">
+          <label for="procedencia">Procedencia</label>
+          <input type="text" id="procedencia" class="form-control" [(ngModel)]="selectedOrdenCompra.procedencia">
+        </div>
+        <div class="form-group">
+          <label for="cantidadRecibir">Cantidad a recibir</label>
+          <input type="number" id="cantidadRecibir" class="form-control" [(ngModel)]="selectedOrdenCompra.cantidadRecibir">
+        </div>
+        <div class="form-group">
+          <label for="precioTotal">Precio total</label>
+          <input type="text" id="precioTotal" class="form-control" [(ngModel)]="selectedOrdenCompra.precioTotal">
+        </div>
+        <div class="form-group">
+          <label for="ubicacion">Ubicación</label>
+          <input type="text" id="ubicacion" class="form-control" [(ngModel)]="selectedOrdenCompra.ubicacion">
+        </div>
+        <div class="form-group">
+          <label for="solicitante">Solicitante</label>
+          <input type="text" id="solicitante" class="form-control" [(ngModel)]="selectedOrdenCompra.solicitante">
+        </div>
+      </div>
+      <div *ngIf="modalAction === 'delete'">
+        <p>¿Estás seguro de que deseas eliminar la orden de compra <strong>{{ selectedOrdenCompra.oc }}</strong>?</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
+      <button class="btn-primary" *ngIf="modalAction === 'edit' || modalAction === 'new'" (click)="saveOrdenCompra()">Guardar Cambios</button>
+      <button class="btn-danger" *ngIf="modalAction === 'delete'" (click)="deleteOrdenCompra()">Eliminar</button>
+    </div>
+  </div>
+</div>
