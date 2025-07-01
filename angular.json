@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "motormexa": {
+    "ferre_barniedo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/motormexa",
+            "outputPath": "dist/ferre_barniedo",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "motormexa:build:production"
+              "buildTarget": "ferre_barniedo:build:production"
             },
             "development": {
-              "buildTarget": "motormexa:build:development"
+              "buildTarget": "ferre_barniedo:build:development"
             }
           },
           "defaultConfiguration": "development"

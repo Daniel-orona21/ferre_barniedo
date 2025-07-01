@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/motormexa/browser",
+  "outputDirectory": "dist/ferre_barniedo/browser",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
