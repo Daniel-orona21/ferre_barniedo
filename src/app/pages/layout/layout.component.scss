@@ -18,7 +18,7 @@
         flex-direction: column;
         transition: all 0.2s ease;
         min-width: 250px;
-        max-width: 500px;
+        max-width: 450px;
         gap: 1rem;
         
         img {
@@ -96,6 +96,7 @@
                     display: flex;
                     gap: .5rem;
                     align-items: center;
+                    font-size: .85rem;
 
                     span {
                         font-size: 1rem;
@@ -111,19 +112,21 @@
                 .rol {
                     opacity: 0.5;
                     font-weight: 200;
+                    font-size: .8rem;
                     color: white;
                     white-space: nowrap;
                 }
             }
 
             li {
+                font-size: .8rem;
                 align-items: center;
                 list-style: none;
                 display: flex;
                 gap: 0.5rem;
                 cursor: pointer;
                 transition: all 0.2s ease;
-                padding: .7rem;
+                padding: .4rem;
                 border-radius: 9999px;
                 opacity: 0.5;
 
@@ -183,7 +186,7 @@
         
     header {
         background-color: $color-principal;
-        padding: 3rem;
+        padding: 2rem 2.5rem 2rem 2.5rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -195,6 +198,7 @@
         }
         h1 {
             font-weight: 300;
+            font-size: 1.8rem;
         }
         
         span {
@@ -217,8 +221,8 @@
 
             .letras {
                 background-color: $color-overlay;
-                width: 45px;
-                height: 45px;
+                width: 35px;
+                height: 35px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -232,6 +236,7 @@
                 h3 {
                     color: white;
                     margin: 0;
+                    font-size: 1rem;
                 }
 
                 &:hover {
@@ -242,6 +247,7 @@
     }
 
     .pagina {
+        padding-right: 4rem !important;
         background-color: $color-principal;
         user-select: auto;
         flex: 1;

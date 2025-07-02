@@ -1,1 +1,104 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <div class="metrics-header">
+    <div class="metric-card usage-metric">
+      <div class="metric-title">
+        <span class="value">{{recibosTotal}} <span class="subdued">recibos</span></span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress" [style.width]="cumplimientoTotal + '%'"></div>
+      </div>
+      <h3>Recibos Emitidos</h3>
+      <p class="description">{{descargasTotal}} descargas completadas</p>
+    </div>
+
+    <div class="metric-card spend-metric">
+      <div class="metric-title">
+        <span class="value">{{cumplimientoTotal}}%</span>
+        <h3>Cumplimiento</h3>
+      </div>
+      <p class="description">Porcentaje de descargas vs recibos emitidos</p>
+    </div>
+
+    <div class="metric-card gauge-metric">
+      <div class="gauge-container">
+        <canvas #gaugeCanvas width="180" height="120"></canvas>
+      </div>
+      <div class="gauge-info">
+        <h3>Nivel de Eficiencia</h3>
+        <p class="description">Medidor de rendimiento general del sistema</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="time-controls">
+    <div class="time-periods">
+      <button *ngFor="let period of timePeriods" 
+              [class.active]="period.active"
+              (click)="selectTimePeriod(period)">
+        {{period.label}}
+      </button>
+    </div>
+  </div>
+
+  <div class="charts-container">
+    <div class="chart-card">
+      <h3>Distribución por Sucursal</h3>
+      <div class="chart-content">
+        <div class="chart-wrapper donut-chart">
+          <canvas baseChart
+            [type]="'doughnut'"
+            [data]="doughnutChartData"
+            [options]="doughnutChartOptions">
+          </canvas>
+        </div>
+        <div class="chart-legend">
+          <div class="legend-item" *ngFor="let item of summaryData">
+            <div class="legend-color" [style.backgroundColor]="item.color"></div>
+            <span class="legend-label">{{item.sucursal}}</span>
+            <span class="legend-value">{{item.recibos}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Histórico de recibos emitidos y descargas</h3>
+      <div class="chart-wrapper">
+        <canvas baseChart
+          [type]="'line'"
+          [data]="lineChartData"
+          [options]="lineChartOptions">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <h3>Resumen por Sucursal</h3>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Sucursal</th>
+            <th>Recibos emitidos</th>
+            <th>Descargas</th>
+            <th>Cumplimiento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of summaryData">
+            <td>{{item.sucursal}}</td>
+            <td>{{item.recibos}}</td>
+            <td>{{item.descargas}}</td>
+            <td>
+              <div class="progress-bar">
+                <div class="progress" [style.width]="item.cumplimiento"></div>
+                <span>{{item.cumplimiento}}</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -38,16 +38,16 @@
         position: relative;
 
         input {
-            background-color: rgba(128, 128, 128, 0.12);
-            border-radius: 12px;
-            padding: 10px 10px 10px 40px;
+            background-color: $color-overlay;
+            border-radius: 9999px;
+            padding: 11px 11px 11px 40px;
             border: 1px solid transparent;
             transition: all 0.2s ease;
             font-size: 1rem;
 
             &:focus {
                 outline: none;
-                border: 1px solid $color-principal;
+                border: 1px solid rgb(190, 190, 190);
             }
         }
 
@@ -56,7 +56,8 @@
             top: 50%;
             transform: translateY(-50%);
             left: 10px;
-            color: $color-principal;
+            color: white;
+            font-weight: 900;
         }
     }
 
@@ -75,20 +76,21 @@
   }
   
   .btn-primary {
-    background-color: $color-terciario;
+    background-color: $color-overlay;
     color: white;
     border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
+    border-radius: 9999px;
+    padding: 10px 20px 10px 10px;
     font-size: 1rem;
     font-weight: 600;
     display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
+    transition: all 0.2s ease;
   
     &:hover {
-      background-color: $color-principal-hover;
+      background-color: $color-overlay-hover;
     }
   }
   

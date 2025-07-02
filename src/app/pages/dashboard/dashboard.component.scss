@@ -1,0 +1,387 @@
+@use '../../../colores.scss' as *;
+
+:host {
+  display: block;
+  color: #e3e3e3;
+}
+
+.dashboard-container {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  // background-color: red;
+  // max-width: 1400px;
+}
+
+// Métricas principales
+.metrics-header {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.metric-card {
+  background-color: $color-contenedor;
+  justify-content: center;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px;
+  font-weight: 200;
+
+  h3 {
+    margin: 0;
+    color: white;
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  .metric-title {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .value {
+      font-size: 2rem;
+      // font-weight: 600;
+      color: white;
+
+      .subdued {
+        font-size: 1rem;
+        color: white;
+        opacity: .5;
+      }
+    }
+  }
+
+  .description {
+    color: white;
+    opacity: .5;
+    margin: 0;
+    font-size: .8rem;
+  }
+
+  // Estilos específicos para el gauge
+  &.gauge-metric {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 12px;
+    gap: 5px;
+
+    .gauge-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      canvas {
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    .gauge-info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      
+      h3 {
+        color: white;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .description {
+        color: white;
+        opacity: .5;
+        font-size: 0.7rem;
+        margin: 0;
+        line-height: 1.1;
+      }
+    }
+  }
+}
+
+// Barra de progreso
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  background-color: $color-overlay;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+
+  .progress {
+    height: 100%;
+    background-color: $color-secundario;
+    transition: width 0.3s ease;
+  }
+
+  span {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 0.875rem;
+    padding-right: 8px;
+  }
+}
+
+// Botón de límite de gasto
+.set-limit-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #8ab4f8;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+
+  &:hover {
+    color: #adc8ff;
+  }
+
+  .material-symbols-outlined {
+    font-size: 20px;
+  }
+}
+
+.team-spend {
+  color: #9aa0a6;
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+
+// Controles de tiempo
+.time-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  .time-periods {
+    display: flex;
+    gap: 8px;
+    
+    button {
+      background-color: $color-contenedor;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      color: rgba(255, 255, 255, 0.481);
+
+      &:hover {
+        background-color: $color-contenedor-hover;
+      }
+
+      &.active {
+        color: white;
+      }
+    }
+  }
+}
+
+.analytics-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #8ab4f8;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 16px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .material-symbols-outlined {
+    font-size: 20px;
+  }
+}
+
+// Métricas de actividad
+.activity-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.metric-box {
+  background: #2d2f31;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .value {
+    font-size: 28px;
+    font-weight: 500;
+  }
+
+  .label {
+    color: #9aa0a6;
+    font-size: 14px;
+  }
+}
+
+// Contenedor de gráficos
+.charts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+}
+
+.chart-card {
+  background-color: $color-contenedor;
+  border-radius: 12px;
+  padding: 24px;
+
+  h3 {
+    margin: 0 0 24px 0;
+    color: white;
+    font-size: 1.15rem;
+    font-weight: 300;
+  }
+
+  .chart-content {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .chart-wrapper {
+    height: 300px;
+    position: relative;
+    flex: 1;
+    
+    &.donut-chart {
+      max-width: 200px;
+    }
+  }
+
+  .chart-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+
+      .legend-color {
+        width: 12px;
+        height: 12px;
+        border-radius: 3px;
+      }
+
+      .legend-label {
+        flex: 1;
+        font-size: 0.875rem;
+      }
+
+      .legend-value {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// Tabla de resumen
+.summary-card {
+  background-color: $color-contenedor;
+  border-radius: 12px;
+  padding: 24px;
+
+  h3 {
+    margin: 0 0 24px 0;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      th, td {
+        padding: 16px;
+        text-align: left;
+        color: white;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      th {
+        font-weight: 500;
+        color: $color-secundario;
+        font-size: 0.875rem;
+      }
+
+      td {
+        font-size: 0.875rem;
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 16px;
+  }
+
+  .charts-container {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-content {
+    flex-direction: column;
+  }
+
+  .chart-wrapper.donut-chart {
+    max-width: 100% !important;
+  }
+
+  .metric-card.gauge-metric {
+    padding: 10px;
+    
+    .gauge-container canvas {
+      width: 150px !important;
+      height: 85px !important;
+    }
+
+    .gauge-info h3 {
+      font-size: 0.8rem;
+    }
+
+    .gauge-info .description {
+      font-size: 0.65rem;
+    }
+  }
+}
