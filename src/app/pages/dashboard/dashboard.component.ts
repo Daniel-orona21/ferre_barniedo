@@ -27,24 +27,37 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   private currentAnimatedValue = 0; 
   private animationId?: number;
 
+  private originalColors = ['#4CAF50', '#2196F3', '#FFC107', '#9C27B0'];
+  private defaultGrayColor = 'rgba(255, 255, 255, 0.065)';
+
   public doughnutChartData: ChartConfiguration<'doughnut'>['data'] = {
     labels: ['Ecotecnias', 'Mendoza', 'San Luis Potosí', 'Puebla'],
     datasets: [{
       data: [300, 300, 300, 100],
-      backgroundColor: ['#4CAF50', '#2196F3', '#FFC107', '#9C27B0'] as string[],
-      hoverBackgroundColor: ['#45a049', '#1976D2', '#FFA000', '#7B1FA2'] as string[]
+      backgroundColor: [this.defaultGrayColor, this.defaultGrayColor, this.defaultGrayColor, this.defaultGrayColor] as string[],
+      hoverBackgroundColor: ['#4CAF50', '#2196F3', '#FFC107', '#9C27B0'] as string[],
+      borderWidth: 0,
+      spacing: 10
     }]
   };
 
   public doughnutChartOptions: ChartOptions<'doughnut'> = {
     responsive: true,
     maintainAspectRatio: false,
+    interaction: {
+      mode: 'point',
+      intersect: true
+    },
     plugins: {
       legend: {
         display: false
       }
     },
-    cutout: '70%'
+    cutout: '70%',
+    animation: {
+      duration: 300,
+      easing: 'easeOutQuart'
+    }
   };
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {
@@ -135,12 +148,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   };
 
-  public summaryData = [
-    { sucursal: 'Ecotecnias', recibos: 300, descargas: 150, cumplimiento: '50%', color: '#4CAF50' },
-    { sucursal: 'Mendoza', recibos: 300, descargas: 300, cumplimiento: '100%', color: '#2196F3' },
-    { sucursal: 'San Luis Potosí', recibos: 300, descargas: 165, cumplimiento: '55%', color: '#FFC107' },
-    { sucursal: 'Puebla', recibos: 100, descargas: 40, cumplimiento: '40%', color: '#9C27B0' }
-  ];
+  public summaryData: any[] = [];
 
   public requestsUsed = 266;
   public requestsLimit = 500;
@@ -162,17 +170,33 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.summaryData = [
+      { sucursal: 'Ecotecnias', recibos: 300, descargas: 150, cumplimiento: '50%', color: this.originalColors[0] },
+      { sucursal: 'Mendoza', recibos: 300, descargas: 300, cumplimiento: '100%', color: this.originalColors[1] },
+      { sucursal: 'San Luis Potosí', recibos: 300, descargas: 165, cumplimiento: '55%', color: this.originalColors[2] },
+      { sucursal: 'Puebla', recibos: 100, descargas: 40, cumplimiento: '40%', color: this.originalColors[3] }
+    ];
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.animateGauge();
     }, 0);
+    
+    // Asegurar que el chart esté listo e inicializar colores grises
+    setTimeout(() => {
+      if (this.chart?.chart) {
+        // Forzar colores grises iniciales
+        const allGrayColors = Array(this.originalColors.length).fill(this.defaultGrayColor);
+        this.doughnutChartData.datasets[0].backgroundColor = [...allGrayColors];
+        this.chart.chart.update('none'); // Sin animación para la inicialización
+      }
+    }, 500);
   }
 
   animateGauge(): void {
     if (!this.gaugeCanvas?.nativeElement) {
-      console.warn('Canvas element not available yet');
       return;
     }
 
@@ -199,14 +223,12 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   drawGauge(): void {
     if (!this.gaugeCanvas?.nativeElement) {
-      console.warn('Canvas element not available yet');
       return;
     }
 
     const canvas = this.gaugeCanvas.nativeElement;
     const ctx = canvas.getContext('2d');
     if (!ctx) {
-      console.error('Could not get canvas context');
       return;
     }
 
@@ -304,17 +326,61 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private drawGaugeValue(ctx: CanvasRenderingContext2D, centerX: number, centerY: number): void {
-
     ctx.font = 'bold 16px Arial';
     ctx.fillStyle = '#ffffff';
     ctx.textAlign = 'center';
     ctx.fillText(`${Math.round(this.currentAnimatedValue)}%`, centerX, centerY + 25); 
-    
   }
 
   selectTimePeriod(period: any): void {
     this.timePeriods.forEach(p => p.active = false);
     period.active = true;
+  }
+
+  onMouseEnter(index: number): void {
+    this.highlightChartSegment(index);
+  }
+
+  onMouseLeave(): void {
+    this.resetChartHighlight();
+  }
+
+  toggleDataVisibility(index: number): void {
+    if (this.chart?.chart) {
+      this.chart.chart.toggleDataVisibility(index);
+      this.chart.chart.update();
+    }
+  }
+
+  isDataVisible(index: number): boolean {
+    if (this.chart?.chart) {
+      return this.chart.chart.getDataVisibility(index);
+    }
+    return true;
+  }
+
+  highlightChartSegment(index: number): void {
+    if (this.chart?.chart && this.doughnutChartData.datasets[0]) {
+      // Crear array completamente gris
+      const newColors = Array(4).fill(this.defaultGrayColor);
+      // Solo activar el color del índice específico
+      newColors[index] = this.originalColors[index];
+      // Actualizar los colores del dataset
+      this.doughnutChartData.datasets[0].backgroundColor = [...newColors];
+      // Forzar actualización del chart
+      this.chart.chart.update();
+    }
+  }
+
+  resetChartHighlight(): void {
+    if (this.chart?.chart && this.doughnutChartData.datasets[0]) {
+      // Volver todos los colores a gris
+      const allGrayColors = Array(4).fill(this.defaultGrayColor);
+      // Actualizar los colores del dataset
+      this.doughnutChartData.datasets[0].backgroundColor = [...allGrayColors];
+      // Forzar actualización del chart
+      this.chart.chart.update();
+    }
   }
 
   ngOnDestroy(): void {

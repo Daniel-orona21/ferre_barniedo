@@ -52,8 +52,12 @@
           </canvas>
         </div>
         <div class="chart-legend">
-          <div class="legend-item" *ngFor="let item of summaryData">
-            <div class="legend-color" [style.backgroundColor]="item.color"></div>
+          <div class="legend-item" 
+               *ngFor="let item of summaryData; let i = index" 
+               [class.disabled]="isDataVisible(i) === false"
+               (mouseenter)="onMouseEnter(i)"
+               (mouseleave)="onMouseLeave()"
+               (click)="toggleDataVisibility(i)">
             <span class="legend-label">{{item.sucursal}}</span>
             <span class="legend-value">{{item.recibos}}</span>
           </div>
