@@ -27,15 +27,15 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   private currentAnimatedValue = 0; 
   private animationId?: number;
 
-  private originalColors = ['#4CAF50', '#2196F3', '#FFC107', '#9C27B0'];
+  private originalColors = ['#87A9BE', '#87A9BE', '#87A9BE', '#87A9BE'];
   private defaultGrayColor = 'rgba(255, 255, 255, 0.065)';
 
   public doughnutChartData: ChartConfiguration<'doughnut'>['data'] = {
     labels: ['Ecotecnias', 'Mendoza', 'San Luis Potosí', 'Puebla'],
     datasets: [{
-      data: [300, 300, 300, 100],
+      data: [300, 200, 300, 100],
       backgroundColor: [this.defaultGrayColor, this.defaultGrayColor, this.defaultGrayColor, this.defaultGrayColor] as string[],
-      hoverBackgroundColor: ['#4CAF50', '#2196F3', '#FFC107', '#9C27B0'] as string[],
+      hoverBackgroundColor: ['#87A9BE', '#87A9BE', '#87A9BE', '#87A9BE'] as string[],
       borderWidth: 0,
       spacing: 10
     }]
@@ -172,10 +172,10 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.summaryData = [
-      { sucursal: 'Ecotecnias', recibos: 300, descargas: 150, cumplimiento: '50%', color: this.originalColors[0] },
-      { sucursal: 'Mendoza', recibos: 300, descargas: 300, cumplimiento: '100%', color: this.originalColors[1] },
-      { sucursal: 'San Luis Potosí', recibos: 300, descargas: 165, cumplimiento: '55%', color: this.originalColors[2] },
-      { sucursal: 'Puebla', recibos: 100, descargas: 40, cumplimiento: '40%', color: this.originalColors[3] }
+      { sucursal: 'Ecotecnias', recibos: this.doughnutChartData.datasets[0].data[0], descargas: this.doughnutChartData.datasets[0].data[1], cumplimiento: '50%', color: this.originalColors[0] },
+      { sucursal: 'Mendoza', recibos: this.doughnutChartData.datasets[0].data[1], descargas: this.doughnutChartData.datasets[0].data[2], cumplimiento: '100%', color: this.originalColors[1] },
+      { sucursal: 'San Luis Potosí', recibos: this.doughnutChartData.datasets[0].data[2], descargas: this.doughnutChartData.datasets[0].data[3], cumplimiento: '55%', color: this.originalColors[2] },
+      { sucursal: 'Puebla', recibos: this.doughnutChartData.datasets[0].data[3], descargas: this.doughnutChartData.datasets[0].data[4], cumplimiento: '40%', color: this.originalColors[3] }
     ];
   }
 
@@ -361,24 +361,17 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   highlightChartSegment(index: number): void {
     if (this.chart?.chart && this.doughnutChartData.datasets[0]) {
-      // Crear array completamente gris
       const newColors = Array(4).fill(this.defaultGrayColor);
-      // Solo activar el color del índice específico
       newColors[index] = this.originalColors[index];
-      // Actualizar los colores del dataset
       this.doughnutChartData.datasets[0].backgroundColor = [...newColors];
-      // Forzar actualización del chart
       this.chart.chart.update();
     }
   }
 
   resetChartHighlight(): void {
     if (this.chart?.chart && this.doughnutChartData.datasets[0]) {
-      // Volver todos los colores a gris
       const allGrayColors = Array(4).fill(this.defaultGrayColor);
-      // Actualizar los colores del dataset
       this.doughnutChartData.datasets[0].backgroundColor = [...allGrayColors];
-      // Forzar actualización del chart
       this.chart.chart.update();
     }
   }
