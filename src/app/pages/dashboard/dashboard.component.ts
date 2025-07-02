@@ -122,7 +122,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         data: [5000, 1200, 2500, 800, 1900, 1500, 2800, 1800, 3500, 2900, 2100, 1200],
         label: 'Descargas',
         fill: true,
-        tension: 0.4,
+        tension: 0,
         borderColor: 'rgba(255, 255, 255, 0.065)',
         backgroundColor: 'rgba(255, 255, 255, 0.04)',
         pointRadius: 4,
