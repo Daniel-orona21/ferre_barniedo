@@ -13,7 +13,7 @@
 
     <div class="metric-card spend-metric">
       <div class="metric-title">
-        <span class="value">{{cumplimientoTotal}}%</span>
+        <span class="value">{{cumplimientoTotal.toFixed(2)}}%</span>
         <h3>Cumplimiento</h3>
       </div>
       <p class="description">Porcentaje de descargas vs recibos emitidos</p>
@@ -94,11 +94,22 @@
             <td>{{item.sucursal}}</td>
             <td>{{item.recibos}}</td>
             <td>{{item.descargas}}</td>
-            <td>
+            <td class="progress-bar-container">
               <div class="progress-bar">
-                <div class="progress" [style.width]="item.cumplimiento"></div>
-                <span>{{item.cumplimiento}}</span>
+                <div class="progress" [style.width]="item.cumplimiento + '%'"></div>
               </div>
+              <span>{{item.cumplimiento}}%</span>
+            </td>
+          </tr>
+          <tr class="total-row">
+            <td>Total</td>
+            <td>{{recibosTotal}}</td>
+            <td>{{descargasTotal}}</td>
+            <td class="progress-bar-container">
+              <div class="progress-bar">
+                <div class="progress" [style.width]="cumplimientoTotal + '%'" ></div>
+              </div>
+              <span>{{cumplimientoTotal.toFixed(1)}}%</span>
             </td>
           </tr>
         </tbody>
