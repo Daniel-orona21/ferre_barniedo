@@ -124,7 +124,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         fill: true,
         tension: 0.4,
         borderColor: 'rgba(255, 255, 255, 0.065)',
-        backgroundColor: 'rgba(33, 150, 243, 0.1)',
+        backgroundColor: 'rgba(255, 255, 255, 0.04)',
         pointRadius: 4,
         pointBackgroundColor: 'rgba(255, 255, 255, 0.065)',
         pointBorderColor: 'rgba(255, 255, 255, 0.065)'
@@ -135,6 +135,26 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: false,
+    animation: {
+      duration: 1000,
+      easing: 'easeInOutQuart',
+      delay: (context) => {
+        let delay = 0;
+        if (context.type === 'data' && context.mode === 'default') {
+          delay = context.dataIndex * 60;
+        }
+        return delay;
+      }
+    },
+    animations: {
+      tension: undefined,
+      borderWidth: {
+        duration: 500,
+        easing: 'easeOutQuart',
+        from: 0,
+        to: 2
+      }
+    },
     plugins: {
       legend: {
         display: true,
@@ -183,6 +203,11 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     },
     elements: {
       line: {
+        borderWidth: 2
+      },
+      point: {
+        radius: 4,
+        hoverRadius: 6,
         borderWidth: 2
       }
     },
@@ -233,7 +258,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         this.doughnutChartData.datasets[0].backgroundColor = [...allGrayColors];
         this.chart.chart.update('none'); 
       }
-    }, 500);
+    }, 0);
   }
 
   animateGauge(): void {
@@ -451,12 +476,14 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     ];
 
-    // Actualizar gráficos
+    // Actualizar gráficos con animación suave
     if (this.chart?.chart) {
       // Resetear colores del gráfico de dona
       const allGrayColors = Array(this.originalColors.length).fill(this.defaultGrayColor);
       this.doughnutChartData.datasets[0].backgroundColor = [...allGrayColors];
-      this.chart.chart.update('active');
+      
+      // Animación más suave para el cambio de datos
+      this.chart.chart.update('show');
     }
   }
 
