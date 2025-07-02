@@ -9,34 +9,111 @@
     height: 100vh;
     max-height: 100vh;
     display: flex;
+    flex-direction: column;
     overflow: hidden;
 
     nav {
         background-color: $color-principal;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        transition: all 0.3s ease;
-        width: 300px;
+        transition: all 0.2s ease;
+        min-width: 250px;
+        max-width: 500px;
         gap: 1rem;
         
         img {
-            margin: 1rem 1rem 0 1rem;
-            width: 35%;
+            width: 40px;
+            opacity: .5;
+            transition: all 0.2s ease;
+            margin: 20px;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+
+
+        .salir {
+            background-color: transparent;
+            position: relative;
+            bottom: 0rem;
+            border: .5px solid white;
+            align-items: center;
+            justify-content: center;
+            list-style: none;
+            display: flex;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: .7rem;
+            border-radius: 9999px;
+            opacity: 0.5;
+            margin: 3rem;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            span {
+                font-weight: 100 !important;
+            }
+
+            h3 {
+                font-weight: 200;
+                transition: all 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+            }
         }
         
         ul {
+
+
+            align-self: center;
             overflow-y: auto;
             overflow-x: hidden;
-            width: 90%;
+            width: auto;
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 0rem;
-            padding: 1rem;
+            gap: 5px;
+            padding: 5rem 3rem 3rem 3rem;
 
             &::-webkit-scrollbar {
                 display: none;
+            }
+
+      
+
+            .info {
+                padding: 2rem 2rem 2rem 1rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                transition: all 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+
+                .nombre {
+                    color: white;
+                    display: flex;
+                    gap: .5rem;
+                    align-items: center;
+
+                    span {
+                        font-size: 1rem;
+                        margin-top: 3px;
+                        cursor: pointer;
+
+                        &:hover {
+                            font-weight: 900;
+                        }
+                    }
+                }
+
+                .rol {
+                    opacity: 0.5;
+                    font-weight: 200;
+                    color: white;
+                    white-space: nowrap;
+                }
             }
 
             li {
@@ -45,48 +122,43 @@
                 display: flex;
                 gap: 0.5rem;
                 cursor: pointer;
-                transition: all 0.3s ease;
+                transition: all 0.2s ease;
                 padding: .7rem;
-                border-radius: 8px;
+                border-radius: 9999px;
+                opacity: 0.5;
 
                 &:hover {
-                    background-color: rgba(128, 128, 128, 0.194);
+                    background-color: $color-overlay;
+                    opacity: 1;
                 }
 
                 span {
                     color: white;
-                    opacity: 0.3;
+                    font-weight: 100 !important;
                 }
 
                 h3 {
-                    font-weight: 500;
+                    font-weight: 200;
                     color: white;
+                    transition: all 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
                 }
             }
 
             .activo {
-                span {
-                    color: $color-secundario;
-                    opacity: 1;
-                }
-
-                h3 {
-                    color: $color-secundario;
-                }
+                background-color: $color-overlay;
+                opacity: 1;
             }
-        }
-    }
+        }    }
 
     nav.collapsed {
-        width: 70px !important; // o el ancho que prefieras
-        min-width: 70px !important;
-        img {
-          display: none;
-        }
+        max-width: 85px;
+        min-width: 85px;
         ul {
+            .info {
+                opacity: 0 !important;
+            }
             flex: 1;
             align-items: center;
-            justify-content: center;
             margin: 0;
         }
         ul li h3 {
@@ -102,30 +174,31 @@
       }
 
     .cuerpo {
-        background-color: #EFF3F9;
         flex: 1;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         position: relative;
         overflow-y: auto;
     }
         
     header {
-        background-color: white;
-        padding: 1rem 2rem;
+        background-color: $color-principal;
+        padding: 3rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
         position: sticky;
         top: 0;
-        box-shadow: 0 4px 24px 0 rgba(0,0,0,0.10);
-        
+
         &.user-menu-active {
             z-index: 1000;
         }
+        h1 {
+            font-weight: 300;
+        }
         
         span {
-            color: $color-principal;
+            color: white;
             background-color: transparent;
             padding: 0.5rem;
             border-radius: 50%;
@@ -141,10 +214,35 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+
+            .letras {
+                background-color: $color-overlay;
+                width: 45px;
+                height: 45px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                padding: 0.5rem;
+                border-radius: 50%;
+                transition: background-color 0.2s ease;
+
+                h3 {
+                    color: white;
+                    margin: 0;
+                }
+
+                &:hover {
+                    background-color: rgba(128, 128, 128, 0.194);
+                }
+            }
         }
     }
 
     .pagina {
+        background-color: $color-principal;
         user-select: auto;
         flex: 1;
         display: flex;
@@ -167,11 +265,12 @@
 
 .user-menu {
     position: absolute;
-    top: 70px;
-    right: 0;
+    top: 105px;
+    right: 50px;
     width: 270px;
-    background: white;
+    background-color: rgb(54, 54, 54);
     border-radius: 20px;
+    backdrop-filter: blur(10px);
     box-shadow: 0 4px 24px 0 rgba(0,0,0,0.10);
     padding: 1.2rem 1.2rem 0.5rem 1.2rem;
     z-index: 999;
@@ -184,6 +283,13 @@
         align-items: center;
         gap: 1rem;
         margin-bottom: 0.5rem;
+
+        .nombre-usuario {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
         img {
             width: 56px;
             height: 56px;
@@ -192,7 +298,7 @@
         .user-name {
             font-weight: 700;
             font-size: 1.2rem;
-            color: #38353e;
+            color: white;
         }
         .user-role {
             color: #bdbdbd;
@@ -201,40 +307,39 @@
     }
     hr {
         border: none;
-        border-top: 1px solid #eee;
+        border-top: 1px solid #eeeeee37;
         margin: 0.5rem 0 0.5rem 0;
     }
     ul {
         list-style: none;
-        padding: 0;
+        padding: .5rem 0 .5rem 0;
         margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
         li {
             display: flex;
             align-items: center;
             gap: 1rem;
             padding: 0.7rem 0;
             font-size: 1.1rem;
-            color: #38353e;
+            color: white;
             cursor: pointer;
             border-radius: 10px;
             transition: background 0.2s;
+            opacity: 0.5;
             &:hover {
-                background: #f5f5f5;
+                background: $color-overlay;
+                color: white;
+                opacity: 1;
             }
             span {
-                color: $color-principal;
+                color: white;
                 font-size: 1.5rem;
                 pointer-events: none;
             }
         }
     }
-}
-
-.arrow-user-menu {
-  transition: transform 0.2s;
-  &.rotated {
-    transform: rotate(180deg);
-  }
 }
 
 .notification-icon {

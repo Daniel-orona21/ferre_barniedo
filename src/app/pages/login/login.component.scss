@@ -6,11 +6,16 @@ img {
   pointer-events: none;
 }
 
+* {
+  color: black;
+}
+
 .loginCuerpo {
     width: 100dvw;
     height: 100dvh;
     display: flex;
     overflow: hidden;
+    background-color: white;
 }
 
 .login {
@@ -38,7 +43,7 @@ img {
     
         .logo {
             width: 50%;
-            margin-left: 1rem;
+            margin-left: 1.6rem;
             object-fit: contain;
         }
     }

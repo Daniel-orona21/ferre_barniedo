@@ -1,42 +1,56 @@
 <div class="contenido">
-    <nav [class.collapsed]="isNavCollapsed">
-        <img src="images/logo2.png" alt="Logo">
-        <ul>
-                <li [routerLink]="['dashboard']" routerLinkActive="activo"><span class="material-symbols-outlined"> dashboard</span><h3>Dashboard</h3></li>
-                <li [routerLink]="['usuarios']" routerLinkActive="activo"><span class="material-symbols-outlined">contacts_product</span><h3>Usuarios</h3></li>
-                <li [routerLink]="['recibos']" routerLinkActive="activo"><span class="material-symbols-outlined">receipt_long</span><h3>Recibos</h3></li>
-                <li [routerLink]="['reporte']" routerLinkActive="activo"><span class="material-symbols-outlined">breaking_news</span><h3>Reportes</h3></li>
-                <li [routerLink]="['perfil']" routerLinkActive="activo"><span class="material-symbols-outlined">person</span><h3>Perfil</h3></li>
-                
-        </ul>
-    </nav>
-    <div class="cuerpo">
-        <header [class.user-menu-active]="showUserMenu">
-            <span class="material-symbols-outlined" (click)="toggleNav()">menu</span>
-            <h1>{{ getCurrentPageTitle() }}</h1>
-            <div class="headerRight">
-                <div class="notification-icon">
-                  <span class="material-symbols-outlined">notifications</span>
-                  <span class="notification-badge" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
-                </div>
-                <img src='images/senior.png' alt="">
-                <span class="material-symbols-outlined arrow-user-menu" (click)="toggleUserMenu()" [class.rotated]="showUserMenu">keyboard_arrow_down</span>
-                <div class="user-menu" *ngIf="showUserMenu">
-                    <div class="user-menu-header">
-                        <img src="images/senior.png" alt="">
-                        <div>
-                            <div class="user-name">Mathew Lucas</div>
-                            <div class="user-role">Administrador</div>
-                        </div>
-                    </div>
-                    <hr>
-                    <ul>
-                        <li><span class="material-symbols-outlined">person</span> Perfil</li>
-                        <li (click)="logout()"><span class="material-symbols-outlined">chip_extraction</span> Cerrar sesión</li>
-                    </ul>
-                </div>
+    <header [class.user-menu-active]="showUserMenu">
+        <span class="material-symbols-outlined" (click)="toggleNav()">menu</span>
+        <h1>{{ getCurrentPageTitle() }}</h1>
+        <div class="headerRight">
+            <div class="notification-icon">
+              <span class="material-symbols-outlined">notifications</span>
+              <span class="notification-badge" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
             </div>
-        </header>
+            <div class="letras" (click)="toggleUserMenu()">
+                <h3>DO</h3>
+            </div>
+            <div class="user-menu" *ngIf="showUserMenu">
+                <div class="user-menu-header">
+                    <div class="letras">
+                        <h3>DO</h3>
+                    </div>  
+                    <div class="nombre-usuario">
+                        <div class="user-name">Daniel Orona</div>
+                        <div class="user-role">Administrador</div>
+                    </div>
+                </div>
+                <hr>
+                <ul>
+                    <li [routerLink]="['perfil']"><span class="material-symbols-outlined">person</span> Perfil</li>
+                    <li (click)="logout()"><span class="material-symbols-outlined">chip_extraction</span> Cerrar sesión</li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    
+    <div class="cuerpo">
+        <nav [class.collapsed]="isNavCollapsed">
+            <!-- <img  src="images/isotipo.png" (click)="toggleNav()" alt="isotipo"> -->
+            <ul>
+                    <div class="info">
+                        <div class="nombre">
+                            <h3>Daniel Orona</h3>
+                            <span [routerLink]="['perfil']" class="material-symbols-outlined">edit_square</span>
+                        </div>
+                    <h3 class="rol">Administrador · danielopez14d&#64;gmail.com</h3>
+                    </div>
+                    <li [routerLink]="['dashboard']" routerLinkActive="activo"><span class="material-symbols-outlined"> data_usage</span><h3>Dashboard</h3></li>
+                    <li [routerLink]="['usuarios']" routerLinkActive="activo"><span class="material-symbols-outlined">contacts_product</span><h3>Usuarios</h3></li>
+                    <li [routerLink]="['recibos']" routerLinkActive="activo"><span class="material-symbols-outlined">receipt_long</span><h3>Recibos</h3></li>
+                    <li [routerLink]="['reporte']" routerLinkActive="activo"><span class="material-symbols-outlined">breaking_news</span><h3>Reportes</h3></li>
+                    <li [routerLink]="['perfil']" routerLinkActive="activo"><span class="material-symbols-outlined">person</span><h3>Perfil</h3></li>
+                </ul>
+                <!-- <button class="salir" (click)="logout()">
+                    <span class="material-symbols-outlined">chip_extraction</span>
+                    <h3>Cerrar sesión</h3>
+                </button> -->
+        </nav>
         <div class="pagina">
             <router-outlet></router-outlet>
         </div>

@@ -39,7 +39,7 @@ export class LayoutComponent {
     if (
       this.showUserMenu &&
       !this.eRef.nativeElement.querySelector('.user-menu')?.contains(target) &&
-      !this.eRef.nativeElement.querySelector('.arrow-user-menu')?.contains(target)
+      !this.eRef.nativeElement.querySelector('.letras')?.contains(target)
     ) {
       this.showUserMenu = false;
     }
@@ -47,14 +47,20 @@ export class LayoutComponent {
 
     getCurrentPageTitle() {
       const currentRoute = this.router.url;
-      if (currentRoute.includes('inventario')) {
+      if (currentRoute.includes('dashboard')) {
         return 'Inventarios';
       }
-      if (currentRoute.includes('ordenes')) {
-        return 'Ordenes de compra';
+      if (currentRoute.includes('usuarios')) {
+        return 'Usuarios';
       }
-      if (currentRoute.includes('ventas')) {
-        return 'Ventas';
+      if (currentRoute.includes('recibos')) {
+        return 'Recibos';
+      }
+      if (currentRoute.includes('reporte')) {
+        return 'Reportes';
+      }
+      if (currentRoute.includes('perfil')) {
+        return 'Perfil';
       }
       return '';
     }
