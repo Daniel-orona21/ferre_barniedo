@@ -1,0 +1,432 @@
+@use '../../../../colores.scss' as *;
+
+:host {
+  display: block;
+  padding: 0;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  .botones {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .btn-volver {
+    background-color: $color-overlay;
+    color: rgba(255, 255, 255, 0.47);
+    border: none;
+    border-radius: 9999px;
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      color: white;
+    }
+    
+    .material-symbols-outlined {
+      font-size: 18px;
+      font-weight: 300;
+    }
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+  }
+}
+
+.card-body {
+  padding: 24px;
+}
+
+.recibo-nomina {
+  background-color: white;
+  color: black !important;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+
+  .logo-empresa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // background-color: green; 
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.1;
+
+    img {
+      height: 200px;
+      // background-color: black;
+      background-color: none;
+      object-fit: contain;
+    }
+  }
+  
+  * {
+    color: black !important;
+  }
+  
+  // Encabezado de la empresa
+  .empresa-header {
+    flex-direction: column;
+    // background-color: red;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    // border: 2px solid black;
+    border-bottom: 1px solid black;
+    position: relative;
+
+    .row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      width: 100%;
+      // background-color: lime;
+    }
+    
+    
+    .empresa-info {
+      flex: 1;
+      // background-color: blue;
+      display: flex;
+      flex-direction: column;
+
+      .empresa-datos-container {
+        display: flex;
+        justify-content: space-between;
+      }
+      
+      h2 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 0 0 8px 0;
+        text-align: center;
+        color: black !important;
+      }
+      
+      .empresa-datos {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        // background-color: yellow;
+        gap: 5px;
+        flex-direction: column;
+        
+        span {
+          font-weight: 500;
+          color: black !important;
+        }
+      }
+      
+      .empresa-detalles {
+        // background-color: lime;
+        font-size: 0.85rem;
+        gap: 5px;
+        display: flex;
+        flex-direction: column;
+        
+        p {
+          margin: 2px 0;
+          text-align: center;
+          color: black !important;
+        }
+      }
+    }
+  }
+  
+  // Información del empleado y período
+  .empleado-periodo {
+    display: flex;
+    
+    .empleado-info, .periodo-info {
+      flex: 1;
+      padding: 16px;
+      
+      h3 {
+        font-size: 1rem;
+        font-weight: bold;
+        margin: 0 0 12px 0;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 4px;
+        display: none; // Ocultar títulos para que se vea más como el original
+      }
+      
+      .datos-empleado, .datos-periodo {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      
+      .dato-item {
+        display: flex;
+        font-size: 0.85rem;
+        
+        .label {
+          font-weight: 500;
+          min-width: 140px;
+          margin-right: 8px;
+          color: black !important;
+        }
+        
+        .value {
+          font-weight: 400;
+          color: black !important;
+        }
+      }
+    }
+    
+    .periodo-info {
+      border-left: 1px solid black;
+    }
+  }
+  
+  // Percepciones y deducciones
+  .percepciones-deducciones {
+    display: flex;
+    border-top: 1px solid black;
+    
+    .percepciones-section, .deducciones-section {
+      flex: 1;
+      
+      h3 {
+        background-color: #f8f9fa;
+        padding: 8px 16px;
+        margin: 0;
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+        border-bottom: 1px solid black;
+        color: black !important;
+      }
+      
+      .tabla-percepciones, .tabla-deducciones {
+        .tabla-header {
+          display: grid;
+          grid-template-columns: 1fr 1fr 2fr 1fr;
+          background-color: #f8f9fa;
+          border-bottom: 1px solid black;
+          
+          span {
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            border-right: 1px solid black;
+            text-align: center;
+            color: black !important;
+            
+            &:last-child {
+              border-right: none;
+            }
+          }
+        }
+        
+        .tabla-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr 2fr 1fr;
+          border-bottom: 1px solid #ddd;
+          
+          span {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            border-right: 1px solid #ddd;
+            text-align: center;
+            color: black !important;
+            
+            &:last-child {
+              border-right: none;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+    
+    .deducciones-section {
+      border-left: 1px solid black;
+    }
+  }
+  
+  // Totales
+  .totales-section {
+    display: flex;
+
+    border-top: 1px solid black;
+    padding: 20px;
+    
+    .qr-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      
+      .qr-code {
+        width: 100px;
+        height: 100px;
+        border: 0px solid black;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+    
+    .totales {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      padding-left: 20px;
+      
+      .total-item {
+        display: flex;
+        justify-content: space-between;
+        min-width: 200px;
+        font-size: 0.9rem;
+        
+        .label {
+          font-weight: 500;
+          color: black !important;
+        }
+        
+        .value {
+          font-weight: 500;
+          color: black !important;
+        }
+        
+        &.total-final {
+          border-top: 2px solid black;
+          padding-top: 8px;
+          margin-top: 8px;
+          font-weight: bold;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  
+  // Firma
+  .firma-section {
+    margin-top: 40px;
+    text-align: center;
+    padding: 30px;
+    
+    .firma-linea {
+      width: 250px;
+      height: 2px;
+      background-color: black;
+      margin: 0 auto 10px;
+    }
+    
+    .firma-texto {
+      font-size: 12px;
+      color: black !important;
+    }
+  }
+
+  .recibo-original {
+    margin-top: 30px;
+    padding: 20px;
+    // border: 2px solid black;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    
+    h3 {
+      margin-bottom: 15px;
+      color: black !important;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    
+    .recibo-datos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      
+      .dato-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #ddd;
+        
+        .label {
+          font-weight: bold;
+          color: black !important;
+        }
+        
+        .value {
+          color: black !important;
+        }
+      }
+    }
+  }
+
+  /* Asegurar que todo el texto sea negro */
+  * {
+    color: black !important;
+  }
+}
+
+.no-recibo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: rgba(255, 255, 255, 0.6);
+  
+  .material-symbols-outlined {
+    font-size: 64px;
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 100;
+    margin-bottom: 16px;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin: 0;
+    text-align: center;
+  }
+}
+

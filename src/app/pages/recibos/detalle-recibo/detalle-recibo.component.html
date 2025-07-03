@@ -1,0 +1,204 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <div class="botones">
+        <button class="btn-volver" (click)="onVolver()">
+          <span class="material-symbols-outlined">arrow_back</span>
+          Volver
+        </button>
+        <button class="btn-volver" (click)="onVolver()">
+          <span class="material-symbols-outlined">download</span>
+          Descargar
+        </button>
+      </div>
+      <h1 class="card-title">Detalle del Recibo de Nómina</h1>
+    </div>
+    
+    <div class="card-body">
+      <div class="recibo-nomina" *ngIf="datosCompletos">
+        <div class="logo-empresa">
+          <img src="images/isotipo.png" alt="">
+        </div>
+        <!-- Encabezado de la empresa -->
+        <div class="empresa-header">
+          <h2>{{ datosCompletos.empresa.nombre }}</h2>
+          <div class="row">
+            <div class="empresa-info">
+              <div class="empresa-datos-container">
+                <div class="empresa-datos">
+                  <span><strong>RFC:</strong> {{ datosCompletos.empresa.rfc }}</span>
+                  <p><strong>Régimen fiscal:</strong> {{ datosCompletos.empresa.regimenFiscal }}</p>
+                  <p><strong>Lugar de expedición:</strong> {{ datosCompletos.empresa.lugarExpedicion }}</p>
+                </div>
+                <div class="empresa-detalles">
+                  <span><strong> Reg Pat:</strong> {{ datosCompletos.empresa.regPat }}</span>
+                  <span><strong>Fecha:</strong> {{ datosCompletos.empresa.fecha }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Información del empleado y período -->
+        <div class="empleado-periodo">
+          <div class="empleado-info">
+            <h3>Información del Empleado</h3>
+            <div class="datos-empleado">
+              <div class="dato-item">
+                <span class="label">Nombre:</span>
+                <span class="value">{{ datosCompletos.empleado.nombre }}</span>
+              </div>
+              <div class="dato-item">
+                <span class="label">RFC:</span>
+                <span class="value">{{ datosCompletos.empleado.rfc }}</span>
+              </div>
+              <div class="dato-item">
+                <span class="label">CURP:</span>
+                <span class="value">{{ datosCompletos.empleado.curp }}</span>
+              </div>
+              <div class="dato-item">
+                <span class="label">Fecha ini Relación lab:</span>
+                <span class="value">{{ datosCompletos.empleado.fechaIniRelacion }}</span>
+              </div>
+              <div class="dato-item">
+                <span class="label">Jornada:</span>
+                <span class="value">{{ datosCompletos.empleado.jornada }}</span>
+              </div>
+              <div class="dato-item">
+                <span class="label">NSS:</span>
+                <span class="value">{{ datosCompletos.empleado.nss }}</span>
+              </div>
+              <div class="dato-item">
+                <span class="label">Tipo salario:</span>
+                <span class="value">{{ datosCompletos.empleado.tipoSalario }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="periodo-info">
+            <h3>Información del Período</h3>
+            <div class="datos-periodo">
+              <div class="dato-item">
+                <span class="label">Ejercicio:</span>
+                <span class="value">{{ datosCompletos.periodo.ejercicio }}</span>
+              </div>
+              <div class="dato-item">
+                <span class="label">Período:</span>
+                <span class="value">{{ datosCompletos.periodo.periodo }}</span>
+              </div>
+              <div class="dato-item">
+                <span class="label">Fecha inicio:</span>
+                <span class="value">{{ datosCompletos.periodo.fechaInicio }}</span>
+              </div>
+              <div class="dato-item">
+                <span class="label">Fecha fin:</span>
+                <span class="value">{{ datosCompletos.periodo.fechaFin }}</span>
+              </div>
+              <div class="dato-item">
+                <span class="label">Días de pago:</span>
+                <span class="value">{{ datosCompletos.periodo.diasPago }}</span>
+              </div>
+              <div class="dato-item">
+                <span class="label">Fecha de pago:</span>
+                <span class="value">{{ datosCompletos.periodo.fechaPago }}</span>
+              </div>
+              <div class="dato-item">
+                <span class="label">Puesto:</span>
+                <span class="value">{{ datosCompletos.periodo.puesto }}</span>
+              </div>
+              <div class="dato-item">
+                <span class="label">Depto:</span>
+                <span class="value">{{ datosCompletos.periodo.depto }}</span>
+              </div>
+              <div class="dato-item">
+                <span class="label">SBC:</span>
+                <span class="value">{{ datosCompletos.periodo.sbc }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Percepciones y Deducciones -->
+        <div class="percepciones-deducciones">
+          <div class="percepciones-section">
+            <h3>Percepciones</h3>
+            <div class="tabla-percepciones">
+              <div class="tabla-header">
+                <span>Agrup SAT</span>
+                <span>No.</span>
+                <span>Concepto</span>
+                <span>Total</span>
+              </div>
+              <div class="tabla-row" *ngFor="let percepcion of datosCompletos.percepciones">
+                <span>{{ percepcion.agrupSat }}</span>
+                <span>{{ percepcion.numero }}</span>
+                <span>{{ percepcion.concepto }}</span>
+                <span>{{ percepcion.total }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="deducciones-section">
+            <h3>Deducciones</h3>
+            <div class="tabla-deducciones">
+              <div class="tabla-header">
+                <span>Agrup SAT</span>
+                <span>No.</span>
+                <span>Concepto</span>
+                <span>Total</span>
+              </div>
+              <div class="tabla-row" *ngFor="let deduccion of datosCompletos.deducciones">
+                <span>{{ deduccion.agrupSat }}</span>
+                <span>{{ deduccion.numero }}</span>
+                <span>{{ deduccion.concepto }}</span>
+                <span>{{ deduccion.total }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Totales -->
+        <div class="totales-section">
+          <div class="qr-section">
+            <div class="qr-code">
+              <img src="images/qr.png" alt="">
+            </div>
+          </div>
+          <div class="totales">
+            <div class="total-item">
+              <span class="label">Subtotal:</span>
+              <span class="value">{{ datosCompletos.totales.subtotal }}</span>
+            </div>
+            <div class="total-item">
+              <span class="label">Descuentos:</span>
+              <span class="value">{{ datosCompletos.totales.descuentos }}</span>
+            </div>
+            <div class="total-item">
+              <span class="label">Retenciones:</span>
+              <span class="value">{{ datosCompletos.totales.retenciones }}</span>
+            </div>
+            <div class="total-item total-final">
+              <span class="label">Total:</span>
+              <span class="value">{{ datosCompletos.totales.total }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Firma -->
+        <div class="firma-section">
+          <div class="firma-linea"></div>
+          <span class="firma-texto">Firma del empleado</span>
+        </div>
+
+        <!-- Información original del recibo -->
+
+
+      </div>
+      
+      <div class="no-recibo" *ngIf="!recibo">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <p>No hay información de recibo disponible</p>
+      </div>
+    </div>
+  </div>
+</div> 

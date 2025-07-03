@@ -1,0 +1,150 @@
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <!-- <h1 class="card-title">Ordenes de compra</h1> -->
+        <div class="selects">
+                      <div class="filter-select-container">
+              <select class="filter-select" 
+                      [class.has-value]="filtroUsuario"
+                      [(ngModel)]="filtroUsuario" 
+                      (ngModelChange)="filtrarPorUsuario()">
+                <option value="">Usuarios</option>
+                <option value="Luis Gomez">Luis Gomez</option>
+                <option value="Juan Pérez">Juan Pérez</option>
+                <option value="Luis López">Luis López</option>
+                <option value="María García">María García</option>
+                <option value="Carlos Ruiz">Carlos Ruiz</option>
+                <option value="Ana Martínez">Ana Martínez</option>
+              </select>
+            </div>
+        <!-- <div class="filter-select-container">
+            <select class="filter-select" [(ngModel)]="filtroSucursal" (ngModelChange)="filtrarPorSucursal()">
+                <option value="">Sucursales</option>
+                <option value="sucursal1">Sucursal 1</option>
+                <option value="sucursal2">Sucursal 2</option>
+                <option value="sucursal3">Sucursal 3</option>
+            </select>
+        </div> -->
+                  <div class="filter-select-container">
+              <select class="filter-select" 
+                      [class.has-value]="filtroEstatus"
+                      [(ngModel)]="filtroEstatus" 
+                      (ngModelChange)="filtrarPorEstatus()">
+                  <option value="">Estatus</option>
+                  <option value="Pendiente">Pendiente</option>
+                  <option value="Visto">Visto</option>
+                  <option value="Descargado">Descargado</option>
+              </select>
+          </div>
+        </div>
+        <div class="contenedor-filtros">
+            <div class="date-picker-wrapper">
+                <label>Desde</label>
+                <input type="text"
+                       placeholder="Fecha"
+                       class="form-control"
+                       bsDatepicker
+                       [(ngModel)]="fechaDesde"
+                       (ngModelChange)="filtrarPorFecha()"
+                       [bsConfig]="bsConfig">
+              <span class="material-symbols-outlined">calendar_month</span>
+              </div>
+              <div class="date-picker-wrapper">
+                <label>Hasta</label>
+                <input type="text"
+                       placeholder="Fecha"
+                       class="form-control"
+                       bsDatepicker
+                       [(ngModel)]="fechaHasta"
+                       (ngModelChange)="filtrarPorFecha()"
+                       [bsConfig]="bsConfig">
+              <span class="material-symbols-outlined">calendar_month</span>
+              </div>
+            <div class="contenedor-buscador">
+                <input type="text" 
+                       class="buscador" 
+                       placeholder="Buscar..." 
+                       [(ngModel)]="filtroBusqueda"
+                       (ngModelChange)="filtrarPorBusqueda()">
+                <span class="material-symbols-outlined">search</span>
+            </div>
+            <button class="btn-primary btn-limpiar" 
+                    [class.active]="hayFiltrosActivos"
+                    [disabled]="!hayFiltrosActivos"
+                    (click)="limpiarFiltros()">
+              <span class="material-symbols-outlined">clear_all</span>
+            </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Usuario</th>
+                <th>Nombre del recibo</th>
+                <th>Estatus</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let orden of ordenesCompra">
+                <td>{{ orden.id }}</td>
+                <td>{{ orden.fecha }}</td>
+                <td>{{ orden.Usuario }}</td>
+                <td>{{ orden.nombreRecibo }}</td>
+                <td>
+                  <span class="badge" 
+                        [class.bg-pendiente]="orden.estatus === 'Pendiente'"
+                        [class.bg-visto]="orden.estatus === 'Visto'"
+                        [class.bg-descargado]="orden.estatus === 'Descargado'">
+                    {{ orden.estatus }}
+                  </span>
+                </td>
+                <td class="actions">
+                  <button class="btn-icon" (click)="openModal(orden, 'view')">
+                    <span class="material-symbols-outlined icon-view">visibility</span>
+                  </button>
+                  <button class="btn-icon" (click)="openModal(orden, 'edit')">
+                    <span class="material-symbols-outlined icon-edit">download</span>
+                  </button>
+                </td>
+              </tr>
+              <tr *ngIf="ordenesCompra.length === 0">
+                <td colspan="6" class="no-results">
+                  <div class="no-results-content">
+                    <span class="material-symbols-outlined">search_off</span>
+                    <p>No se encontraron coincidencias</p>
+                    <small>Intenta ajustar los filtros o términos de búsqueda</small>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="pagination-controls">
+            <span>Resultados por pagina:</span>
+            <select class="form-select">
+                <option selected>10</option>
+                <option>20</option>
+                <option>50</option>
+            </select>
+        </div>
+        <div class="pagination-info">
+            <span>1-10 de 30</span>
+            <div class="btn-group">
+                <button class="btn-light">
+                  <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <button class="btn-light">
+                  <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+            </div>
+        </div>
+      </div>
+    </div>
+</div> 
