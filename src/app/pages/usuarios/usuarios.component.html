@@ -118,33 +118,94 @@
     </button>
   </div>
   <div class="modal-body" *ngIf="selectedUser">
-    <div *ngIf="modalAction === 'view'">
-      <p><strong>ID:</strong> {{ selectedUser.id }}</p>
-      <p><strong>Nombre:</strong> {{ selectedUser.nombre }}</p>
-      <p><strong>Sucursal:</strong> {{ selectedUser.sucursal }}</p>
-      <p><strong>Área de trabajo:</strong> {{ selectedUser.area }}</p>
-      <p><strong>Rol:</strong> {{ selectedUser.rol }}</p>
-      <p><strong>Estatus:</strong> <span class="badge bg-success">{{ selectedUser.estatus }}</span></p>
+    <div class="ver-usuario" *ngIf="modalAction === 'view'">
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon">
+            <span class="material-symbols-outlined">badge</span>
+          </div>
+          <div class="info-content">
+            <span class="info-label">ID</span>
+            <span class="info-value">{{ selectedUser.id }}</span>
+          </div>
+        </div>
+        
+        <div class="info-card">
+          <div class="info-icon">
+            <span class="material-symbols-outlined">person</span>
+          </div>
+          <div class="info-content">
+            <span class="info-label">Nombre</span>
+            <span class="info-value">{{ selectedUser.nombre }}</span>
+          </div>
+        </div>
+        
+        <div class="info-card">
+          <div class="info-icon">
+            <span class="material-symbols-outlined">business</span>
+          </div>
+          <div class="info-content">
+            <span class="info-label">Sucursal</span>
+            <span class="info-value">{{ selectedUser.sucursal }}</span>
+          </div>
+        </div>
+        
+        <div class="info-card">
+          <div class="info-icon">
+            <span class="material-symbols-outlined">work</span>
+          </div>
+          <div class="info-content">
+            <span class="info-label">Área de trabajo</span>
+            <span class="info-value">{{ selectedUser.area }}</span>
+          </div>
+        </div>
+        
+        <div class="info-card">
+          <div class="info-icon">
+            <span class="material-symbols-outlined">admin_panel_settings</span>
+          </div>
+          <div class="info-content">
+            <span class="info-label">Rol</span>
+            <span class="info-value">{{ selectedUser.rol }}</span>
+          </div>
+        </div>
+        
+        <div class="info-card">
+          <div class="info-icon">
+            <span class="material-symbols-outlined">verified</span>
+          </div>
+          <div class="info-content">
+            <span class="info-label">Estatus</span>
+            <span class="info-value status" [class.active]="selectedUser.estatus === 'Activo'">
+              {{ selectedUser.estatus }}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
     <div *ngIf="modalAction === 'edit' || modalAction === 'new'">
-      <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" class="form-control" [(ngModel)]="selectedUser.nombre">
+      <div class="input-container">
+        <input type="text" id="nombre" class="styled_input_bar" placeholder="" [(ngModel)]="selectedUser.nombre">
+        <label class="input-label" for="nombre">Nombre</label>
       </div>
-      <div class="form-group">
-        <label for="sucursal">Sucursal</label>
-        <input type="text" id="sucursal" class="form-control" [(ngModel)]="selectedUser.sucursal">
+      <div class="input-container">
+        <input type="text" id="correo" class="styled_input_bar" placeholder="" [(ngModel)]="selectedUser.correo">
+        <label class="input-label" for="correo">Correo electrónico</label>
       </div>
-      <div class="form-group">
-        <label for="area">Área de trabajo</label>
-        <input type="text" id="area" class="form-control" [(ngModel)]="selectedUser.area">
+      <div class="input-container">
+        <input type="text" id="sucursal" class="styled_input_bar" placeholder="" [(ngModel)]="selectedUser.sucursal">
+        <label class="input-label" for="sucursal">Sucursal</label>
       </div>
-      <div class="form-group">
-        <label for="rol">Rol</label>
-        <input type="text" id="rol" class="form-control" [(ngModel)]="selectedUser.rol">
+      <div class="input-container">
+        <input type="text" id="area" class="styled_input_bar" placeholder="" [(ngModel)]="selectedUser.area">
+        <label class="input-label" for="area">Área de trabajo</label>
+      </div>
+      <div class="input-container">
+        <input type="text" id="rol" class="styled_input_bar" placeholder="" [(ngModel)]="selectedUser.rol">
+        <label class="input-label" for="rol">Rol</label>
       </div>
     </div>
-    <div *ngIf="modalAction === 'delete'">
+    <div class="delete-usuario" *ngIf="modalAction === 'delete'">
       <p>¿Estás seguro de que deseas eliminar al usuario <strong>{{ selectedUser.nombre }}</strong>?</p>
     </div>
   </div>
