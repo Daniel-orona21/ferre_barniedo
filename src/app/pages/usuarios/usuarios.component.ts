@@ -13,24 +13,60 @@ export class UsuariosComponent {
   isModalVisible = false;
   selectedUser: any = null;
   modalAction = ''; // 'view', 'edit', 'delete', or 'new'
+  public estatus = [
+    { label: 'Activos', active: false },
+    { label: 'Inactivos', active: false },
+    { label: 'Todos', active: true },
+  ];
 
   users = [
-    { id: 1, nombre: 'Jane Cooper', sucursal: 'Suc1', area: 'Finanzas', rol: 'Administrador', estatus: 'Activo' },
-    { id: 2, nombre: 'Wade Warren', sucursal: 'Suc2', area: 'Finanzas', rol: 'Administrador', estatus: 'Activo' },
-    { id: 3, nombre: 'Esther Howard', sucursal: 'Suc3', area: 'Finanzas', rol: 'Administrador', estatus: 'Activo' },
-    { id: 4, nombre: 'Cameron Williamson', sucursal: 'Suc2', area: 'Administración', rol: 'Supervisor', estatus: 'Activo' },
-    { id: 5, nombre: 'Leslie Alexander', sucursal: 'Suc1', area: 'Administración', rol: 'Supervisor', estatus: 'Activo' },
-    { id: 6, nombre: 'Guy Hawkins', sucursal: 'Suc4', area: 'Finanzas', rol: 'Administrador', estatus: 'Activo' },
-    { id: 7, nombre: 'Jacob Jones', sucursal: 'Suc2', area: 'Almacen', rol: 'Almacen', estatus: 'Activo' },
-    { id: 8, nombre: 'Darlene Robertson', sucursal: 'Suc4', area: 'Administración', rol: 'Supervisor', estatus: 'Activo' },
-    { id: 9, nombre: 'Devon Lane', sucursal: 'Suc1', area: 'Administración', rol: 'Supervisor', estatus: 'Activo' }
+    { id: 1, nombre: 'Juan Perez', correo: 'aaa@gmail.com', area: 'Legal', rol: 'Administrador', sucursal: 'Monclova', estatus: 'Activo' },
+    { id: 2, nombre: 'Elisa Lopez', correo: 'aaa@gmail.com', area: 'Finanzas', rol: 'Supervisor', sucursal: 'Ecatepec', estatus: 'Activo' },
+    { id: 3, nombre: 'Luis Gomez', correo: 'aaa@gmail.com', area: 'Operaciones', rol: 'Director', sucursal: 'San Luis Potosí', estatus: 'Activo' },
+    { id: 4, nombre: 'Ana Torres', correo: 'ana@gmail.com', area: 'Legal', rol: 'Administrador', sucursal: 'Monclova', estatus: 'Inactivo' },
+    { id: 5, nombre: 'Carlos Ruiz', correo: 'carlos@gmail.com', area: 'Finanzas', rol: 'Supervisor', sucursal: 'Ecatepec', estatus: 'Inactivo' },
+    { id: 6, nombre: 'Marta Diaz', correo: 'marta@gmail.com', area: 'Operaciones', rol: 'Director', sucursal: 'San Luis Potosí', estatus: 'Inactivo' },
   ];
+
+  searchTerm: string = '';
+
+  get filteredUsers() {
+    let filtered = this.users;
+    const activeFilter = this.estatus.find(e => e.active)?.label;
+    if (activeFilter === 'Activos') {
+      filtered = filtered.filter(u => u.estatus === 'Activo');
+    } else if (activeFilter === 'Inactivos') {
+      filtered = filtered.filter(u => u.estatus === 'Inactivo');
+    }
+    if (this.searchTerm.trim()) {
+      const term = this.searchTerm.trim().toLowerCase();
+      filtered = filtered.filter(u =>
+        u.nombre.toLowerCase().includes(term) ||
+        (u.correo && u.correo.toLowerCase().includes(term)) ||
+        u.area.toLowerCase().includes(term) ||
+        u.rol.toLowerCase().includes(term) ||
+        u.sucursal.toLowerCase().includes(term)
+      );
+    }
+    return filtered;
+  }
 
   openNewUserModal() {
     this.selectedUser = { nombre: '', sucursal: '', area: '', rol: '', estatus: 'Activo' };
     this.modalAction = 'new';
     this.isModalVisible = true;
   }
+
+  selectEstatus(estatus: any): void {
+    this.estatus.forEach(p => p.active = false);
+    estatus.active = true;
+    this.updateDataForPeriod();
+  }
+
+  updateDataForPeriod() {
+    // El filtrado ahora es reactivo a través de filteredUsers
+  }
+  
 
   openModal(user: any, action: string) {
     this.selectedUser = { ...user };

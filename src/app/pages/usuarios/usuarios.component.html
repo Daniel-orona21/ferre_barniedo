@@ -1,133 +1,157 @@
 <div class="container-fluid">
-    <div class="card">
-      <div class="card-header">
-        <div class="contenedor-filtros">
-            <div class="categoria">
-                <h3>Sucursal</h3>
-                <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
-            </div>
-            <div class="categoria">
-                <h3>Estatus</h3>
-                <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
-            </div>
-            <div class="contenedor-buscador">
-                <input type="text" class="buscador" placeholder="Buscar...">
-                <span class="material-symbols-outlined">search</span>
-            </div>
-            <button class="btn-primary" (click)="openNewUserModal()">
-              <span class="material-symbols-outlined">add</span>
-              Nuevo
-            </button>
+  <div class="card">
+    <div class="card-header">
+      <div class="time-controls">
+        <div class="time-periods">
+          <button *ngFor="let estatus of estatus" 
+                  [class.active]="estatus.active"
+                  (click)="selectEstatus(estatus)">
+            {{estatus.label}}
+          </button>
         </div>
       </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Sucursal</th>
-                <th>Área de trabajo</th>
-                <th>Rol</th>
-                <th>Estatus</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let user of users">
-                <td>{{ user.id }}</td>
-                <td>{{ user.nombre }}</td>
-                <td>{{ user.sucursal }}</td>
-                <td>{{ user.area }}</td>
-                <td>{{ user.rol }}</td>
-                <td><span class="badge bg-success">{{ user.estatus }}</span></td>
-                <td class="actions">
+      <div class="contenedor-filtros">
+          <!-- <div class="categoria">
+              <h3>Sucursal</h3>
+              <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
+          </div>
+          <div class="categoria">
+              <h3>Estatus</h3>
+              <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
+          </div> -->
+          <div class="contenedor-buscador">
+              <input type="text" class="buscador" placeholder="Buscar..." [(ngModel)]="searchTerm">
+              <span class="material-symbols-outlined">search</span>
+          </div>
+          <button class="btn-primary" (click)="openNewUserModal()">
+            <span class="material-symbols-outlined">add</span>
+            Nuevo
+          </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Usuario</th>
+              <th>Correo electrónico</th>
+              <th>Departamento</th>
+              <th>Rol</th>
+              <th>Sucursal</th>
+              <th>Estatus</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of filteredUsers">
+              <td>{{ user.nombre }}</td>
+              <td>{{ user.correo }}</td>
+              <td>{{ user.area }}</td>
+              <td>{{ user.rol }}</td>
+              <td>{{ user.sucursal }}</td>
+              <td>
+                <span class="badge" [class.bg-success]="user.estatus === 'Activo'" [class.bg-danger]="user.estatus !== 'Activo'">
+                  <span class="material-symbols-outlined">
+                    {{ user.estatus === 'Activo' ? 'check' : 'close' }}
+                  </span>
+                </span>
+              </td>
+              <td class="actions">
+                <div class="tooltip-container">
                   <button class="btn-icon" (click)="openModal(user, 'view')">
                     <span class="material-symbols-outlined icon-view">visibility</span>
                   </button>
+                  <span class="custom-tooltip">Ver</span>
+                </div>
+                <div class="tooltip-container">
                   <button class="btn-icon" (click)="openModal(user, 'edit')">
                     <span class="material-symbols-outlined icon-edit">edit</span>
                   </button>
+                  <span class="custom-tooltip">Editar</span>
+                </div>
+                <div class="tooltip-container">
                   <button class="btn-icon" (click)="openModal(user, 'delete')">
                     <span class="material-symbols-outlined icon-delete">delete</span>
                   </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="card-footer">
-        <div class="pagination-controls">
-            <span>Resultados por pagina:</span>
-            <select class="form-select">
-                <option selected>10</option>
-                <option>20</option>
-                <option>50</option>
-            </select>
-        </div>
-        <div class="pagination-info">
-            <span>1-10 de 30</span>
-            <div class="btn-group">
-                <button class="btn-light">
-                  <span class="material-symbols-outlined">chevron_left</span>
-                </button>
-                <button class="btn-light">
-                  <span class="material-symbols-outlined">chevron_right</span>
-                </button>
-            </div>
-        </div>
+                  <span class="custom-tooltip">Eliminar</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+    <div class="card-footer">
+      <div class="pagination-controls">
+          <span>Resultados por pagina:</span>
+          <select class="form-select">
+              <option selected>10</option>
+              <option>20</option>
+              <option>50</option>
+          </select>
+      </div>
+      <div class="pagination-info">
+          <span>1-10 de 30</span>
+          <div class="btn-group">
+              <button class="btn-light">
+                <span class="material-symbols-outlined">chevron_left</span>
+              </button>
+              <button class="btn-light">
+                <span class="material-symbols-outlined">chevron_right</span>
+              </button>
+          </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="modal-overlay" *ngIf="isModalVisible">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2 *ngIf="modalAction === 'view'">Ver Usuario</h2>
-      <h2 *ngIf="modalAction === 'edit'">Editar Usuario</h2>
-      <h2 *ngIf="modalAction === 'new'">Nuevo Usuario</h2>
-      <h2 *ngIf="modalAction === 'delete'">Eliminar Usuario</h2>
-      <button class="btn-icon" (click)="closeModal()">
-        <span class="material-symbols-outlined">close</span>
-      </button>
+<div class="modal-content">
+  <div class="modal-header">
+    <h2 *ngIf="modalAction === 'view'">Ver Usuario</h2>
+    <h2 *ngIf="modalAction === 'edit'">Editar Usuario</h2>
+    <h2 *ngIf="modalAction === 'new'">Nuevo Usuario</h2>
+    <h2 *ngIf="modalAction === 'delete'">Eliminar Usuario</h2>
+    <button class="btn-icon" (click)="closeModal()">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+  <div class="modal-body" *ngIf="selectedUser">
+    <div *ngIf="modalAction === 'view'">
+      <p><strong>ID:</strong> {{ selectedUser.id }}</p>
+      <p><strong>Nombre:</strong> {{ selectedUser.nombre }}</p>
+      <p><strong>Sucursal:</strong> {{ selectedUser.sucursal }}</p>
+      <p><strong>Área de trabajo:</strong> {{ selectedUser.area }}</p>
+      <p><strong>Rol:</strong> {{ selectedUser.rol }}</p>
+      <p><strong>Estatus:</strong> <span class="badge bg-success">{{ selectedUser.estatus }}</span></p>
     </div>
-    <div class="modal-body" *ngIf="selectedUser">
-      <div *ngIf="modalAction === 'view'">
-        <p><strong>ID:</strong> {{ selectedUser.id }}</p>
-        <p><strong>Nombre:</strong> {{ selectedUser.nombre }}</p>
-        <p><strong>Sucursal:</strong> {{ selectedUser.sucursal }}</p>
-        <p><strong>Área de trabajo:</strong> {{ selectedUser.area }}</p>
-        <p><strong>Rol:</strong> {{ selectedUser.rol }}</p>
-        <p><strong>Estatus:</strong> <span class="badge bg-success">{{ selectedUser.estatus }}</span></p>
+    <div *ngIf="modalAction === 'edit' || modalAction === 'new'">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" class="form-control" [(ngModel)]="selectedUser.nombre">
       </div>
-      <div *ngIf="modalAction === 'edit' || modalAction === 'new'">
-        <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" class="form-control" [(ngModel)]="selectedUser.nombre">
-        </div>
-        <div class="form-group">
-          <label for="sucursal">Sucursal</label>
-          <input type="text" id="sucursal" class="form-control" [(ngModel)]="selectedUser.sucursal">
-        </div>
-        <div class="form-group">
-          <label for="area">Área de trabajo</label>
-          <input type="text" id="area" class="form-control" [(ngModel)]="selectedUser.area">
-        </div>
-        <div class="form-group">
-          <label for="rol">Rol</label>
-          <input type="text" id="rol" class="form-control" [(ngModel)]="selectedUser.rol">
-        </div>
+      <div class="form-group">
+        <label for="sucursal">Sucursal</label>
+        <input type="text" id="sucursal" class="form-control" [(ngModel)]="selectedUser.sucursal">
       </div>
-      <div *ngIf="modalAction === 'delete'">
-        <p>¿Estás seguro de que deseas eliminar al usuario <strong>{{ selectedUser.nombre }}</strong>?</p>
+      <div class="form-group">
+        <label for="area">Área de trabajo</label>
+        <input type="text" id="area" class="form-control" [(ngModel)]="selectedUser.area">
+      </div>
+      <div class="form-group">
+        <label for="rol">Rol</label>
+        <input type="text" id="rol" class="form-control" [(ngModel)]="selectedUser.rol">
       </div>
     </div>
-    <div class="modal-footer">
-      <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
-      <button class="btn-primary" *ngIf="modalAction === 'edit' || modalAction === 'new'" (click)="saveUser()">Guardar Cambios</button>
-      <button class="btn-danger" *ngIf="modalAction === 'delete'" (click)="deleteUser()">Eliminar</button>
+    <div *ngIf="modalAction === 'delete'">
+      <p>¿Estás seguro de que deseas eliminar al usuario <strong>{{ selectedUser.nombre }}</strong>?</p>
     </div>
   </div>
+  <div class="modal-footer">
+    <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
+    <button class="btn-primary" *ngIf="modalAction === 'edit' || modalAction === 'new'" (click)="saveUser()">Guardar Cambios</button>
+    <button class="btn-danger" *ngIf="modalAction === 'delete'" (click)="deleteUser()">Eliminar</button>
+  </div>
+</div>
 </div>
