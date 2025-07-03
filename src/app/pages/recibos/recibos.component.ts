@@ -46,7 +46,7 @@ export class RecibosComponent {
     defineLocale('es', esLocale);
     this.localeService.use('es');
     this.bsConfig = Object.assign({}, { 
-      containerClass: 'theme-default',
+      containerClass: 'theme-dark-custom',
       dateInputFormat: 'DD/MM/YYYY'
     });
   }

@@ -2,11 +2,81 @@
 
 /* You can add global styles to this file, and also import other style files */
 
+/* Tema oscuro personalizado para datepicker */
+.theme-dark-custom {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.theme-dark-custom .bs-datepicker {
+  background-color: #2a2a2a !important;
+  border: none !important;
+  border-radius: 30px !important;
+  box-shadow: none !important;
+  color: white !important;
+}
+
+.theme-dark-custom .bs-datepicker-container {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.theme-dark-custom .bs-datepicker-head {
+  background-color: #2a2a2a !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 30px 30px 0 0 !important;
+}
+
+.theme-dark-custom .bs-datepicker-head button {
+  background-color: transparent !important;
+  border: none !important;
+  color: white !important;
+}
+
+.theme-dark-custom .bs-datepicker-head button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 50% !important;
+}
+
+.theme-dark-custom .bs-datepicker-body {
+  background-color: #2a2a2a !important;
+  border-radius: 0 0 30px 30px !important;
+}
+
+.theme-dark-custom .bs-datepicker-body table th {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-weight: 300 !important;
+  font-size: 0.8rem !important;
+}
+
+.theme-dark-custom .bs-datepicker-body table td span {
+  background-color: transparent !important;
+  color: white !important;
+  border-radius: 50% !important;
+  transition: all 0.2s ease !important;
+}
+
+.theme-dark-custom .bs-datepicker-body table td span:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.theme-dark-custom .bs-datepicker-body table td span.selected {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+}
+
+.theme-dark-custom .bs-datepicker-body table td span.is-other-month {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
 * {
-    box-sizing: border-box;
-    font-family: "Inter var", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    margin: 0;
-    color: white;
+  box-sizing: border-box;
+  font-family: "Inter var", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  margin: 0;
+  color: white;
 }
 
 body.dark-theme {
