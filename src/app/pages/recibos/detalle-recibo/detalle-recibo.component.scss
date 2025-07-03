@@ -35,22 +35,65 @@
     color: rgba(255, 255, 255, 0.47);
     border: none;
     border-radius: 9999px;
-    padding: 8px 16px;
-    font-size: 0.875rem;
-    font-weight: 300;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     gap: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
     
     &:hover {
       color: white;
     }
     
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
     .material-symbols-outlined {
       font-size: 18px;
-      font-weight: 300;
+    }
+    
+    .loading-spinner {
+      width: 18px;
+      height: 18px;
+      transform-origin: center;
+      animation: rotate4 2s linear infinite;
+      
+      circle {
+        fill: none;
+        stroke: white;
+        stroke-width: 2;
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        stroke-linecap: round;
+        animation: dash4 1.5s ease-in-out infinite;
+      }
+    }
+  }
+  
+  @keyframes rotate4 {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes dash4 {
+    0% {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+    }
+    
+    50% {
+      stroke-dasharray: 90, 200;
+      stroke-dashoffset: -35px;
+    }
+    
+    100% {
+      stroke-dashoffset: -125px;
     }
   }
   
@@ -67,60 +110,73 @@
 }
 
 .recibo-nomina {
-  background-color: white;
+  background-color: white !important;
+  max-width: 210mm !important;
+  min-height: 297mm !important;
+  width: 210mm !important;
+  margin: 0 auto !important;
+  padding: 15mm !important;
+  font-family: 'Times New Roman', serif !important;
+  font-size: 10pt !important;
+  line-height: 1.3 !important;
   color: black !important;
   border-radius: 8px;
   padding: 30px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   position: relative;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
 
   .logo-empresa {
     display: flex;
     align-items: center;
     justify-content: center;
-    // background-color: green; 
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 40%;
     transform: translate(-50%, -50%);
-    opacity: 0.1;
+    opacity: 0.15;
+    z-index: 0;
 
     img {
       height: 200px;
-      // background-color: black;
-      background-color: none;
+      width: auto;
       object-fit: contain;
+      display: block;
     }
-  }
-  
-  * {
-    color: black !important;
   }
   
   // Encabezado de la empresa
   .empresa-header {
     flex-direction: column;
-    // background-color: red;
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px;
-    // border: 2px solid black;
-    border-bottom: 1px solid black;
+    padding: 0;
+    margin-bottom: 15mm;
+    border-bottom: 2px solid black;
+    padding-bottom: 8px;
     position: relative;
+    z-index: 1;
+
+    h2 {
+      font-size: 18pt !important;
+      font-weight: bold !important;
+      text-align: center !important;
+      color: black !important;
+      margin: 0 0 6px 0 !important;
+    }
 
     .row {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       width: 100%;
-      // background-color: lime;
     }
-    
     
     .empresa-info {
       flex: 1;
-      // background-color: blue;
       display: flex;
       flex-direction: column;
 
@@ -129,173 +185,169 @@
         justify-content: space-between;
       }
       
-      h2 {
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin: 0 0 8px 0;
-        text-align: center;
-        color: black !important;
-      }
-      
       .empresa-datos {
         display: flex;
         justify-content: space-between;
-        font-size: 0.9rem;
-        // background-color: yellow;
+        font-size: 9pt;
         gap: 5px;
         flex-direction: column;
         
         span {
-          font-weight: 500;
           color: black !important;
+          margin: 0;
+          line-height: 1.2;
+        }
+
+        p {
+          color: black !important;
+          margin: 0;
+          line-height: 1.2;
         }
       }
       
       .empresa-detalles {
-        // background-color: lime;
-        font-size: 0.85rem;
+        font-size: 9pt;
         gap: 5px;
         display: flex;
         flex-direction: column;
+        text-align: right;
         
-        p {
-          margin: 2px 0;
-          text-align: center;
+        span {
           color: black !important;
+          margin: 0;
+          line-height: 1.2;
+        }
+
+        p {
+          color: black !important;
+          margin: 0;
+          line-height: 1.2;
         }
       }
     }
   }
-  
+
   // Información del empleado y período
   .empleado-periodo {
     display: flex;
+    margin-bottom: 10mm;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
     
     .empleado-info, .periodo-info {
       flex: 1;
-      padding: 16px;
+      padding: 8px;
+      border: 1px solid black;
       
       h3 {
-        font-size: 1rem;
-        font-weight: bold;
-        margin: 0 0 12px 0;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 4px;
-        display: none; // Ocultar títulos para que se vea más como el original
+        font-size: 10pt !important;
+        font-weight: bold !important;
+        text-align: center !important;
+        color: black !important;
+        margin: 0 0 6px 0 !important;
+        border-bottom: 1px solid black !important;
+        padding-bottom: 3px !important;
       }
       
       .datos-empleado, .datos-periodo {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-      
-      .dato-item {
-        display: flex;
-        font-size: 0.85rem;
-        
-        .label {
-          font-weight: 500;
-          min-width: 140px;
-          margin-right: 8px;
-          color: black !important;
-        }
-        
-        .value {
-          font-weight: 400;
-          color: black !important;
+        .dato-item {
+          font-size: 8pt;
+          margin-bottom: 2px;
+          display: flex;
+          justify-content: space-between;
+          
+          .label {
+            font-weight: bold;
+            color: black !important;
+          }
+          
+          .value {
+            color: black !important;
+            text-align: right;
+          }
         }
       }
-    }
-    
-    .periodo-info {
-      border-left: 1px solid black;
     }
   }
-  
+
   // Percepciones y deducciones
   .percepciones-deducciones {
     display: flex;
-    border-top: 1px solid black;
+    margin-bottom: 10mm;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    padding: 5px 0;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
     
     .percepciones-section, .deducciones-section {
       flex: 1;
+      padding: 6px;
+      border: 1px solid black;
       
       h3 {
-        background-color: #f8f9fa;
-        padding: 8px 16px;
-        margin: 0;
-        font-size: 1rem;
-        font-weight: bold;
-        text-align: center;
-        border-bottom: 1px solid black;
+        font-size: 10pt !important;
+        font-weight: bold !important;
+        text-align: center !important;
         color: black !important;
+        margin: 0 0 4px 0 !important;
+        border-bottom: 1px solid black !important;
+        padding-bottom: 2px !important;
       }
       
       .tabla-percepciones, .tabla-deducciones {
         .tabla-header {
-          display: grid;
-          grid-template-columns: 1fr 1fr 2fr 1fr;
-          background-color: #f8f9fa;
+          font-size: 7pt;
+          font-weight: bold;
+          padding: 2px;
           border-bottom: 1px solid black;
+          display: grid;
+          grid-template-columns: 50px 30px 1fr 50px;
+          gap: 2px;
           
           span {
-            padding: 8px 12px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            border-right: 1px solid black;
-            text-align: center;
             color: black !important;
-            
-            &:last-child {
-              border-right: none;
-            }
           }
         }
         
         .tabla-row {
+          font-size: 7pt;
+          padding: 2px;
           display: grid;
-          grid-template-columns: 1fr 1fr 2fr 1fr;
-          border-bottom: 1px solid #ddd;
+          grid-template-columns: 50px 30px 1fr 50px;
+          gap: 2px;
           
           span {
-            padding: 8px 12px;
-            font-size: 0.85rem;
-            border-right: 1px solid #ddd;
-            text-align: center;
             color: black !important;
-            
-            &:last-child {
-              border-right: none;
-              font-weight: 500;
-            }
+            padding: 1px;
           }
         }
       }
     }
-    
-    .deducciones-section {
-      border-left: 1px solid black;
-    }
   }
-  
+
   // Totales
   .totales-section {
     display: flex;
-
-    border-top: 1px solid black;
-    padding: 20px;
+    padding: 8px;
+    border-top: 2px solid black;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 15mm;
     
     .qr-section {
-      flex: 1;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       
       .qr-code {
-        width: 100px;
-        height: 100px;
-        border: 0px solid black;
+        width: 80px;
+        height: 80px;
+        border: 1px solid black;
         position: relative;
         display: flex;
         align-items: center;
@@ -303,101 +355,63 @@
 
         img {
           width: 100%;
-          height: 100%;
+          height: 100%; 
           object-fit: contain;
+          display: block;
         }
       }
     }
     
     .totales {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
-      padding-left: 20px;
+      padding-left: 15px;
+      min-width: 150px;
       
       .total-item {
+        font-size: 9pt;
+        margin-bottom: 3px;
         display: flex;
         justify-content: space-between;
-        min-width: 200px;
-        font-size: 0.9rem;
         
         .label {
-          font-weight: 500;
+          font-weight: bold;
           color: black !important;
         }
         
         .value {
-          font-weight: 500;
           color: black !important;
+          text-align: right;
         }
         
         &.total-final {
-          border-top: 2px solid black;
-          padding-top: 8px;
-          margin-top: 8px;
+          font-size: 11pt;
           font-weight: bold;
-          font-size: 1rem;
+          border-top: 2px solid black;
+          padding-top: 4px;
+          margin-top: 6px;
         }
       }
-    }
-  }
-  
-  // Firma
-  .firma-section {
-    margin-top: 40px;
-    text-align: center;
-    padding: 30px;
-    
-    .firma-linea {
-      width: 250px;
-      height: 2px;
-      background-color: black;
-      margin: 0 auto 10px;
-    }
-    
-    .firma-texto {
-      font-size: 12px;
-      color: black !important;
     }
   }
 
-  .recibo-original {
-    margin-top: 30px;
-    padding: 20px;
-    // border: 2px solid black;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+  // Firma
+  .firma-section {
+    margin-top: auto;
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    z-index: 1;
     
-    h3 {
-      margin-bottom: 15px;
-      color: black !important;
-      text-align: center;
-      font-size: 16px;
-      font-weight: bold;
+    .firma-linea {
+      width: 200px;
+      height: 2px;
+      background-color: black;
+      margin: 0 auto 6px;
     }
     
-    .recibo-datos {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      
-      .dato-item {
-        display: flex;
-        justify-content: space-between;
-        padding: 8px 0;
-        border-bottom: 1px solid #ddd;
-        
-        .label {
-          font-weight: bold;
-          color: black !important;
-        }
-        
-        .value {
-          color: black !important;
-        }
-      }
+    .firma-texto {
+      font-size: 9pt;
+      font-weight: bold;
+      color: black !important;
     }
   }
 

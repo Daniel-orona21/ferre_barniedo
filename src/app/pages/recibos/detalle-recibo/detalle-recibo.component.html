@@ -6,9 +6,12 @@
           <span class="material-symbols-outlined">arrow_back</span>
           Volver
         </button>
-        <button class="btn-volver" (click)="onVolver()">
-          <span class="material-symbols-outlined">download</span>
-          Descargar
+        <button class="btn-volver" (click)="descargarPDF()" [disabled]="generandoPDF">
+          <span class="material-symbols-outlined" *ngIf="!generandoPDF">download</span>
+          <svg viewBox="25 25 50 50" class="loading-spinner" *ngIf="generandoPDF">
+            <circle r="20" cy="50" cx="50"></circle>
+          </svg>
+          {{ generandoPDF ? 'Generando PDF...' : 'Descargar' }}
         </button>
       </div>
       <h1 class="card-title">Detalle del Recibo de Nómina</h1>
@@ -17,7 +20,7 @@
     <div class="card-body">
       <div class="recibo-nomina" *ngIf="datosCompletos">
         <div class="logo-empresa">
-          <img src="images/isotipo.png" alt="">
+          <img src="images/isotipo.png" alt="" crossorigin="anonymous">
         </div>
         <!-- Encabezado de la empresa -->
         <div class="empresa-header">
@@ -159,9 +162,9 @@
 
         <!-- Totales -->
         <div class="totales-section">
-          <div class="qr-section">
-            <div class="qr-code">
-              <img src="images/qr.png" alt="">
+                      <div class="qr-section">
+              <div class="qr-code">
+                <img src="images/qr.png" alt="" crossorigin="anonymous">
             </div>
           </div>
           <div class="totales">
