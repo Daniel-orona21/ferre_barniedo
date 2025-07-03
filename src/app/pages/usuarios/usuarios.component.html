@@ -78,6 +78,15 @@
                 </div>
               </td>
             </tr>
+            <tr *ngIf="filteredUsers.length === 0">
+              <td colspan="7" class="no-results">
+                <div class="no-results-content">
+                  <span class="material-symbols-outlined">search_off</span>
+                  <p>No se encontraron coincidencias</p>
+                  <small>Intenta ajustar los filtros o términos de búsqueda</small>
+                </div>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

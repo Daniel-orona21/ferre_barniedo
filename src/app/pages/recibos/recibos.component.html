@@ -3,8 +3,11 @@
       <div class="card-header">
         <!-- <h1 class="card-title">Ordenes de compra</h1> -->
         <div class="selects">
-          <div class="filter-select-container">
-            <select class="filter-select" [(ngModel)]="filtroUsuario" (ngModelChange)="filtrarPorUsuario()">
+                      <div class="filter-select-container">
+              <select class="filter-select" 
+                      [class.has-value]="filtroUsuario"
+                      [(ngModel)]="filtroUsuario" 
+                      (ngModelChange)="filtrarPorUsuario()">
                 <option value="">Usuarios</option>
                 <option value="Luis Gomez">Luis Gomez</option>
                 <option value="Juan Pérez">Juan Pérez</option>
@@ -12,8 +15,8 @@
                 <option value="María García">María García</option>
                 <option value="Carlos Ruiz">Carlos Ruiz</option>
                 <option value="Ana Martínez">Ana Martínez</option>
-            </select>
-        </div>
+              </select>
+            </div>
         <!-- <div class="filter-select-container">
             <select class="filter-select" [(ngModel)]="filtroSucursal" (ngModelChange)="filtrarPorSucursal()">
                 <option value="">Sucursales</option>
@@ -22,14 +25,17 @@
                 <option value="sucursal3">Sucursal 3</option>
             </select>
         </div> -->
-        <div class="filter-select-container">
-            <select class="filter-select" [(ngModel)]="filtroEstatus" (ngModelChange)="filtrarPorEstatus()">
-                <option value="">Estatus</option>
-                <option value="Pendiente">Pendiente</option>
-                <option value="Visto">Visto</option>
-                <option value="Descargado">Descargado</option>
-            </select>
-        </div>
+                  <div class="filter-select-container">
+              <select class="filter-select" 
+                      [class.has-value]="filtroEstatus"
+                      [(ngModel)]="filtroEstatus" 
+                      (ngModelChange)="filtrarPorEstatus()">
+                  <option value="">Estatus</option>
+                  <option value="Pendiente">Pendiente</option>
+                  <option value="Visto">Visto</option>
+                  <option value="Descargado">Descargado</option>
+              </select>
+          </div>
         </div>
         <div class="contenedor-filtros">
             <div class="date-picker-wrapper">
@@ -104,6 +110,15 @@
                   <button class="btn-icon" (click)="openModal(orden, 'edit')">
                     <span class="material-symbols-outlined icon-edit">download</span>
                   </button>
+                </td>
+              </tr>
+              <tr *ngIf="ordenesCompra.length === 0">
+                <td colspan="6" class="no-results">
+                  <div class="no-results-content">
+                    <span class="material-symbols-outlined">search_off</span>
+                    <p>No se encontraron coincidencias</p>
+                    <small>Intenta ajustar los filtros o términos de búsqueda</small>
+                  </div>
                 </td>
               </tr>
             </tbody>

@@ -34,43 +34,48 @@
       align-items: center;
     }
 
-    .filter-select {
-      background: $color-overlay !important;
-      border: none !important;
-      border-radius: 9999px !important;
-      padding: 8px 32px 8px 12px !important;
-      color: rgba(255, 255, 255, 0.481) !important;
-      font-size: 0.875rem !important;
-      font-weight: 300 !important;
-      cursor: pointer !important;
-      transition: all 0.2s ease !important;
-      opacity: 0.7 !important;
-      appearance: none !important;
-      -webkit-appearance: none !important;
-      -moz-appearance: none !important;
-      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.481)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") !important;
-      background-repeat: no-repeat !important;
-      background-position: right 8px center !important;
-      background-size: 16px !important;
-      min-width: 140px !important;
-      
-      &:hover {
-        opacity: 1 !important;
-        color: white !important;
-      }
-      
-      &:focus {
-        outline: none !important;
-        opacity: 1 !important;
-        color: white !important;
-      }
-      
-      option {
-        background-color: $color-contenedor !important;
-        color: white !important;
-        padding: 8px 12px !important;
-      }
-    }
+            .filter-select {
+          background: $color-overlay !important;
+          border: none !important;
+          border-radius: 9999px !important;
+          padding: 8px 32px 8px 12px !important;
+          color: rgba(255, 255, 255, 0.481) !important;
+          font-size: 0.875rem !important;
+          font-weight: 300 !important;
+          cursor: pointer !important;
+          transition: all 0.2s ease !important;
+          opacity: 0.7 !important;
+          appearance: none !important;
+          -webkit-appearance: none !important;
+          -moz-appearance: none !important;
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.481)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+          background-repeat: no-repeat !important;
+          background-position: right 8px center !important;
+          background-size: 16px !important;
+          min-width: 140px !important;
+          
+          &:hover {
+            opacity: 1 !important;
+            color: white !important;
+          }
+          
+          &:focus {
+            outline: none !important;
+            opacity: 1 !important;
+            color: white !important;
+          }
+
+          &.has-value {
+            opacity: 1 !important;
+            color: white !important;
+          }
+          
+          option {
+            background-color: $color-contenedor !important;
+            color: white !important;
+            padding: 8px 12px !important;
+          }
+        }
     
 
     .contenedor-filtros {
@@ -265,6 +270,37 @@
         color: white;
         font-weight: 300;
         font-size: 0.875rem;
+      }
+
+      .no-results {
+        text-align: center;
+        padding: 60px 20px;
+        
+        .no-results-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+          
+          .material-symbols-outlined {
+            font-size: 48px;
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 100;
+          }
+          
+          p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            font-weight: 400;
+          }
+          
+          small {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+            font-weight: 300;
+          }
+        }
       }
     }
   }
