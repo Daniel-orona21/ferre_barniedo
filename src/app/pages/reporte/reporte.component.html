@@ -1,0 +1,140 @@
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <div class="selects">
+            <div class="filter-select-container">
+                <select class="filter-select" 
+                        [class.has-value]="filtroUsuario"
+                        [(ngModel)]="filtroUsuario" 
+                        (ngModelChange)="aplicarFiltros()">
+                    <option value="">Usuario</option>
+                    <option *ngFor="let usuario of listaUsuarios" [value]="usuario">{{ usuario }}</option>
+                </select>
+            </div>
+            <div class="filter-select-container">
+                <select class="filter-select" 
+                        [class.has-value]="filtroEstatus"
+                        [(ngModel)]="filtroEstatus" 
+                        (ngModelChange)="aplicarFiltros()">
+                    <option value="">Estatus</option>
+                    <option *ngFor="let estatus of listaEstatus" [value]="estatus">{{ estatus }}</option>
+                </select>
+            </div>
+            <!-- <div class="filter-select-container">
+                <select class="filter-select" 
+                        [class.has-value]="filtroSucursal"
+                        [(ngModel)]="filtroSucursal" 
+                        (ngModelChange)="aplicarFiltros()">
+                    <option value="">Sucursal</option>
+                    <option *ngFor="let sucursal of listaSucursales" [value]="sucursal">{{ sucursal }}</option>
+                </select>
+            </div> -->
+            <div class="filter-select-container">
+                <select class="filter-select" 
+                        [class.has-value]="filtroNomina"
+                        [(ngModel)]="filtroNomina" 
+                        (ngModelChange)="aplicarFiltros()">
+                    <option value="">No. Nomina</option>
+                    <option *ngFor="let nomina of listaNominas" [value]="nomina">{{ nomina }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="contenedor-filtros">
+            <div class="date-picker-wrapper">
+                <label>Desde</label>
+                <input type="text"
+                       placeholder="Fecha"
+                       class="form-control"
+                       bsDatepicker
+                       [(ngModel)]="fechaInicio"
+                       (ngModelChange)="aplicarFiltros()"
+                       [bsConfig]="bsConfig">
+                <span class="material-symbols-outlined">calendar_month</span>
+            </div>
+            <div class="date-picker-wrapper">
+                <label>Hasta</label>
+                <input type="text"
+                       placeholder="Fecha"
+                       class="form-control"
+                       bsDatepicker
+                       [(ngModel)]="fechaFin"
+                       (ngModelChange)="aplicarFiltros()"
+                       [bsConfig]="bsConfig">
+                <span class="material-symbols-outlined">calendar_month</span>
+            </div>
+            <!-- <div class="contenedor-buscador">
+                <input type="text" 
+                       class="buscador" 
+                       placeholder="Buscar..." 
+                       [(ngModel)]="filtroBusqueda"
+                       (ngModelChange)="aplicarFiltros()">
+                <span class="material-symbols-outlined">search</span>
+            </div> -->
+            <button class="btn-primary btn-limpiar" 
+                    [class.active]="hayFiltrosActivos"
+                    [disabled]="!hayFiltrosActivos"
+                    (click)="limpiarFiltros()">
+              <span class="material-symbols-outlined">clear_all</span>
+            </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Usuario</th>
+                <th>Nombre del recibo</th>
+                <th>Estatus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let recibo of recibosFiltrados">
+                <td>{{ recibo.id }}</td>
+                <td>{{ recibo.fecha }}</td>
+                <td>{{ recibo.usuario }}</td>
+                <td>{{ recibo.nombreRecibo }}</td>
+                <td>
+                  <span class="badge">
+                    {{ recibo.estatus }}
+                  </span>
+                </td>
+              </tr>
+              <tr *ngIf="recibosFiltrados.length === 0">
+                <td colspan="5" class="no-results">
+                  <div class="no-results-content">
+                    <span class="material-symbols-outlined">search_off</span>
+                    <p>No se encontraron coincidencias</p>
+                    <small>Intenta ajustar los filtros o términos de búsqueda</small>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="pagination-controls">
+            <span>Resultados por pagina:</span>
+            <select class="form-select" [(ngModel)]="resultadosPorPagina" (ngModelChange)="cambiarPaginacion()">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+            </select>
+        </div>
+        <div class="pagination-info">
+            <span>{{ paginaActual * resultadosPorPagina + 1 }}-{{ Math.min((paginaActual + 1) * resultadosPorPagina, totalRecibos) }} de {{ totalRecibos }}</span>
+            <div class="btn-group">
+                <button class="btn-light" (click)="paginaAnterior()" [disabled]="paginaActual === 0">
+                  <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <button class="btn-light" (click)="paginaSiguiente()" [disabled]="(paginaActual + 1) * resultadosPorPagina >= totalRecibos">
+                  <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

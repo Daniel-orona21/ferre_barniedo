@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
-import { ReporteComponent } from './pages/ordenes-de-compra/reporte.component';
+import { ReporteComponent } from './pages/reporte/reporte.component';
 import { RecibosComponent } from './pages/recibos/recibos.component';
 import { ListaRecibosComponent } from './pages/recibos/lista-recibos/lista-recibos.component';
 import { DetalleReciboComponent } from './pages/recibos/detalle-recibo/detalle-recibo.component';
