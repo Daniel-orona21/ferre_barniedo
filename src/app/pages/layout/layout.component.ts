@@ -48,7 +48,7 @@ export class LayoutComponent {
     getCurrentPageTitle() {
       const currentRoute = this.router.url;
       if (currentRoute.includes('dashboard')) {
-        return 'Inventarios';
+        return 'Dashboard';
       }
       if (currentRoute.includes('usuarios')) {
         return 'Usuarios';

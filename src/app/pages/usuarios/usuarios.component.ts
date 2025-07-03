@@ -20,12 +20,12 @@ export class UsuariosComponent {
   ];
 
   users = [
-    { id: 1, nombre: 'Juan Perez', correo: 'aaa@gmail.com', area: 'Legal', rol: 'Administrador', sucursal: 'Monclova', estatus: 'Activo' },
-    { id: 2, nombre: 'Elisa Lopez', correo: 'aaa@gmail.com', area: 'Finanzas', rol: 'Supervisor', sucursal: 'Ecatepec', estatus: 'Activo' },
-    { id: 3, nombre: 'Luis Gomez', correo: 'aaa@gmail.com', area: 'Operaciones', rol: 'Director', sucursal: 'San Luis Potosí', estatus: 'Activo' },
-    { id: 4, nombre: 'Ana Torres', correo: 'ana@gmail.com', area: 'Legal', rol: 'Administrador', sucursal: 'Monclova', estatus: 'Inactivo' },
-    { id: 5, nombre: 'Carlos Ruiz', correo: 'carlos@gmail.com', area: 'Finanzas', rol: 'Supervisor', sucursal: 'Ecatepec', estatus: 'Inactivo' },
-    { id: 6, nombre: 'Marta Diaz', correo: 'marta@gmail.com', area: 'Operaciones', rol: 'Director', sucursal: 'San Luis Potosí', estatus: 'Inactivo' },
+    { id: 1, nombre: 'Juan Perez', correo: 'aaa@gmail.com', area: 'Legal', rol: 'Empleado', sucursal: 'Monclova', estatus: 'Activo' },
+    { id: 2, nombre: 'Elisa Lopez', correo: 'aaa@gmail.com', area: 'Finanzas', rol: 'Empleado', sucursal: 'Ecatepec', estatus: 'Activo' },
+    { id: 3, nombre: 'Luis Gomez', correo: 'aaa@gmail.com', area: 'Operaciones', rol: 'Administrador', sucursal: 'San Luis Potosí', estatus: 'Activo' },
+    { id: 4, nombre: 'Ana Torres', correo: 'ana@gmail.com', area: 'Legal', rol: 'Empleado', sucursal: 'Monclova', estatus: 'Inactivo' },
+    { id: 5, nombre: 'Carlos Ruiz', correo: 'carlos@gmail.com', area: 'Finanzas', rol: 'Empleado', sucursal: 'Ecatepec', estatus: 'Inactivo' },
+    { id: 6, nombre: 'Marta Diaz', correo: 'marta@gmail.com', area: 'Operaciones', rol: 'Administrador', sucursal: 'San Luis Potosí', estatus: 'Inactivo' },
   ];
 
   searchTerm: string = '';

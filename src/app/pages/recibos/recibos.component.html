@@ -2,46 +2,71 @@
     <div class="card">
       <div class="card-header">
         <!-- <h1 class="card-title">Ordenes de compra</h1> -->
+        <div class="selects">
+          <div class="filter-select-container">
+            <select class="filter-select" [(ngModel)]="filtroUsuario" (ngModelChange)="filtrarPorUsuario()">
+                <option value="">Usuarios</option>
+                <option value="Luis Gomez">Luis Gomez</option>
+                <option value="Juan Pérez">Juan Pérez</option>
+                <option value="Luis López">Luis López</option>
+                <option value="María García">María García</option>
+                <option value="Carlos Ruiz">Carlos Ruiz</option>
+                <option value="Ana Martínez">Ana Martínez</option>
+            </select>
+        </div>
+        <!-- <div class="filter-select-container">
+            <select class="filter-select" [(ngModel)]="filtroSucursal" (ngModelChange)="filtrarPorSucursal()">
+                <option value="">Sucursales</option>
+                <option value="sucursal1">Sucursal 1</option>
+                <option value="sucursal2">Sucursal 2</option>
+                <option value="sucursal3">Sucursal 3</option>
+            </select>
+        </div> -->
+        <div class="filter-select-container">
+            <select class="filter-select" [(ngModel)]="filtroEstatus" (ngModelChange)="filtrarPorEstatus()">
+                <option value="">Estatus</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Visto">Visto</option>
+                <option value="Descargado">Descargado</option>
+            </select>
+        </div>
+        </div>
         <div class="contenedor-filtros">
-            <div class="categoria">
-                <h3>Proveedor</h3>
-                <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
-            </div>
-            <div class="categoria">
-                <h3>Ubicación</h3>
-                <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
-            </div>
-            <div class="categoria">
-                <h3>Estatus</h3>
-                <span class="material-symbols-outlined btn-icon">keyboard_arrow_down</span>
-            </div>
             <div class="date-picker-wrapper">
                 <label>Desde</label>
                 <input type="text"
-                       placeholder="Seleccionar fecha"
+                       placeholder="Fecha"
                        class="form-control"
                        bsDatepicker
                        [(ngModel)]="fechaDesde"
                        (ngModelChange)="filtrarPorFecha()"
                        [bsConfig]="bsConfig">
+              <span class="material-symbols-outlined">calendar_month</span>
               </div>
               <div class="date-picker-wrapper">
                 <label>Hasta</label>
                 <input type="text"
-                       placeholder="Seleccionar fecha"
+                       placeholder="Fecha"
                        class="form-control"
                        bsDatepicker
                        [(ngModel)]="fechaHasta"
                        (ngModelChange)="filtrarPorFecha()"
                        [bsConfig]="bsConfig">
+              <span class="material-symbols-outlined">calendar_month</span>
               </div>
             <div class="contenedor-buscador">
-                <input type="text" class="buscador" placeholder="Buscar...">
+                <input type="text" 
+                       class="buscador" 
+                       placeholder="Buscar..." 
+                       [(ngModel)]="filtroBusqueda"
+                       (ngModelChange)="filtrarPorBusqueda()">
                 <span class="material-symbols-outlined">search</span>
             </div>
-            <button class="btn-primary" routerLink="/app/ordenes/registrar">
-              <span class="material-symbols-outlined">add</span>
-              Nuevo
+            <button class="btn-primary btn-limpiar" 
+                    [class.active]="hayFiltrosActivos"
+                    [disabled]="!hayFiltrosActivos"
+                    (click)="limpiarFiltros()">
+              <span class="material-symbols-outlined">clear_all</span>
             </button>
         </div>
       </div>
@@ -50,34 +75,25 @@
           <table class="table">
             <thead>
               <tr>
+                <th>ID</th>
                 <th>Fecha</th>
-                <th>OC</th>
-                <th>Proveedor</th>
-                <th>Procedencia</th>
-                <th class="min-width-col">Cantidad a recibir</th>
-                <th>Precio total</th>
-                <th>Ubicación</th>
-                <th>Solicitante</th>
+                <th>Usuario</th>
+                <th>Nombre del recibo</th>
                 <th>Estatus</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let orden of ordenesCompra">
+                <td>{{ orden.id }}</td>
                 <td>{{ orden.fecha }}</td>
-                <td>{{ orden.oc }}</td>
-                <td>{{ orden.proveedor }}</td>
-                <td>{{ orden.procedencia }}</td>
-                <td class="min-width-col">{{ orden.cantidadRecibir }}</td>
-                <td>{{ orden.precioTotal }}</td>
-                <td>{{ orden.ubicacion }}</td>
-                <td>{{ orden.solicitante }}</td>
+                <td>{{ orden.Usuario }}</td>
+                <td>{{ orden.nombreRecibo }}</td>
                 <td>
                   <span class="badge" 
                         [class.bg-pendiente]="orden.estatus === 'Pendiente'"
-                        [class.bg-ordenada]="orden.estatus === 'Ordenada'"
-                        [class.bg-cancelada]="orden.estatus === 'Cancelada'"
-                        [class.bg-surtida]="orden.estatus === 'Surtida'">
+                        [class.bg-visto]="orden.estatus === 'Visto'"
+                        [class.bg-descargado]="orden.estatus === 'Descargado'">
                     {{ orden.estatus }}
                   </span>
                 </td>
@@ -86,10 +102,7 @@
                     <span class="material-symbols-outlined icon-view">visibility</span>
                   </button>
                   <button class="btn-icon" (click)="openModal(orden, 'edit')">
-                    <span class="material-symbols-outlined icon-edit">edit</span>
-                  </button>
-                  <button class="btn-icon" (click)="openModal(orden, 'delete')">
-                    <span class="material-symbols-outlined icon-delete">delete</span>
+                    <span class="material-symbols-outlined icon-edit">download</span>
                   </button>
                 </td>
               </tr>
@@ -121,79 +134,3 @@
     </div>
 </div>
 
-<div class="modal-overlay" *ngIf="isModalVisible">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2 *ngIf="modalAction === 'view'">Ver orden de compra</h2>
-      <h2 *ngIf="modalAction === 'edit'">Editar orden de compra</h2>
-      <h2 *ngIf="modalAction === 'new'">Nueva orden de compra</h2>
-      <h2 *ngIf="modalAction === 'delete'">Eliminar orden de compra</h2>
-      <button class="btn-icon" (click)="closeModal()">
-        <span class="material-symbols-outlined">close</span>
-      </button>
-    </div>
-    <div class="modal-body" *ngIf="selectedOrdenCompra">
-      <div *ngIf="modalAction === 'view'">
-        <p><strong>Fecha:</strong> {{ selectedOrdenCompra.fecha }}</p>
-        <p><strong>OC:</strong> {{ selectedOrdenCompra.oc }}</p>
-        <p><strong>Proveedor:</strong> {{ selectedOrdenCompra.proveedor }}</p>
-        <p><strong>Procedencia:</strong> {{ selectedOrdenCompra.procedencia }}</p>
-        <p><strong>Cantidad a recibir:</strong> {{ selectedOrdenCompra.cantidadRecibir }}</p>
-        <p><strong>Precio total:</strong> {{ selectedOrdenCompra.precioTotal }}</p>
-        <p><strong>Ubicación:</strong> {{ selectedOrdenCompra.ubicacion }}</p>
-        <p><strong>Solicitante:</strong> {{ selectedOrdenCompra.solicitante }}</p>
-        <p><strong>Estatus:</strong> 
-          <span class="badge" 
-                [class.bg-pendiente]="selectedOrdenCompra.estatus === 'Pendiente'"
-                [class.bg-ordenada]="selectedOrdenCompra.estatus === 'Ordenada'"
-                [class.bg-cancelada]="selectedOrdenCompra.estatus === 'Cancelada'"
-                [class.bg-surtida]="selectedOrdenCompra.estatus === 'Surtida'">
-            {{ selectedOrdenCompra.estatus }}
-          </span>
-        </p>
-      </div>
-      <div *ngIf="modalAction === 'edit' || modalAction === 'new'">
-        <div class="form-group">
-          <label for="fecha">Fecha</label>
-          <input type="text" id="fecha" class="form-control" [(ngModel)]="selectedOrdenCompra.fecha">
-        </div>
-        <div class="form-group">
-          <label for="oc">OC</label>
-          <input type="text" id="oc" class="form-control" [(ngModel)]="selectedOrdenCompra.oc">
-        </div>
-        <div class="form-group">
-          <label for="proveedor">Proveedor</label>
-          <input type="text" id="proveedor" class="form-control" [(ngModel)]="selectedOrdenCompra.proveedor">
-        </div>
-        <div class="form-group">
-          <label for="procedencia">Procedencia</label>
-          <input type="text" id="procedencia" class="form-control" [(ngModel)]="selectedOrdenCompra.procedencia">
-        </div>
-        <div class="form-group">
-          <label for="cantidadRecibir">Cantidad a recibir</label>
-          <input type="number" id="cantidadRecibir" class="form-control" [(ngModel)]="selectedOrdenCompra.cantidadRecibir">
-        </div>
-        <div class="form-group">
-          <label for="precioTotal">Precio total</label>
-          <input type="text" id="precioTotal" class="form-control" [(ngModel)]="selectedOrdenCompra.precioTotal">
-        </div>
-        <div class="form-group">
-          <label for="ubicacion">Ubicación</label>
-          <input type="text" id="ubicacion" class="form-control" [(ngModel)]="selectedOrdenCompra.ubicacion">
-        </div>
-        <div class="form-group">
-          <label for="solicitante">Solicitante</label>
-          <input type="text" id="solicitante" class="form-control" [(ngModel)]="selectedOrdenCompra.solicitante">
-        </div>
-      </div>
-      <div *ngIf="modalAction === 'delete'">
-        <p>¿Estás seguro de que deseas eliminar la orden de compra <strong>{{ selectedOrdenCompra.oc }}</strong>?</p>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
-      <button class="btn-primary" *ngIf="modalAction === 'edit' || modalAction === 'new'" (click)="saveOrdenCompra()">Guardar Cambios</button>
-      <button class="btn-danger" *ngIf="modalAction === 'delete'" (click)="deleteOrdenCompra()">Eliminar</button>
-    </div>
-  </div>
-</div>
