@@ -96,19 +96,13 @@
                 <td>{{ orden.Usuario }}</td>
                 <td>{{ orden.nombreRecibo }}</td>
                 <td>
-                  <span class="badge" 
-                        [class.bg-pendiente]="orden.estatus === 'Pendiente'"
-                        [class.bg-visto]="orden.estatus === 'Visto'"
-                        [class.bg-descargado]="orden.estatus === 'Descargado'">
+                  <span class="estatus-container">
                     {{ orden.estatus }}
                   </span>
                 </td>
                 <td class="actions">
                   <button class="btn-icon" (click)="openModal(orden, 'view')">
                     <span class="material-symbols-outlined icon-view">visibility</span>
-                  </button>
-                  <button class="btn-icon" (click)="openModal(orden, 'edit')">
-                    <span class="material-symbols-outlined icon-edit">download</span>
                   </button>
                 </td>
               </tr>

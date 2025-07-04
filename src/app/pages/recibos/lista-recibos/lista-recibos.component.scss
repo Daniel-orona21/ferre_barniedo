@@ -476,3 +476,46 @@
         color: white;
     }
 } 
+
+// LED indicator styles
+.estatus-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.led-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: inherit;
+        box-shadow: 0 0 6px currentColor;
+    }
+    
+    &.led-pendiente {
+        background-color: #ff8c00;
+        color: #ff8c00;
+    }
+    
+    &.led-visto {
+        background-color: #0ea5e9;
+        color: #0ea5e9;
+    }
+    
+    &.led-descargado {
+        background-color: #22c55e;
+        color: #22c55e;
+    }
+} 

@@ -97,7 +97,11 @@
                 <td>{{ recibo.usuario }}</td>
                 <td>{{ recibo.nombreRecibo }}</td>
                 <td>
-                  <span class="badge">
+                  <span class="estatus-container">
+                    <!-- <span class="led-indicator" 
+                          [class.led-pendiente]="recibo.estatus === 'Pendiente'"
+                          [class.led-visto]="recibo.estatus === 'Visto'"
+                          [class.led-descargado]="recibo.estatus === 'Descargado'"></span> -->
                     {{ recibo.estatus }}
                   </span>
                 </td>
