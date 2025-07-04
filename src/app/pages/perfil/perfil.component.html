@@ -1,1 +1,363 @@
-<p>perfil works!</p>
+<div class="perfil-container">
+  <!-- Header con información del usuario -->
+  <div class="perfil-header">
+    <div class="avatar-section">
+      <div class="letras">
+        <h3>{{ getUserInitials() }}</h3>
+      </div>
+    </div>
+    
+    <div class="usuario-info">
+      <h1>{{ currentUser?.name || 'Usuario' }}</h1>
+      <p class="puesto">{{ getRoleDisplayName() }}</p>
+      <p class="fecha-registro">Miembro desde {{ usuario.fechaRegistro | date: 'MMMM yyyy' }}</p>
+    </div>
+
+    <div class="acciones-header">
+      <button class="btn-secondary" (click)="toggleEditarPerfil()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+        </svg>
+        Editar perfil
+      </button>
+    </div>
+  </div>
+
+  <!-- Información personal -->
+  <div class="perfil-section">
+    <h2>Información personal</h2>
+    
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-header">
+          <h3>Datos de contacto</h3>
+          <button class="btn-edit" (click)="toggleEditarPerfil()" *ngIf="!editandoPerfil">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="info-content" *ngIf="!editandoPerfil">
+          <div class="info-item">
+            <label>Nombre completo</label>
+            <span>{{ currentUser?.name || 'Usuario' }}</span>
+          </div>
+          <div class="info-item">
+            <label>Correo electrónico</label>
+            <span>{{ currentUser?.email || 'email@ejemplo.com' }}</span>
+          </div>
+          <div class="info-item">
+            <label>Teléfono</label>
+            <span>{{ usuario.telefono }}</span>
+          </div>
+          <div class="info-item">
+            <label>Puesto</label>
+            <span>{{ getRoleDisplayName() }}</span>
+          </div>
+          <div class="info-item">
+            <label>Sucursal</label>
+            <span>{{ usuario.sucursal }}</span>
+          </div>
+        </div>
+
+        <!-- Formulario de edición -->
+        <form class="edit-form" *ngIf="editandoPerfil" (ngSubmit)="guardarCambiosPerfil()">
+          <div class="form-group">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" [value]="currentUser?.name || ''" name="nombre" required readonly>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" [value]="currentUser?.email || ''" name="email" required readonly>
+          </div>
+          
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" [(ngModel)]="usuarioTemp.telefono" name="telefono">
+          </div>
+          
+          <div class="form-group">
+            <label for="puesto">Puesto</label>
+            <input type="text" id="puesto" [value]="getRoleDisplayName()" name="puesto" required readonly>
+          </div>
+          
+          <div class="form-group">
+            <label for="sucursal">Sucursal</label>
+            <select id="sucursal" [(ngModel)]="usuarioTemp.sucursal" name="sucursal" required>
+              <option value="Sucursal Centro">Sucursal Centro</option>
+              <option value="Sucursal Norte">Sucursal Norte</option>
+              <option value="Sucursal Sur">Sucursal Sur</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" (click)="cancelarEdicion()" [disabled]="guardandoCambios">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-primary" [disabled]="guardandoCambios">
+              <span *ngIf="guardandoCambios">Guardando...</span>
+              <span *ngIf="!guardandoCambios">Guardar cambios</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Configuración de notificaciones -->
+  <div class="perfil-section">
+    <h2>Notificaciones</h2>
+    
+    <div class="settings-card">
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Notificaciones por email</h3>
+          <p>Recibir notificaciones importantes por correo electrónico</p>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" 
+                 #emailCheck
+                 [checked]="configuracion.notificaciones.email"
+                 (change)="actualizarConfiguracion('notificaciones', 'email', emailCheck.checked)">
+          <span class="slider"></span>
+        </div>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Notificaciones push</h3>
+          <p>Recibir notificaciones push en el navegador</p>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" 
+                 #pushCheck
+                 [checked]="configuracion.notificaciones.push"
+                 (change)="actualizarConfiguracion('notificaciones', 'push', pushCheck.checked)">
+          <span class="slider"></span>
+        </div>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Reportes automáticos</h3>
+          <p>Recibir reportes semanales y mensuales automáticamente</p>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" 
+                 #reportesCheck
+                 [checked]="configuracion.notificaciones.reportes"
+                 (change)="actualizarConfiguracion('notificaciones', 'reportes', reportesCheck.checked)">
+          <span class="slider"></span>
+        </div>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Alertas del sistema</h3>
+          <p>Recibir alertas sobre el estado del sistema</p>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" 
+                 #alertasCheck
+                 [checked]="configuracion.notificaciones.alertas"
+                 (change)="actualizarConfiguracion('notificaciones', 'alertas', alertasCheck.checked)">
+          <span class="slider"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Configuración de privacidad -->
+  <div class="perfil-section">
+    <h2>Privacidad</h2>
+    
+    <div class="settings-card">
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Perfil público</h3>
+          <p>Permitir que otros usuarios vean tu información básica</p>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" 
+                 #perfilPublicoCheck
+                 [checked]="configuracion.privacidad.perfilPublico"
+                 (change)="actualizarConfiguracion('privacidad', 'perfilPublico', perfilPublicoCheck.checked)">
+          <span class="slider"></span>
+        </div>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Mostrar teléfono</h3>
+          <p>Mostrar tu número de teléfono en el perfil</p>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" 
+                 #mostrarTelefonoCheck
+                 [checked]="configuracion.privacidad.mostrarTelefono"
+                 (change)="actualizarConfiguracion('privacidad', 'mostrarTelefono', mostrarTelefonoCheck.checked)">
+          <span class="slider"></span>
+        </div>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Compartir estadísticas</h3>
+          <p>Permitir que tus estadísticas sean visibles para otros administradores</p>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" 
+                 #compartirEstadisticasCheck
+                 [checked]="configuracion.privacidad.compartirEstadisticas"
+                 (change)="actualizarConfiguracion('privacidad', 'compartirEstadisticas', compartirEstadisticasCheck.checked)">
+          <span class="slider"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preferencias -->
+  <div class="perfil-section">
+    <h2>Preferencias</h2>
+    
+    <div class="settings-card">
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Tema</h3>
+          <p>Selecciona el tema de la interfaz</p>
+        </div>
+        <select #temaSelect
+                [(ngModel)]="configuracion.preferencias.tema" 
+                (change)="actualizarConfiguracion('preferencias', 'tema', temaSelect.value)"
+                class="select-field">
+          <option value="oscuro">Oscuro</option>
+          <option value="claro">Claro</option>
+          <option value="auto">Automático</option>
+        </select>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Idioma</h3>
+          <p>Selecciona el idioma de la interfaz</p>
+        </div>
+        <select #idiomaSelect
+                [(ngModel)]="configuracion.preferencias.idioma" 
+                (change)="actualizarConfiguracion('preferencias', 'idioma', idiomaSelect.value)"
+                class="select-field">
+          <option value="es">Español</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Zona horaria</h3>
+          <p>Selecciona tu zona horaria</p>
+        </div>
+        <select #zonaSelect
+                [(ngModel)]="configuracion.preferencias.zona" 
+                (change)="actualizarConfiguracion('preferencias', 'zona', zonaSelect.value)"
+                class="select-field">
+          <option value="America/Mexico_City">Ciudad de México</option>
+          <option value="America/Tijuana">Tijuana</option>
+          <option value="America/Cancun">Cancún</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seguridad -->
+  <div class="perfil-section">
+    <h2>Seguridad</h2>
+    
+    <div class="settings-card">
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Contraseña</h3>
+          <p>Última modificación: hace 3 meses</p>
+        </div>
+        <button class="btn-secondary">
+          Cambiar contraseña
+        </button>
+      </div>
+
+      <!-- Formulario para cambiar contraseña -->
+      <div class="password-form" *ngIf="cambiandoContrasena">
+        <form (ngSubmit)="cambiarContrasena()" class="password-change-form">
+          <div class="form-group">
+            <label for="passwordActual">Contraseña actual</label>
+            <input type="password" id="passwordActual" 
+                   [(ngModel)]="contrasenaTemporal.actual" 
+                   name="passwordActual" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="passwordNueva">Nueva contraseña</label>
+            <input type="password" id="passwordNueva" 
+                   [(ngModel)]="contrasenaTemporal.nueva" 
+                   name="passwordNueva" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="passwordConfirmar">Confirmar nueva contraseña</label>
+            <input type="password" id="passwordConfirmar" 
+                   [(ngModel)]="contrasenaTemporal.confirmar" 
+                   name="passwordConfirmar" required>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" (click)="toggleCambiarContrasena()">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-primary" [disabled]="guardandoCambios">
+              <span *ngIf="guardandoCambios">Cambiando...</span>
+              <span *ngIf="!guardandoCambios">Cambiar contraseña</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Sesiones activas</h3>
+          <p>Gestiona tus sesiones activas en diferentes dispositivos</p>
+        </div>
+        <button class="btn-secondary">
+          Ver sesiones
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Acciones de cuenta -->
+  <div class="perfil-section">
+    <h2>Cuenta</h2>
+    
+    <div class="settings-card">
+      <div class="setting-item">
+        <div class="setting-info">
+          <h3>Exportar datos</h3>
+          <p>Descargar una copia de todos tus datos</p>
+        </div>
+        <button class="btn-secondary" (click)="exportarDatos()">
+          Exportar
+        </button>
+      </div>
+
+      <div class="setting-item danger">
+        <div class="setting-info">
+          <h3>Eliminar cuenta</h3>
+          <p>Eliminar permanentemente tu cuenta y todos los datos asociados</p>
+        </div>
+        <button class="btn-danger" (click)="eliminarCuenta()">
+          Eliminar cuenta
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

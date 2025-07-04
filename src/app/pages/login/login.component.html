@@ -1,5 +1,8 @@
 <div class="loginCuerpo">
-    <div class="login">
+  <div class="ferre-blur-container">
+    <img class="ferre" src="images/ferre.png" alt="">
+  </div>
+  <div class="login">
         <div class="carta">
             <img class="logo" src="images/logo.png" alt="">
         <form (ngSubmit)="login()" class="form form-fade-in" *ngIf="!showForgotPassword">
@@ -51,7 +54,7 @@
                     <label for="recuerdame">Recuérdame</label>
                 </div>
                 <div class="olvidaste">
-                    <p style="cursor: pointer;" (click)="showForgotPassword = true">¿Olvidaste tu contraseña?</p>
+                    <p (click)="showForgotPassword = true">¿Olvidaste tu contraseña?</p>
                 </div>
             </div>
           
@@ -89,9 +92,4 @@
           </form>
         </div>
     </div>
-    <div class="contenedorImagenes">
-            <div class="texto">
-                <h3>Sistema de gestion de logística</h3>
-                <h1>Bienvenido!</h1>
     </div>
-</div>
