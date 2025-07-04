@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { AuthService, User } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 
@@ -9,7 +10,15 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [RouterModule, CommonModule],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss'
+  styleUrl: './layout.component.scss',
+  animations: [
+    trigger('routeAnimation', [
+      transition('* <=> *', [
+        style({ opacity: 0 }),
+        animate('300ms ease-in-out', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   isNavCollapsed = false;
@@ -19,7 +28,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   private userSubscription: Subscription = new Subscription();
 
   constructor(
-    private router: Router, 
+    public router: Router, 
     private eRef: ElementRef,
     private authService: AuthService
   ) {}
