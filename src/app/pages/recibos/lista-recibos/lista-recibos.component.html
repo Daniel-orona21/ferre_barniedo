@@ -3,7 +3,7 @@
       <div class="card-header">
         <!-- <h1 class="card-title">Ordenes de compra</h1> -->
         <div class="selects">
-                      <div class="filter-select-container">
+                      <div *ngIf="rol === 'admin'" class="filter-select-container">
               <select class="filter-select" 
                       [class.has-value]="filtroUsuario"
                       [(ngModel)]="filtroUsuario" 
@@ -83,7 +83,7 @@
               <tr>
                 <th>ID</th>
                 <th>Fecha</th>
-                <th>Usuario</th>
+                <th *ngIf="rol === 'admin'">Usuario</th>
                 <th>Nombre del recibo</th>
                 <th>Estatus</th>
                 <th>Acciones</th>
@@ -93,7 +93,7 @@
               <tr *ngFor="let orden of ordenesCompra">
                 <td>{{ orden.id }}</td>
                 <td>{{ orden.fecha }}</td>
-                <td>{{ orden.Usuario }}</td>
+                <td *ngIf="rol === 'admin'">{{ orden.Usuario }}</td>
                 <td>{{ orden.nombreRecibo }}</td>
                 <td>
                   <span class="estatus-container">

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecibosService } from '../../../services/recibos.service';
+import { AuthService } from '../../../services/auth.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -19,13 +20,14 @@ export class DetalleReciboComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, 
     private router: Router,
-    private recibosService: RecibosService
+    private recibosService: RecibosService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = +params['id']; // Convertir a número
-      this.recibo = this.recibosService.getReciboById(id);
+      this.recibo = this.recibosService.getReciboById(id, this.authService.currentUserValue?.role);
     });
   }
 

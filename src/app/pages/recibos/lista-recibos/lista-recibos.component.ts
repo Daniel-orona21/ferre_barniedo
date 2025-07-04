@@ -6,6 +6,7 @@ import { BsDatepickerModule, BsDatepickerConfig, BsLocaleService } from 'ngx-boo
 import { esLocale } from 'ngx-bootstrap/locale';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { RecibosService } from '../../../services/recibos.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-lista-recibos',
@@ -33,10 +34,15 @@ export class ListaRecibosComponent {
 
   bsConfig: Partial<BsDatepickerConfig>;
 
+  get rol(): string | undefined {
+    return this.authService.currentUserValue?.role;
+  }
+
   constructor(
     private localeService: BsLocaleService, 
     private router: Router,
-    private recibosService: RecibosService
+    private recibosService: RecibosService,
+    private authService: AuthService
   ) {
     defineLocale('es', esLocale);
     this.localeService.use('es');
@@ -45,8 +51,8 @@ export class ListaRecibosComponent {
       dateInputFormat: 'DD/MM/YYYY'
     });
     
-    // Cargar datos del servicio
-    this.todasLasOrdenes = this.recibosService.getAllRecibos();
+    // Cargar datos del servicio según el rol del usuario
+    this.todasLasOrdenes = this.recibosService.getAllRecibos(this.authService.currentUserValue?.role);
     this.ordenesCompra = [...this.todasLasOrdenes];
   }
 
@@ -173,12 +179,12 @@ export class ListaRecibosComponent {
     if (this.modalAction === 'edit') {
       this.recibosService.updateRecibo(this.selectedOrdenCompra);
       // Recargar datos
-      this.todasLasOrdenes = this.recibosService.getAllRecibos();
+      this.todasLasOrdenes = this.recibosService.getAllRecibos(this.authService.currentUserValue?.role);
       this.aplicarFiltros();
     } else if (this.modalAction === 'new') {
       this.recibosService.addRecibo(this.selectedOrdenCompra);
       // Recargar datos
-      this.todasLasOrdenes = this.recibosService.getAllRecibos();
+      this.todasLasOrdenes = this.recibosService.getAllRecibos(this.authService.currentUserValue?.role);
       this.aplicarFiltros();
     }
     this.closeModal();
@@ -187,7 +193,7 @@ export class ListaRecibosComponent {
   deleteOrdenCompra() {
     this.recibosService.deleteRecibo(this.selectedOrdenCompra.id);
     // Recargar datos
-    this.todasLasOrdenes = this.recibosService.getAllRecibos();
+    this.todasLasOrdenes = this.recibosService.getAllRecibos(this.authService.currentUserValue?.role);
     this.aplicarFiltros();
     this.closeModal();
   }

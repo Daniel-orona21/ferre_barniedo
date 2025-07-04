@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class RecibosService {
 
-  private recibos = [
+  private recibosAdmin = [
     { id: 11, fecha: '14/02/2025', Usuario: 'Luis Gomez', nombreRecibo: 'RA100VS2025-03-AED', estatus: 'Descargado' },
     { id: 10, fecha: '11/01/2025', Usuario: 'Juan Pérez', nombreRecibo: 'RA100VS2025-02-AED', estatus: 'Visto' },
     { id: 9, fecha: '10/01/2025', Usuario: 'Luis López', nombreRecibo: 'RA100VS2025-01-AEF', estatus: 'Pendiente' },
@@ -16,29 +16,40 @@ export class RecibosService {
     { id: 4, fecha: '05/01/2025', Usuario: 'Juan Pérez', nombreRecibo: 'RA100VS2025-01-MNO', estatus: 'Visto' },
   ];
 
+  private recibosEmpleado = [
+    { id: 11, fecha: '15/02/2025', Usuario: 'Usuario Empleado', nombreRecibo: 'RA100VS2025-03-AED', estatus: 'Descargado' },
+    { id: 10, fecha: '31/01/2025', Usuario: 'Usuario Empleado', nombreRecibo: 'RA100VS2025-02-ABD', estatus: 'Visto' },
+    { id: 9, fecha: '15/01/2025', Usuario: 'Usuario Empleado', nombreRecibo: 'RA100VS2025-01-AEF', estatus: 'Pendiente' },
+    { id: 7, fecha: '31/12/2024', Usuario: 'Usuario Empleado', nombreRecibo: 'RA100VS2024-052-OED', estatus: 'Pendiente' },
+  ];
+
   constructor() { }
 
-  getAllRecibos() {
-    return [...this.recibos];
+  getAllRecibos(userRole?: string) {
+    if (userRole === 'empleado') {
+      return [...this.recibosEmpleado];
+    }
+    return [...this.recibosAdmin];
   }
 
-  getReciboById(id: number) {
-    return this.recibos.find(recibo => recibo.id === id);
+  getReciboById(id: number, userRole?: string) {
+    const recibos = userRole === 'empleado' ? this.recibosEmpleado : this.recibosAdmin;
+    return recibos.find(recibo => recibo.id === id);
   }
 
   updateRecibo(updatedRecibo: any) {
-    const index = this.recibos.findIndex(r => r.id === updatedRecibo.id);
+    const index = this.recibosAdmin.findIndex(r => r.id === updatedRecibo.id);
     if (index !== -1) {
-      this.recibos[index] = { ...updatedRecibo };
+      this.recibosAdmin[index] = { ...updatedRecibo };
     }
   }
 
   addRecibo(newRecibo: any) {
-    const newId = this.recibos.length > 0 ? Math.max(...this.recibos.map(r => r.id)) + 1 : 1;
-    this.recibos.unshift({ id: newId, ...newRecibo });
+    const newId = this.recibosAdmin.length > 0 ? Math.max(...this.recibosAdmin.map(r => r.id)) + 1 : 1;
+    this.recibosAdmin.unshift({ id: newId, ...newRecibo });
   }
 
   deleteRecibo(id: number) {
-    this.recibos = this.recibos.filter(r => r.id !== id);
+    this.recibosAdmin = this.recibosAdmin.filter(r => r.id !== id);
   }
 } 
