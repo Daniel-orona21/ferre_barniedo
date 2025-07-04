@@ -66,8 +66,6 @@
         }
         
         ul {
-
-
             align-self: center;
             overflow-y: auto;
             overflow-x: hidden;
@@ -121,6 +119,7 @@
             }
 
             li {
+                min-width: 300px;
                 font-size: .8rem;
                 align-items: center;
                 list-style: none;
