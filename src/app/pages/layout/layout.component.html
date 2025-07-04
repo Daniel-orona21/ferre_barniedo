@@ -8,16 +8,16 @@
               <span class="notification-badge" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
             </div> -->
             <div class="letras" (click)="toggleUserMenu()">
-                <h3>DO</h3>
+                <h3>{{ getUserInitials() }}</h3>
             </div>
             <div class="user-menu" *ngIf="showUserMenu">
                 <div class="user-menu-header">
                     <div class="letras">
-                        <h3>DO</h3>
+                        <h3>{{ getUserInitials() }}</h3>
                     </div>  
                     <div class="nombre-usuario">
-                        <div class="user-name">Daniel Orona</div>
-                        <div class="user-role">Administrador</div>
+                        <div class="user-name">{{ currentUser?.name || 'Usuario' }}</div>
+                        <div class="user-role">{{ getRoleDisplayName() }}</div>
                     </div>
                 </div>
                 <hr>
@@ -35,16 +35,16 @@
             <ul>
                     <div class="info">
                         <div class="nombre">
-                            <h3>Daniel Orona</h3>
+                            <h3>{{ currentUser?.name || 'Usuario' }}</h3>
                             <span [routerLink]="['perfil']" class="material-symbols-outlined">edit_square</span>
                         </div>
-                    <h3 class="rol">Administrador · danielopez14d&#64;gmail.com</h3>
+                    <h3 class="rol">{{ getRoleDisplayName() }} · {{ currentUser?.email || '' }}</h3>
                     </div>
-                    <li [routerLink]="['dashboard']" routerLinkActive="activo"><span class="material-symbols-outlined"> data_usage</span><h3>Dashboard</h3></li>
-                    <li [routerLink]="['usuarios']" routerLinkActive="activo"><span class="material-symbols-outlined">contacts_product</span><h3>Usuarios</h3></li>
-                    <li [routerLink]="['recibos']" routerLinkActive="activo"><span class="material-symbols-outlined">receipt_long</span><h3>Recibos</h3></li>
-                    <li [routerLink]="['reporte']" routerLinkActive="activo"><span class="material-symbols-outlined">breaking_news</span><h3>Reportes</h3></li>
-                    <li [routerLink]="['perfil']" routerLinkActive="activo"><span class="material-symbols-outlined">person</span><h3>Perfil</h3></li>
+                    <li *ngIf="canViewTab('dashboard')" [routerLink]="['dashboard']" routerLinkActive="activo"><span class="material-symbols-outlined"> data_usage</span><h3>Dashboard</h3></li>
+                    <li *ngIf="canViewTab('usuarios')" [routerLink]="['usuarios']" routerLinkActive="activo"><span class="material-symbols-outlined">contacts_product</span><h3>Usuarios</h3></li>
+                    <li *ngIf="canViewTab('recibos')" [routerLink]="['recibos']" routerLinkActive="activo"><span class="material-symbols-outlined">receipt_long</span><h3>Recibos</h3></li>
+                    <li *ngIf="canViewTab('reporte')" [routerLink]="['reporte']" routerLinkActive="activo"><span class="material-symbols-outlined">breaking_news</span><h3>Reportes</h3></li>
+                    <li *ngIf="canViewTab('perfil')" [routerLink]="['perfil']" routerLinkActive="activo"><span class="material-symbols-outlined">person</span><h3>Perfil</h3></li>
                 </ul>
                 <!-- <button class="salir" (click)="logout()">
                     <span class="material-symbols-outlined">chip_extraction</span>

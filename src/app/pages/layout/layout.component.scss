@@ -97,6 +97,7 @@
                     gap: .5rem;
                     align-items: center;
                     font-size: .85rem;
+                    text-transform: capitalize;
 
                     span {
                         font-size: 1rem;
@@ -321,6 +322,7 @@
         }
 
         .user-name {
+            text-transform: capitalize;
             font-weight: 700;
             font-size: 1rem;
             color: white;

@@ -8,19 +8,20 @@ import { ListaRecibosComponent } from './pages/recibos/lista-recibos/lista-recib
 import { DetalleReciboComponent } from './pages/recibos/detalle-recibo/detalle-recibo.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
+import { AuthGuard } from './services/auth.guard';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent, pathMatch: 'full' },
-    { path: 'app', component: LayoutComponent, children: [
-        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-        { path: 'dashboard', component: DashboardComponent },
-        { path: 'usuarios', component: UsuariosComponent },
-        { path: 'recibos', component: RecibosComponent, children: [
+    { path: 'app', component: LayoutComponent, canActivate: [AuthGuard], children: [
+        { path: '', redirectTo: 'recibos', pathMatch: 'full' },
+        { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], data: { role: 'admin' } },
+        { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard], data: { role: 'admin' } },
+        { path: 'recibos', component: RecibosComponent, canActivate: [AuthGuard], children: [
             { path: '', component: ListaRecibosComponent },
             { path: ':id', component: DetalleReciboComponent }
         ]},
-        { path: 'reporte', component: ReporteComponent },
-        { path: 'perfil', component: PerfilComponent },
+        { path: 'reporte', component: ReporteComponent, canActivate: [AuthGuard], data: { role: 'admin' } },
+        { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
     ]},
     { path: '**', redirectTo: '' }
 ];
